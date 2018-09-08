@@ -18,15 +18,16 @@ export default {
 <style lang="stylus" scoped>
 .wrapper
   width 100%
-  min-height 700px
+  min-height 100vh
   display flex
   flex-direction column
-  justify-content center
+  // justify-content center
   align-items center
   background #eee
   .title
     font-size 3rem
-    margin 3rem 0
+    font-weight 600
+    margin 9rem 0  4rem 0
     span
       padding .5rem 0
       border-bottom 2px solid #E87E04

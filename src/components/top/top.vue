@@ -17,7 +17,7 @@
           <router-link tag="li" to='/b'>
             <a href="javascript:;">技术栈</a>
           </router-link >
-          <router-link tag="li" to='/c'>
+          <router-link tag="li" to='/contact'>
             <a href="javascript:;">联系我</a>
           </router-link >
         </ul>

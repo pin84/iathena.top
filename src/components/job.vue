@@ -4,25 +4,26 @@
       <span>作品集</span>
     </div>
     <ul class="list">
+       <li>
+        <img src="../assets/img/02.jpg" alt="">
+        <a href="http://13.230.38.7:8080/index.html" target="_blank">
+          <h4>静态页面-企业官网</h4>
+          <p>业务范围下的数据都是用ajax从后台请求</p>
+        </a>
+      </li>
       <li>
         <img src="../assets/img/01.jpg" alt="">
         <a href="https://pin84.github.io/live/02_yiling/" target='_blank'>
-          <h4>静态页面</h4>
-          <p>html、css的练习</p>
-        </a>
-      </li>
-      <li>
-        <img src="../assets/img/02.jpg" alt="">
-        <a href="https://pin84.github.io/live/01_web/02-daofeng/index.html" target="_blank">
           <h4>静态页面-企业官网</h4>
-          <p>html、css的练习</p>
+          <p>早期的作品</p>
         </a>
       </li>
+     
       <li>
         <img src="../assets/img/03.jpg" alt="">
         <a href="https://pin84.github.io/live/05_css3/05_3dPictrues/" target="_blank">
-          <h4>3D旋转</h4>
-          <p>请用 Google Chrome 浏览器打开(原因你懂的)(原因你懂的)(原因你懂的)</p>
+          <h4>css3 3D旋转</h4>
+          <p>请用 Google Chrome 浏览器打开(原因你懂的)</p>
         </a>
       </li>
       <li>
@@ -69,9 +70,8 @@ export default {};
 <style lang="stylus" scoped>
 .wrapper
   width 80%
-  height 600px
+  height 100vh
   margin 0 auto
-  // border 1px solid red
   display flex
   flex-direction column
   .title

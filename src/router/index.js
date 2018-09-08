@@ -5,6 +5,7 @@ Vue.use(Router)
 
 import Job from '../components/job'
 import About from '../components/about'
+import Contact from '../components/contact/contact'
 
 export default new Router({
   mode: 'history',
@@ -21,6 +22,10 @@ export default new Router({
     {
       path: '/about',
       component: About
+    },
+    {
+      path: '/contact',
+      component: Contact
     }
   ]
 })
