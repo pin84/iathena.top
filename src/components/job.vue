@@ -113,7 +113,6 @@ export default {};
         line-height 25px
         h4
           margin-bottom 10px  
-
     :hover
       transform scale(1.04)
       a

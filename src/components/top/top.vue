@@ -14,7 +14,7 @@
           <router-link tag="li" to='/a'>
             <a href="javascript:;">求职意向</a>
           </router-link >
-          <router-link tag="li" to='/b'>
+          <router-link tag="li" to='/skill'>
             <a href="javascript:;">技术栈</a>
           </router-link >
           <router-link tag="li" to='/contact'>
