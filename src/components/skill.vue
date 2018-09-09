@@ -1,25 +1,29 @@
 <template>
   <div class="wrapper">
-    <div class="signboard one">
-      <div class="sign">html5、css3、js</div>
-      <div class="strings"></div>
-      <div class="pin top"></div>
-      <div class="pin left"></div>
-      <div class="pin right"></div>
-    </div>
-    <div class="signboard two">
-      <div class="sign">vue、node、mysql</div>
-      <div class="strings"></div>
-      <div class="pin top"></div>
-      <div class="pin left"></div>
-      <div class="pin right"></div>
-    </div>
+    <div class="container"></div>
+      <div class="signboard one">
+        <div class="sign">html5、css3、js</div>
+        <div class="strings"></div>
+        <div class="pin top"></div>
+        <div class="pin left"></div>
+        <div class="pin right"></div>
+      </div>
+      <div class="signboard two">
+        <div class="sign">vue、node、mysql</div>
+        <div class="strings"></div>
+        <div class="pin top"></div>
+        <div class="pin left"></div>
+        <div class="pin right"></div>
+      </div>
   </div>
 </template>
 
 <script>
+import Goddess from './goddess.vue'
  export default{
-
+   components:{
+     Goddess
+   }
 }
 </script>
 
@@ -27,11 +31,18 @@
 .wrapper
   width 100%
   height 100vh
-  // display relative
-  // flex-direction column
-  // justify-content center
+  min-height 700px
+  
   position relative
-  background url(../assets/img/skill/skills-bg.jpg) no-repeat center
+  background url(../assets/img/bg3.jpg)   no-repeat center
+  background-size cover
+  .container
+    width 100%
+    height 100%
+    position absolute 
+    top 0
+    left 0
+    background rgba(255,255,255,0)
   .signboard
     width 400px
     height 300px
@@ -46,7 +57,7 @@
     &.two
       top 2%
       left 60%  
-      // animation twomove 1s ease-in-out infinite alternate
+      animation twomove 1s ease-in-out infinite alternate
     .sign
       width 100%
       height 200px
@@ -87,6 +98,15 @@
         left 80px
       &.right 
         right 80px
+  .goddess
+    position absolute 
+    top 80%
+    left 10%
+    background none
+    width 300px
+    height 50px
+    overflow hidden
+    // border 1px solid red
 @keyframes onemove{
   from{
     transform:rotate(10deg)
@@ -98,10 +118,10 @@
 
 @keyframes twomove{
   from{
-    transform:rotate(5deg)
+    transform:rotate(10deg)
   }
   to{
-    transform:rotate(-5deg)
+    transform:rotate(-10deg)
   }
 }
 </style>

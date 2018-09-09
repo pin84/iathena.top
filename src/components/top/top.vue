@@ -11,11 +11,11 @@
           <router-link tag="li" to='/job'>
             <a href="javascript:;">作品集</a>
           </router-link >
-          <router-link tag="li" to='/a'>
-            <a href="javascript:;">求职意向</a>
-          </router-link >
           <router-link tag="li" to='/skill'>
             <a href="javascript:;">技术栈</a>
+          </router-link >
+          <router-link tag="li" to='/blog'>
+            <a href="javascript:;">我的博客</a>
           </router-link >
           <router-link tag="li" to='/contact'>
             <a href="javascript:;">联系我</a>
@@ -47,7 +47,9 @@ nav
       font-size: 1.4rem;
       line-height: 80px;
       height: 80px;
-      padding: 0 20px;
+      padding: 0 20px
+      &:hover
+        color #FFFFCC
     .title 
       font-size: 2rem;
       font-weight: 600;

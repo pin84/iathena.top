@@ -13,9 +13,9 @@
       </li>
       <li>
         <img src="../assets/img/01.jpg" alt="">
-        <a href="https://pin84.github.io/live/02_yiling/" target='_blank'>
+        <a href="https://pin84.github.io/live/01_web/01_miaov/" target='_blank'>
           <h4>静态页面-企业官网</h4>
-          <p>早期的作品</p>
+          <p></p>
         </a>
       </li>
      
