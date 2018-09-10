@@ -10,7 +10,7 @@ import Skill from '../components/skill'
 import Blog from '../components/blog/blog'
 
 export default new Router({
-  mode: 'history',
+  // mode: 'history',
   // linkActiveClass:'acitve',
   routes: [
     {

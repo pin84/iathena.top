@@ -6,7 +6,7 @@
     <ul class="list">
        <li>
         <img src="../assets/img/02.jpg" alt="">
-        <a href="http://13.230.38.7:8080/index.html" target="_blank">
+        <a href="http://www.iathena.top:8010/index.html" target="_blank">
           <h4>静态页面-企业官网</h4>
           <p>业务范围下的数据都是用ajax从后台请求</p>
         </a>
@@ -28,37 +28,34 @@
       </li>
       <li>
         <img src="../assets/img/04.jpg" alt="">
-        <a href="">
-          <h4>静态页面</h4>
-          <p>html、css的练习</p>
+        <a href="http://www.iathena.top:8012/#/goods" target="_blank">
+          <h4>VUE 移动端，请将浏览器切换到手机端页面</h4>
+          <p>仿'饿了吗'APP，所有数据都用axios从后台请求</p>
         </a>
       </li>
       <li>
         <img src="../assets/img/05.jpg" alt="">
-        <a href="">
-          <h4>静态页面</h4>
-          <p>html、css的练习</p>
+        <a href="https://pin84.github.io/live/01_web/03_ResponsiveWeb/" target="_blank">
+          <h4>理财网站-响应式页面</h4>
         </a>
       </li>
       <li>
         <img src="../assets/img/06.jpg" alt="">
-        <a href="">
-          <h4>静态页面</h4>
-          <p>html、css的练习</p>
+        <a href="https://pin84.github.io/live/10_magnifier/" target="_blank">
+          <h4>淘宝网的放大镜效果</h4>
         </a>
       </li>
       <li>
         <img src="../assets/img/07.jpg" alt="">
-        <a href="">
-          <h4>静态页面</h4>
-          <p>html、css的练习</p>
+        <a href="https://pin84.github.io/live/01_web/04_JavaScriptDrumKit/" target="_blank">
+          <h4>css+js</h4>
+          <p>来弹钢琴吧~~</p>
         </a>
       </li>
       <li>
         <img src="../assets/img/08.jpg" alt="">
-        <a href="">
-          <h4>静态页面</h4>
-          <p>html、css的练习</p>
+        <a href="https://github.com/pin84" target="_blank">
+          <h4>更多请访问我的github</h4>
         </a>
       </li>
     </ul>
