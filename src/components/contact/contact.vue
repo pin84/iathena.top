@@ -39,6 +39,7 @@ export default {
   display flex
   flex-direction column
   background url(./bg.jpg) no-repeat center
+  background-size cover
   .container
     width 300px
     margin 0 auto

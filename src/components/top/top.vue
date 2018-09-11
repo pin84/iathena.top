@@ -64,7 +64,7 @@ nav
       width 90%
       justify-content space-between
       a
-        padding 0 12px
+        padding 0 10px
         font-weight 200 
 @media screen and (max-width:480px)
   nav
@@ -78,9 +78,9 @@ nav
       a
         height 60px
         line-height 60px
-        padding 0 12px
-        font-size 1rem
-        font-weight 200 
+        padding 0 8px
+        font-size 1.4rem
+        font-weight 400 
         &.title
           display none
 .router-link-active
