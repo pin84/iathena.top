@@ -8,6 +8,9 @@
   </div>
   <div class="desc">
       我叫覃平，坐标广州，是一名从事前端工作的普通一员。前端是一门有容乃大的行业，我并不是计算机专业出身。 在自学前端之前，我一直从事的是印刷设备的售后服务工作。庆幸的是在慢长的自学中，让我体会到了乐趣，让我能一直走到今天。
+      <p>
+        最讨厌的事：客服电话的人工服务，简直是在浪费生命！
+      </p>
   </div>
 </div>
 </template>
@@ -43,5 +46,20 @@ export default {
     width 60%
     margin 3rem auto 
     font-size 1.6rem
-    text-indent 2em
+    text-indent 1.5em
+    p
+      margin-top 20px
+      margin-bottom 60px
+
+@media screen and (max-width:480px)
+  .wrapper
+    background #eee
+    .title
+      margin 5rem 0 
+    .avartor
+      width 150px
+      height 150px  
+    .desc
+      width 70%
+      font-size 1.4rem
 </style>

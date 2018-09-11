@@ -49,7 +49,7 @@
         <img src="../assets/img/07.jpg" alt="">
         <a href="https://pin84.github.io/live/01_web/04_JavaScriptDrumKit/" target="_blank">
           <h4>css+js</h4>
-          <p>来弹钢琴吧~~</p>
+          <p>来弹钢琴吧~~只支持PC端</p>
         </a>
       </li>
       <li>
@@ -67,19 +67,17 @@ export default {};
 <style lang="stylus" scoped>
 .wrapper
   width 80%
-  height 100vh
   margin 0 auto
   display flex
   flex-direction column
   .title
     font-size 3rem
     margin 3rem 0
+    font-weight 600
     span
       padding .5rem 0
       border-bottom 2px solid #E87E04
   .list
-    // width 80%
-    // margin 0 auto
     display flex
     flex-wrap wrap
     justify-content center
@@ -87,7 +85,7 @@ export default {};
       width 23%
       position relative
       transition 0.3s
-      margin 8px  
+      margin 4px  
       img
         width 100%
         height 100%
@@ -110,11 +108,56 @@ export default {};
         line-height 25px
         h4
           margin-bottom 10px  
-    :hover
-      transform scale(1.04)
-      a
-        opacity 1
-      
-
-
+      &:hover
+        transform scale(1.04)
+        a
+          opacity 1
+@media screen and (max-width:900px)
+  .wrapper
+    width 95%
+    .list
+      display flex
+      justify-content start
+      li
+        width 31%
+        margin 4px
+    //     a
+    //       opacity 1
+    //       font-size 1.3rem
+    //       line-height 18px
+    //       padding 15px
+    //       font-weight 100
+    //       h4
+    //         font-weight 100
+    //     &:hover  
+    //       transform scale(1)    
+// @media screen and (max-width:768px)
+//   .wrapper
+//     width 95%
+//     .list
+//       display flex
+//       justify-content start
+//       li
+//         width 32%
+//         margin 2px
+        
+@media screen and (max-width:480px)
+  .wrapper
+    width 95%
+    .list
+      display flex
+      margin-bottom 80px
+      li
+        width 48%
+        margin 2px
+        a
+          opacity 1
+          font-size 1.3rem
+          line-height 18px
+          padding 15px
+          font-weight 100
+          h4
+            font-weight 100
+        &:hover  
+          transform scale(1)    
 </style>

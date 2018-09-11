@@ -70,6 +70,15 @@ export default {
         // margin-bottom -5px
       .github::before
         background url('./github.png') no-repeat center
-    
+
+
+@media screen and (max-width:375px)
+  .wrapper
+    width 100%
+    .container
+      width 80%
+      margin 0 auto
+      .info
+        font-size 1.6rem
 </style>
 
