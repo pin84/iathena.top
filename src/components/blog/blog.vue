@@ -13,7 +13,6 @@
 
 <script>
 export default {
-  name: 'HelloWorld',
 
   mounted() {
     this.showArticle()
