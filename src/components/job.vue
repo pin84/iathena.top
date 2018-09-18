@@ -6,7 +6,7 @@
     <ul class="list">
        <li>
         <img src="../assets/img/02.jpg" alt="">
-        <a href="http://www.iathena.top:8010/index.html" target="_blank">
+        <a href="http://df.iathena.top" target="_blank">
           <h4>静态页面-企业官网</h4>
           <p>业务范围下的数据都是用ajax从后台请求</p>
         </a>
@@ -28,7 +28,7 @@
       </li>
       <li>
         <img src="../assets/img/04.jpg" alt="">
-        <a href="http://www.iathena.top:8012/#/goods" target="_blank">
+        <a href="http://seller.iathena.top" target="_blank">
           <h4>VUE 移动端，请将浏览器切换到手机端页面</h4>
           <p>仿'饿了吗'APP，所有数据都用axios从后台请求</p>
         </a>

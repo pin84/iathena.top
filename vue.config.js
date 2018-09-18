@@ -2,6 +2,6 @@
 module.exports = {
   // 选项...
   devServer: {
-    port: 80
+    port: 8080
   }
 }
