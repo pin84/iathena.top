@@ -1,9 +1,7 @@
 <template>
   <div id="app">
-    <!-- <img alt="Vue logo" src="./assets/logo.png"> -->
-    <!-- <HelloWorld msg="Welcome to Your Vue.js App abc"/> -->
-    <Top />
-    <router-view></router-view>
+    <Top class="top"/>
+    <router-view class="view"></router-view>
   </div>
 </template>
 
@@ -22,14 +20,16 @@ export default {
 </script>
 
 <style lang="stylus" scoped>
-#app {
+#app 
   font-family:'microsoft yahei', 'Avenir', Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   color: #2c3e50;
-  // height 100vh
   position relative
   overflow hidden
-}
+  .top
+    position fixed
+  .view
+    margin-top 80px
 
 </style>

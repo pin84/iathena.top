@@ -7,7 +7,10 @@ import Job from '../components/job'
 import About from '../components/about'
 import Contact from '../components/contact/contact'
 import Skill from '../components/skill'
-import Blog from '../components/blog/blog'
+import Blog from '../components/blog'
+
+import One from '../components/blog/blog'
+import Two from '../components/blog/blog_1'
 
 export default new Router({
   // mode: 'history',
@@ -35,7 +38,21 @@ export default new Router({
     },
     {
       path: '/blog',
-      component: Blog
+      component: Blog,
+      children:[
+        {
+          path: '',
+          component: One
+        },
+        {
+          path: 'one',
+          component: One
+        },
+        {
+          path: 'two',
+          component: Two
+        }
+      ]
     }
   ]
 })
