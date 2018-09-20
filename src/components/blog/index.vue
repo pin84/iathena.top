@@ -2,7 +2,6 @@
   <div class="wrapper">
     <Nav class="nav"/>
     <router-view class="blog"></router-view>
-    <!-- <Blog  class="blog"/> -->
   </div>
 </template>
 <script>
@@ -26,7 +25,7 @@ export default {
     bottom 0
     top 80px
     overflow-y auto
-    padding 20px 20px
+    padding 20px 20px 20px 40px
     box-sizing border-box
   .blog
     padding-left 400px

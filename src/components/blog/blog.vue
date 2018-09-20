@@ -91,6 +91,7 @@ export default {
   .container
     .item
       margin-bottom 15px
+      // color #2c3e50
       .title
         margin-bottom 5px
         font-size 2rem
@@ -100,8 +101,7 @@ export default {
         // white-space nowrap 
         // text-overflow ellipsis 
         // overflow hidden
-        line-height 16px
-        // border-left 1px solid #2c3e50
+        line-height 24px
         padding-left 5px
         &:hover
           cursor pointer
