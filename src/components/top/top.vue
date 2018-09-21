@@ -21,7 +21,7 @@
           <a href="javascript:;">我的博客</a>
         </router-link> -->
         <li>
-          <a href="http://api.iathena.top" target="_blank">我的博客</a>
+          <a href="http://books.iathena.top" target="_blank">我的博客</a>
         </li>
       </ul>
     </div>
