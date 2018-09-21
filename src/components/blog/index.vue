@@ -1,5 +1,5 @@
 <template>
-  <div class="wrapper">
+  <div class="wrapper" >
     <Nav class="nav"/>
     <router-view class="blog"></router-view>
   </div>
