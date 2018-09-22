@@ -17,11 +17,11 @@
         <router-link tag="li" to='/contact'>
           <a href="javascript:;">联系我</a>
         </router-link>
-        <!-- <router-link tag="li" to='/blog'>
+        <router-link tag="li" to='/blog'>
           <a href="javascript:;">我的博客</a>
-        </router-link> -->
+        </router-link>
         <li>
-          <a href="http://books.iathena.top" target="_blank">我的博客</a>
+          <a href="http://books.iathena.top" target="_blank">经验值+1</a>
         </li>
       </ul>
     </div>
