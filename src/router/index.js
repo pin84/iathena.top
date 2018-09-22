@@ -42,7 +42,7 @@ export default new Router({
       children:[
         {
           path: '',
-          component: One
+          redirect: 'one'
         },
         {
           path: 'one',

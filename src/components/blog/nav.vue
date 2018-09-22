@@ -3,7 +3,6 @@
     <ul>
       <router-link tag="li" to='/blog/one'> <a>测试用的第一篇博文</a></router-link>
       <router-link tag="li" to='/blog/two'> <a>测试用的第二篇博文</a></router-link>
-      <a href="../books/abc.html">abc</a>
     </ul>
   </div>
 </template>

@@ -6,11 +6,11 @@
 </template>
 <script>
 import Nav from './nav'
-import Blog from './blog'
+// import Blog from './blog'
 export default {
   components: {
     Nav,
-    Blog
+    // Blog
   },
 }
 </script>
