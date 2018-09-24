@@ -21,7 +21,7 @@
           <a href="javascript:;">联系我</a>
         </router-link>
         <li>
-          <a href="http://books.iathena.top/css/cssTips.html" target="_blank">经验值+1</a>
+          <a href="http://books.iathena.top/css/cssTips.html" target="_blank">EXP+1</a>
         </li>
       </ul>
     </div>
