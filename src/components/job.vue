@@ -67,6 +67,7 @@ export default {};
 <style lang="stylus" scoped>
 .wrapper
   width 80%
+  height 100vh
   margin 0 auto
   display flex
   flex-direction column
@@ -112,6 +113,11 @@ export default {};
         transform scale(1.04)
         a
           opacity 1
+        &:last-child
+          perspective 700 
+          transform  rotate3d(180deg,0deg,20deg)
+
+
 @media screen and (max-width:900px)
   .wrapper
     width 95%
@@ -121,25 +127,6 @@ export default {};
       li
         width 31%
         margin 4px
-    //     a
-    //       opacity 1
-    //       font-size 1.3rem
-    //       line-height 18px
-    //       padding 15px
-    //       font-weight 100
-    //       h4
-    //         font-weight 100
-    //     &:hover  
-    //       transform scale(1)    
-// @media screen and (max-width:768px)
-//   .wrapper
-//     width 95%
-//     .list
-//       display flex
-//       justify-content start
-//       li
-//         width 32%
-//         margin 2px
         
 @media screen and (max-width:480px)
   .wrapper
