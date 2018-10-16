@@ -29,6 +29,7 @@ export default {
   overflow hidden
   .top
     position fixed
+    z-index 999
   .view
     margin-top 80px
 

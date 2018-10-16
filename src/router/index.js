@@ -11,6 +11,7 @@ import Blog from '../components/blog'
 
 import One from '../components/blog/blog'
 import Two from '../components/blog/blog_1'
+import Experience from '../components/Experience'
 
 export default new Router({
   // mode: 'history',
@@ -35,6 +36,10 @@ export default new Router({
     {
       path: '/skill',
       component: Skill
+    },
+    {
+      path: '/experience',
+      component: Experience
     },
     {
       path: '/blog',
