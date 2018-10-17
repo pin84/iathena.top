@@ -41,13 +41,13 @@
       </li>
       <li>
         <img src="../assets/img/06.jpg" alt="">
-        <a href="https://pin84.github.io/live/10_magnifier/" target="_blank">
+        <a href="https://pin84.github.io/live/02_jspractice/02_magnifier/" target="_blank">
           <h4>淘宝网的放大镜效果</h4>
         </a>
       </li>
       <li>
         <img src="../assets/img/07.jpg" alt="">
-        <a href="https://pin84.github.io/live/01_web/04_JavaScriptDrumKit/" target="_blank">
+        <a href="https://pin84.github.io/live/02_jspractice/01_JavaScriptDrumKit/" target="_blank">
           <h4>css+js</h4>
           <p>来弹钢琴吧~~只支持PC端</p>
         </a>
