@@ -19,7 +19,7 @@
           <p>公司主要生产检测仪器，用于检测包装袋中的水分，氧气等的含量。我主要负责公司生产的检测设备的安装培训以及售后服务.</p>
         </div>
         <div class="show">
-          <img src="../assets/img/biaoji.jpg" alt="">
+          <img src="../assets/img/biaoji_1.jpg" alt="">
         </div>
       </li>
       <li class="item end">
