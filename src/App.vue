@@ -29,8 +29,16 @@ export default {
   overflow hidden
   .top
     position fixed
-    z-index 999
+    z-index 9999
   .view
     margin-top 80px
 
+// @media screen and (max-width:768px)
+//   nav
+//     z-index 2
+   
+@media screen and (max-width:480px)    
+  #app
+    .view
+      margin-top 0
 </style>

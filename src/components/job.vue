@@ -34,6 +34,13 @@
         </a>
       </li>
       <li>
+        <img src="../assets/img/08.jpg" alt="">
+        <a href="http://cxen.iathena.top" target="_blank">
+          <h4>VUE 移动端，请将浏览器切换到手机端页面</h4>
+          <p>前后端分离，新时代英语APP。没有路由，都是组件跳组件</p>
+        </a>
+      </li>
+      <li>
         <img src="../assets/img/05.jpg" alt="">
         <a href="https://pin84.github.io/live/01_web/03_ResponsiveWeb/" target="_blank">
           <h4>理财网站-响应式页面</h4>
@@ -67,7 +74,7 @@ export default {};
 <style lang="stylus" scoped>
 .wrapper
   width 80%
-  height 100vh
+  padding-bottom 30px
   margin 0 auto
   display flex
   flex-direction column
@@ -81,12 +88,20 @@ export default {};
   .list
     display flex
     flex-wrap wrap
-    justify-content center
+    justify-content  space-between
+    perspective 750px
     li
-      width 23%
+      width 24%
       position relative
-      transition 0.3s
-      margin 4px  
+      margin 4px
+      transition 300ms
+      transform-origin 0 50%
+      transform-style preserve-3d
+      &:hover
+        transform scale(1.04)
+        a
+          opacity 1
+          
       img
         width 100%
         height 100%
@@ -109,13 +124,10 @@ export default {};
         line-height 25px
         h4
           margin-bottom 10px  
-      &:hover
-        transform scale(1.04)
-        a
-          opacity 1
-        &:last-child
-          perspective 700 
-          transform  rotate3d(180deg,0deg,20deg)
+      // &:hover
+      //   transform scale(1.04)
+      //   a
+      //     opacity 1
 
 
 @media screen and (max-width:900px)

@@ -52,7 +52,7 @@ nav
       font-size: 1.4rem;
       line-height: 80px;
       height: 80px;
-      padding: 0 20px
+      padding: 0 15px
       &:hover
         color #FFFFCC
       &.title 
@@ -66,12 +66,12 @@ nav
 @media screen and (max-width:768px)
   nav
     // position fixed
-    z-index 999
+    z-index 2
     .container 
       width 90%
       justify-content space-between
       a
-        padding 0 10px
+        padding 0 5px
         font-weight 200 
 @media screen and (max-width:480px)
   nav
@@ -81,15 +81,23 @@ nav
     z-index 999
     .container 
       width 100%
-      justify-content center
+      justify-content space-around
       a
         height 60px
         line-height 60px
-        padding 0 8px
+        // padding 0 2px
         font-size 1.4rem
         font-weight 400 
         &.title
           display none
+@media screen and (max-width:320px)    
+  nav
+    height 50px
+    .container
+      a
+        height 50px
+        line-height 50px
+        font-size 1.2rem  
 .router-link-active
   background #006699
 </style>

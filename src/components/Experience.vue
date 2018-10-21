@@ -87,7 +87,10 @@ export default {
 
 <style lang='stylus' scoped>
 .experience
+  width 100%
+  height 100%
   padding-top 50px
+  margin-bottom 80px
   box-sizing border-box
   .list
     position relative
