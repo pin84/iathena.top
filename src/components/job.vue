@@ -37,7 +37,7 @@
         <img src="../assets/img/08.jpg" alt="">
         <a href="http://cxen.iathena.top" target="_blank">
           <h4>VUE 移动端，请将浏览器切换到手机端页面</h4>
-          <p>前后端分离，新时代英语APP。没有路由，都是组件跳组件</p>
+          <p>前后端分离，新时代英语APP。</p>
         </a>
       </li>
       <li>
