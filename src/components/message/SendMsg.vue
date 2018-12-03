@@ -1,9 +1,10 @@
 <template>
   <div class="sendMsg">
+    <hr style="margin-bottom:20px;">
     <form action="">
       <div class="userinfo">
-        <label for="username">昵称(<span class="red">必填</span>): </label><input type="text" id="username" autocomplete="off" v-model="message.username"> <br><br>
-        <label for="title">标题(<span>选填</span>): </label><input type="text" id="title" autocomplete="off" v-model="message.title">
+        <label for="username">昵称: </label><input type="text" id="username" autocomplete="off" v-model="message.username"> <br><br>
+        <label for="title">标题: </label><input type="text" id="title" autocomplete="off" v-model="message.title">
       </div>
       <br>
       <div class="avatar">
@@ -50,8 +51,8 @@ export default {
     },
 
     send() {
-      if (!this.message.username || !this.message.msg) {
-        return alert('请输入用户名或留言信息')
+      if (!this.message.msg) {
+        return alert('请输入留言信息')
       }
 
       fetch(`${config.url}/addmsg`, {
@@ -67,7 +68,7 @@ export default {
           this.message.msg = ''
           alert(data.data)
           this.$emit('refreshMsg')
-          window.scrollTo(0,260)  //滚动窗口到指定坐标
+          window.scrollTo(0,210)  //滚动窗口到指定坐标
         }
       })
     }

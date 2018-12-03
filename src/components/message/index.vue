@@ -2,31 +2,59 @@
   <div class="message">
     <div class="content">
       <div class="banner">
-        <img src="../../assets/img/message/banner.jpg" alt="">
+        <img
+          src="../../assets/img/message/banner.jpg"
+          alt=""
+        >
       </div>
-      <div class="seach">
-        <button class="write">签写留言</button>
+      <div class="search">
+        <button class="write" @click="toWriteMsg">签写留言</button>
         <div>
-          <input type="text" placeholder="输入关键字搜索留言">
-          <button>搜索</button>
+          <input
+            type="text"
+            placeholder="输入关键字搜索留言"
+            v-model="searchKeyword"
+          >
+
+          <button @click="searchMsg">搜索</button>
         </div>
       </div>
+
       <ul class="msglist">
-        <li class="item" v-for="(msg,i) in computedData" :key="i">
+        <li
+          class="item"
+          v-for="(msg,i) in data"
+          :key="i"
+        >
           <div class="top">
-            <span>标题:</span> <span>{{msg.title}}</span> <span class="name">{{msg.username}}</span>  <time><span>发表于:</span>{{msg.created}}</time> 
+            <span>标题:</span> <span>{{msg.title}}</span> <span class="name">{{msg.username}}</span> <time><span>发表于:</span>{{msg.created}}</time>
           </div>
           <div class="bottom">
             <div class="avatar">
-              <img :src="require(`../../assets/img/message/avatar/${msg.avatar}.gif`)" alt="">
+              <img
+                :src="require(`../../assets/img/message/avatar/${msg.avatar}.gif`)"
+                alt=""
+              >
               <h5>{{msg.username}}</h5>
             </div>
             <div class="detail">{{msg.msg}}</div>
           </div>
         </li>
       </ul>
-      <PageChange />
-      <SendMsg @refreshMsg="refreshMsg"/>
+      <p v-if='false'>搜索结果一共 3 条留言</p>
+      <PageChange
+        v-else
+        :pages='pages'
+        :currentPage='pageIndex'
+        @toLastPage="toLastPage"
+        @toFirstPage="toFirstPage"
+        @toPre="toPre"
+        @toNext="toNext"
+        @selectPage="selectPage"
+        @changePageNum="changePageNum"
+      />
+
+      <SendMsg @refreshMsg="refreshMsg" ref="send" />
     </div>
     <div class="note">留言本于2018.12.1开放</div>
   </div>
@@ -38,36 +66,91 @@ import config from '../../config/config'
 import PageChange from './PageChange'
 import SendMsg from './SendMsg'
 export default {
-  data(){
-    return{
-      data:[]
+  data() {
+    return {
+      data: [], //从后台拿回来的数据 
+      isSearch: false,
+      pageIndex: 0, //当前页面
+      pageNum: 2, //每面显示 
+      pages: 0, //传递给子组件的值(总的页码数)
+      searchKeyword: '' // 搜索关键字
     }
   },
-  components:{
+  components: {
     PageChange,
     SendMsg
   },
 
-  computed:{
-    computedData:function(){
-      return this.data
-    }
-  },
 
-  mounted(){
+  mounted() {
     this.initData()
-    
+
   },
-  methods:{
-    initData(){
-      fetch(`${config.url}/initData`).then(res =>{
+  methods: {
+    initData() {
+      fetch(`${config.url}/initData?pageIndex=${this.pageIndex}&pageNum=${this.pageNum}`).then(res => {
         return res.json()
-      }).then(json =>{
+      }).then(json => {
         this.data = json.data
+        this.pages = json.pages
+        window.scrollTo(0, 200)
       })
     },
-    refreshMsg(){
-     this.initData()
+    refreshMsg() {
+      this.pageIndex = 0
+      this.initData()
+    },
+
+    toPre() {
+      if (this.pageIndex === 0) return
+      this.pageIndex -= 1
+      this.initData()
+    },
+    toNext() {
+      if (this.pageIndex === this.pages - 1) return
+      this.pageIndex += 1
+      this.initData()
+    },
+
+    toFirstPage() {
+      if (this.pageIndex === 0) return
+      this.pageIndex = 0
+      this.initData()
+    },
+
+    toLastPage() {
+      if (this.pageIndex === this.pages - 1) return
+      this.pageIndex = this.pages - 1
+      this.initData()
+    },
+    selectPage(s1) {
+      this.pageIndex = s1
+      this.initData()
+    },
+    changePageNum(num) {
+      this.pageIndex = 0
+      this.pageNum = num
+      this.initData()
+    },
+
+    toWriteMsg(){
+      window.scrollTo(0,817)
+      let send = this.$refs.send.$el
+
+      console.log(send);
+      
+    },
+    searchMsg() {
+      fetch(`${config.url}/searchmsg?keyword=${this.searchKeyword}`).then(res => {
+        return res.json()
+      }).then(json => {
+        console.log(json);
+        this.data = json.data
+        this.isSearch = true
+
+        this.pages = Math.ceil(json.data.length / this.pageNum)
+        
+      })
     }
   }
 }
@@ -79,7 +162,7 @@ export default {
   width 100%
   padding-top 20px
   box-sizing border-box
-  font-size 1.6rem
+  font-size 1.4rem
   margin-bottom 40px
   .content
     width 80%
@@ -88,11 +171,8 @@ export default {
       img
         width 100%
         height 100%
-    .seach
+    .search
       margin-top 10px
-      font-size 1.6rem
-      // margin-left auto
-      // text-align right 
       display flex
       justify-content space-between
       input

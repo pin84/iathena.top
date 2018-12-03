@@ -21,9 +21,9 @@
         <!-- <router-link tag="li" to='/blog'>
           <a href="javascript:;">我的博客</a>
         </router-link> -->
-        <router-link tag="li" to='/contact'>
+        <!-- <router-link tag="li" to='/contact'>
           <a href="javascript:;">联系我</a>
-        </router-link>
+        </router-link> -->
         <router-link tag="li" to='/message'>
           <a href="javascript:;">留言本</a>
         </router-link>

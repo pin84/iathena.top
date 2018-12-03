@@ -1,9 +1,9 @@
 <template>
   <div class="wrapper">
     <div class="container">
-      <div class="title">
+      <!-- <div class="title">
         <span>联系我</span>
-      </div>
+      </div> -->
       <div class="info">
         <div class="phone">
           <i>18610141858</i>
@@ -35,19 +35,16 @@ export default {
 <style lang='stylus' scoped>
 .wrapper
   width 100%
-  height 100vh
+  // height 100vh
   display flex
   flex-direction column
-  background url(./bg.jpg) no-repeat center
-  background-size cover
+  background rgba(0,0,0,0)
   .container
     width 300px
     margin 0 auto
-    // border 1px solid red
     .title
       font-size 3rem
       font-weight 600
-      margin 9rem 0  4rem 0
       span
         padding .5rem 0
         border-bottom 2px solid #E87E04

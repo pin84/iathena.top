@@ -37,10 +37,10 @@ export default {
 <style lang='stylus' scoped>
 .wrapper
   width 100%
-  height 100%
+  height 100vh
   min-height 700px
   position relative
-  background url(../assets/img/bg3.jpg)   no-repeat center
+  background url(../assets/img/bg3.jpg)   no-repeat center center
   background-size cover
   .signboard
     width 400px
