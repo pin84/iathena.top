@@ -2,39 +2,25 @@
   <div class="message">
     <div class="content">
       <div class="banner">
-        <img
-          src="../../assets/img/message/banner.jpg"
-          alt=""
-        >
+        <img src="../../assets/img/message/banner.jpg" alt="">
       </div>
       <div class="search">
         <button class="write" @click="toWriteMsg">签写留言</button>
         <div>
-          <input
-            type="text"
-            placeholder="输入关键字搜索留言"
-            v-model="searchKeyword"
-          >
+          <input type="text" placeholder="输入关键字搜索留言" v-model="searchKeyword">
 
           <button @click="searchMsg">搜索</button>
         </div>
       </div>
 
       <ul class="msglist">
-        <li
-          class="item"
-          v-for="(msg,i) in data"
-          :key="i"
-        >
+        <li class="item" v-for="(msg,i) in data" :key="i">
           <div class="top">
             <span>标题:</span> <span>{{msg.title}}</span> <span class="name">{{msg.username}}</span> <time><span>发表于:</span>{{msg.created}}</time>
           </div>
           <div class="bottom">
             <div class="avatar">
-              <img
-                :src="require(`../../assets/img/message/avatar/${msg.avatar}.gif`)"
-                alt=""
-              >
+              <img :src="require(`../../assets/img/message/avatar/${msg.avatar}.gif`)" alt="">
               <h5>{{msg.username}}</h5>
             </div>
             <div class="detail">{{msg.msg}}</div>
@@ -42,17 +28,7 @@
         </li>
       </ul>
       <p v-if='false'>搜索结果一共 3 条留言</p>
-      <PageChange
-        v-else
-        :pages='pages'
-        :currentPage='pageIndex'
-        @toLastPage="toLastPage"
-        @toFirstPage="toFirstPage"
-        @toPre="toPre"
-        @toNext="toNext"
-        @selectPage="selectPage"
-        @changePageNum="changePageNum"
-      />
+      <PageChange v-else :pages='pages' :currentPage='pageIndex' @toLastPage="toLastPage" @toFirstPage="toFirstPage" @toPre="toPre" @toNext="toNext" @selectPage="selectPage" @changePageNum="changePageNum" />
 
       <SendMsg @refreshMsg="refreshMsg" ref="send" />
     </div>
@@ -88,12 +64,17 @@ export default {
   },
   methods: {
     initData() {
+      let pageIndex = window.localStorage.getItem('currentPage')
+      console.log(pageIndex)
       fetch(`${config.url}/initData?pageIndex=${this.pageIndex}&pageNum=${this.pageNum}`).then(res => {
         return res.json()
       }).then(json => {
         this.data = json.data
         this.pages = json.pages
-        window.scrollTo(0, 200)
+        window.scrollTo(0, 180)
+
+        // let localStorage = window.localStorage
+        // localStorage.setItem('currentPage', this.pageIndex)
       })
     },
     refreshMsg() {
@@ -133,12 +114,9 @@ export default {
       this.initData()
     },
 
-    toWriteMsg(){
-      window.scrollTo(0,817)
-      let send = this.$refs.send.$el
-
-      console.log(send);
-      
+    toWriteMsg() {
+      let send = this.$refs.send.$el.offsetTop
+      window.scrollTo(0, send - 85)
     },
     searchMsg() {
       fetch(`${config.url}/searchmsg?keyword=${this.searchKeyword}`).then(res => {
@@ -149,7 +127,7 @@ export default {
         this.isSearch = true
 
         this.pages = Math.ceil(json.data.length / this.pageNum)
-        
+
       })
     }
   }
@@ -163,7 +141,7 @@ export default {
   padding-top 20px
   box-sizing border-box
   font-size 1.4rem
-  margin-bottom 40px
+  margin-bottom 60px
   .content
     width 80%
     margin 0 auto
@@ -217,10 +195,23 @@ export default {
             font-size 1.4rem 
             text-indent 1em
             text-align left
+            word-break break-all
+            
   .note
     margin 20px 0
     width 100%
     text-align center
     color #006633    
     font-size 1.6rem
+
+@media screen and (max-width:480px)
+  .message
+    padding-top 0
+    box-sizing border-box
+    font-size 1.4rem
+    margin-bottom 80px
+    .content
+      width 100%
+      .msglist
+        margin-top 10px 
 </style>

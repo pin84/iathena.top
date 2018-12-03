@@ -19,7 +19,7 @@
       </div>
       <div class="content">
         <h4>留言内容 (<span class="red">必填</span>)</h4>
-        <textarea name="msg" cols="60" rows="10" v-model="message.msg"></textarea>
+        <textarea name="msg" cols="50" rows="10" v-model="message.msg"></textarea>
         <p id="silent">
           <span>是否为悄悄话(只有管理员才能看得见): </span>
           <input type="checkbox">
@@ -121,4 +121,9 @@ export default {
       padding 0 5px
       &:hover
         cursor pointer
+
+
+@media screen and (max-width:480px)
+  .sendMsg
+    padding 5px        
 </style>
