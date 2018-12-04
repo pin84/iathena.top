@@ -3,7 +3,7 @@
     {{setSelectedIndex}}
     <a
       href=""
-      @click.prevent="$emit('toFirstPage')"
+      @click.prevent="toFirstPage"
     >第一页</a>
     <a
       href=""
@@ -26,7 +26,7 @@
       ref="select1"
     >
       <option
-        value="2"
+        value=""
         v-for="i of pages"
         :key="i"
         
@@ -77,9 +77,15 @@ export default {
   },
 
   methods: {
+    toFirstPage(){
+      this.$emit('toFirstPage')
+      let s1 = this.$refs.select1
+      
+    },
     selectPage() {
       let s1 = this.$refs.select1.selectedIndex
       this.$emit('selectPage', s1)
+
     },
     changePageNum() {
       let s2 = this.$refs.select2

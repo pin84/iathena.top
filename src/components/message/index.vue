@@ -88,14 +88,6 @@ export default {
   },
 
   created() {
-    //  //刷新页面就把当前码信息存入locastorage
-    //     window.addEventListener("beforeunload", () => {
-    //       localStorage.setItem("pageInfo", JSON.stringify({ pageIndex: this.pageIndex, pageNum: this.pageNum }))
-    //     })
-    //     //取出
-    //     let pageInfo = localStorage.getItem('pageInfo')
-    //     this.pageIndex = JSON.parse(pageInfo).pageIndex
-    //     this.pageNum = JSON.parse(pageInfo).pageNum
     this.initData()
   },
 
