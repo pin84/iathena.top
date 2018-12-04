@@ -19,7 +19,10 @@
             v-model="searchKeyword"
           >
 
-          <button @click="searchMsg" disabled>搜索</button>
+          <button
+            @click="searchMsg"
+            disabled
+          >搜索</button>
         </div>
       </div>
 
@@ -47,8 +50,6 @@
       <p v-if='false'>搜索结果一共 3 条留言</p>
       <PageChange
         v-else
-        :pages='pages'
-        :currentPage='pageIndex'
         @toLastPage="toLastPage"
         @toFirstPage="toFirstPage"
         @toPre="toPre"
@@ -62,7 +63,7 @@
         ref="send"
       />
     </div>
-    <div class="note">留言本于2018.12.1开放</div>
+    <div class="note">留言本于2018.12.1开放 </div>
   </div>
 </template>
 
@@ -71,14 +72,13 @@
 import config from '../../config/config'
 import PageChange from './PageChange'
 import SendMsg from './SendMsg'
+
+
 export default {
   data() {
     return {
       data: [], //从后台拿回来的数据 
       isSearch: false,
-      pageIndex: 0, //当前页面
-      pageNum: 2, //每面显示 
-      pages: 0, //传递给子组件的值(总的页码数)
       searchKeyword: '' // 搜索关键字
     }
   },
@@ -87,60 +87,63 @@ export default {
     SendMsg
   },
 
-
-  mounted() {
+  created() {
+    //  //刷新页面就把当前码信息存入locastorage
+    //     window.addEventListener("beforeunload", () => {
+    //       localStorage.setItem("pageInfo", JSON.stringify({ pageIndex: this.pageIndex, pageNum: this.pageNum }))
+    //     })
+    //     //取出
+    //     let pageInfo = localStorage.getItem('pageInfo')
+    //     this.pageIndex = JSON.parse(pageInfo).pageIndex
+    //     this.pageNum = JSON.parse(pageInfo).pageNum
     this.initData()
-
   },
+
   methods: {
     initData() {
-      let pageIndex = window.localStorage.getItem('currentPage')
-      console.log(pageIndex)
-      fetch(`${config.url}/initData?pageIndex=${this.pageIndex}&pageNum=${this.pageNum}`).then(res => {
+      fetch(`${config.url}/initData?pageIndex=${this.$store.state.pageIndex}&pageNum=${this.$store.state.pageNum}`).then(res => {
         return res.json()
       }).then(json => {
         this.data = json.data
-        this.pages = json.pages
+        this.$store.commit('setPages', json.pages)
         window.scrollTo(0, 180)
-
-        // let localStorage = window.localStorage
-        // localStorage.setItem('currentPage', this.pageIndex)
       })
     },
     refreshMsg() {
-      this.pageIndex = 0
+      this.$store.commit('toFirstPage')
       this.initData()
     },
 
     toPre() {
-      if (this.pageIndex === 0) return
-      this.pageIndex -= 1
+      if (this.$store.state.pageIndex === 0) return
+      this.$store.commit('minus')
       this.initData()
     },
+
     toNext() {
-      if (this.pageIndex === this.pages - 1) return
-      this.pageIndex += 1
+      if (this.$store.state.pageIndex === this.$store.state.pages - 1) return
+      this.$store.commit('increment')
       this.initData()
     },
 
     toFirstPage() {
-      if (this.pageIndex === 0) return
-      this.pageIndex = 0
+      if (this.$store.state.pageIndex === 0) return
+      this.$store.commit('toFirstPage')
       this.initData()
     },
 
     toLastPage() {
-      if (this.pageIndex === this.pages - 1) return
-      this.pageIndex = this.pages - 1
+      if (this.$store.state.pageIndex === this.$store.state.pages - 1) return
+      this.$store.commit('toLastPage')
       this.initData()
     },
     selectPage(s1) {
-      this.pageIndex = s1
+      this.$store.state.pageIndex = s1
       this.initData()
     },
     changePageNum(num) {
-      this.pageIndex = 0
-      this.pageNum = num
+      this.$store.commit('toFirstPage')
+      this.$store.commit('setPageNum', num)
       this.initData()
     },
 
@@ -148,6 +151,7 @@ export default {
       let send = this.$refs.send.$el.offsetTop
       window.scrollTo(0, send - 85)
     },
+
     searchMsg() {
       fetch(`${config.url}/searchmsg?keyword=${this.searchKeyword}`).then(res => {
         return res.json()
