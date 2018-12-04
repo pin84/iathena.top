@@ -2,25 +2,42 @@
   <div class="message">
     <div class="content">
       <div class="banner">
-        <img src="../../assets/img/message/banner.jpg" alt="">
+        <img
+          src="../../assets/img/message/banner.jpg"
+          alt=""
+        >
       </div>
       <div class="search">
-        <button class="write" @click="toWriteMsg">签写留言</button>
+        <button
+          class="write"
+          @click="toWriteMsg"
+        >签写留言</button>
         <div>
-          <input type="text" placeholder="输入关键字搜索留言" v-model="searchKeyword">
+          <input
+            type="text"
+            placeholder="输入关键字搜索留言"
+            v-model="searchKeyword"
+          >
 
-          <button @click="searchMsg">搜索</button>
+          <button @click="searchMsg" disabled>搜索</button>
         </div>
       </div>
 
       <ul class="msglist">
-        <li class="item" v-for="(msg,i) in data" :key="i">
+        <li
+          class="item"
+          v-for="(msg,i) in data"
+          :key="i"
+        >
           <div class="top">
             <span>标题:</span> <span>{{msg.title}}</span> <span class="name">{{msg.username}}</span> <time><span>发表于:</span>{{msg.created}}</time>
           </div>
           <div class="bottom">
             <div class="avatar">
-              <img :src="require(`../../assets/img/message/avatar/${msg.avatar}.gif`)" alt="">
+              <img
+                :src="require(`../../assets/img/message/avatar/${msg.avatar}.gif`)"
+                alt=""
+              >
               <h5>{{msg.username}}</h5>
             </div>
             <div class="detail">{{msg.msg}}</div>
@@ -28,9 +45,22 @@
         </li>
       </ul>
       <p v-if='false'>搜索结果一共 3 条留言</p>
-      <PageChange v-else :pages='pages' :currentPage='pageIndex' @toLastPage="toLastPage" @toFirstPage="toFirstPage" @toPre="toPre" @toNext="toNext" @selectPage="selectPage" @changePageNum="changePageNum" />
+      <PageChange
+        v-else
+        :pages='pages'
+        :currentPage='pageIndex'
+        @toLastPage="toLastPage"
+        @toFirstPage="toFirstPage"
+        @toPre="toPre"
+        @toNext="toNext"
+        @selectPage="selectPage"
+        @changePageNum="changePageNum"
+      />
 
-      <SendMsg @refreshMsg="refreshMsg" ref="send" />
+      <SendMsg
+        @refreshMsg="refreshMsg"
+        ref="send"
+      />
     </div>
     <div class="note">留言本于2018.12.1开放</div>
   </div>
@@ -123,10 +153,10 @@ export default {
         return res.json()
       }).then(json => {
         console.log(json);
-        this.data = json.data
-        this.isSearch = true
+        // this.data = json.data
+        // this.isSearch = true
 
-        this.pages = Math.ceil(json.data.length / this.pageNum)
+        // this.pages = Math.ceil(json.data.length / this.pageNum)
 
       })
     }

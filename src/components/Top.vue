@@ -5,6 +5,7 @@
       <a href="/" class="title">
         iAthena
       </a>
+      
       <ul class="pc">
         <router-link tag="li" to='/about'>
           <a href="javascript:;">关于我</a>
