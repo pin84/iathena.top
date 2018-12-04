@@ -4,9 +4,7 @@ import Vuex from 'vuex'
 Vue.use(Vuex)
 
 
-function storeLocalStore(stae) {
 
-}
 
 export default new Vuex.Store({
   state: {

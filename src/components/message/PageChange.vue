@@ -69,7 +69,9 @@ export default {
     },
     setSelectedIndex:function(){
       // let s1 = this.$refs.select1
-      // s1.selectedIndex = this.$store.state.pageIndex
+      // if(s1){
+      //   s1.selectedIndex = this.$store.state.pageIndex
+      // }
       return this.$store.state.pageIndex
     }
   },
@@ -89,7 +91,6 @@ export default {
     //   let s1 = this.$refs.select1
     //   s1.selectedIndex = this.$store.state.pageIndex
     //   console.log(this.setSelectedIndex);
-      
     // }
   }
 }
