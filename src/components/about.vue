@@ -23,6 +23,7 @@
 <script>
 import Contact from './contact/Contact'
 export default {
+
   components:{
     Contact
   }

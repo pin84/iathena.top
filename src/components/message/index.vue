@@ -19,10 +19,7 @@
             v-model="searchKeyword"
           >
 
-          <button
-            @click="searchMsg"
-            disabled
-          >搜索</button>
+          <button @click="searchMsg">搜索</button>
         </div>
       </div>
 
@@ -43,11 +40,14 @@
               >
               <h5>{{msg.username}}</h5>
             </div>
-            <div class="detail">{{msg.msg}}</div>
+            <div class="detail" >{{msg.msg}}</div>
           </div>
         </li>
       </ul>
-      <p v-if='false'>搜索结果一共 3 条留言</p>
+      <div v-if='isSearch' id="isSearch">
+        <span>搜索结果一共 <strong>{{data.length}}</strong>  条留言</span>
+        <button @click="initData">确定</button>
+      </div>
       <PageChange
         v-else
         @toLastPage="toLastPage"
@@ -72,14 +72,16 @@
 import config from '../../config/config'
 import PageChange from './PageChange'
 import SendMsg from './SendMsg'
-
+import utils from '@/utils/dateFormat'
 
 export default {
   data() {
     return {
       data: [], //从后台拿回来的数据 
       isSearch: false,
-      searchKeyword: '' // 搜索关键字
+      searchKeyword: '', // 搜索关键字
+      searchRes: [],
+      maxSearchResLength:32,
     }
   },
   components: {
@@ -92,15 +94,39 @@ export default {
   },
 
   methods: {
-    initData() {
+
+     initData() {
       fetch(`${config.url}/initData?pageIndex=${this.$store.state.pageIndex}&pageNum=${this.$store.state.pageNum}`).then(res => {
         return res.json()
       }).then(json => {
+        
+        let d = json.data[0].created
+        // console.log(d);
         this.data = json.data
         this.$store.commit('setPages', json.pages)
         window.scrollTo(0, 180)
+        if(this.isSearch){  // isSearch 修改为false 显示分页条
+          this.isSearch = false
+        }
       })
     },
+
+    searchMsg() {
+      if(!this.searchKeyword){
+        return alert('请输入关键字搜索，可以搜索标题、作者、留言内容')
+      }
+      fetch(`${config.url}/searchmsg?keyword=${this.searchKeyword}`).then(res => {
+        return res.json()
+      }).then(json => {
+        if(json.data.length > this.maxSearchResLength ){ //防止搜索的结果过多，造成页面卡死
+          json.data.length = this.maxSearchResLength
+        }
+        this.data = json.data
+        this.isSearch = true
+        this.searchKeyword = ''
+      })
+    },
+   
     refreshMsg() {
       this.$store.commit('toFirstPage')
       this.initData()
@@ -144,18 +170,7 @@ export default {
       window.scrollTo(0, send - 85)
     },
 
-    searchMsg() {
-      fetch(`${config.url}/searchmsg?keyword=${this.searchKeyword}`).then(res => {
-        return res.json()
-      }).then(json => {
-        console.log(json);
-        // this.data = json.data
-        // this.isSearch = true
 
-        // this.pages = Math.ceil(json.data.length / this.pageNum)
-
-      })
-    }
   }
 }
 </script>
@@ -222,7 +237,20 @@ export default {
             text-indent 1em
             text-align left
             word-break break-all
-            
+    #isSearch
+      span
+        margin-right 10px
+        strong 
+          color red
+      button
+        border 0
+        outline none 
+        background #FF9900
+        padding 1px 5px
+        box-shadow 2px 2px 1px #666
+        &:hover
+          background #FF6600
+          cursor pointer
   .note
     margin 20px 0
     width 100%

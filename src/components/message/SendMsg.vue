@@ -3,28 +3,58 @@
     <hr style="margin-bottom:20px;">
     <form action="">
       <div class="userinfo">
-        <label for="username">昵称: </label><input type="text" id="username" autocomplete="off" v-model="message.username"> <br><br>
-        <label for="title">标题: </label><input type="text" id="title" autocomplete="off" v-model="message.title">
+        <label for="username">昵称: </label><input
+          type="text"
+          id="username"
+          autocomplete="off"
+          v-model="message.username"
+          placeholder="访客"
+        > <br><br>
+        <label for="title">标题: </label><input
+          type="text"
+          id="title"
+          autocomplete="off"
+          v-model="message.title"
+          placeholder="无标题"
+        >
       </div>
       <br>
       <div class="avatar">
         <p>请选择头像：</p>
         <br>
         <ul class="list">
-          <li class="item" v-for="(item,i) in 16" :key="i">
-            <input class="ra" type="radio" name="avatar" @click="selectedAvatar(i)">
+          <li
+            class="item"
+            v-for="(item,i) in 16"
+            :key="i"
+          >
+            <input
+              ref="avatar"
+              class="ra"
+              type="radio"
+              name="avatar"
+              @click="selectedAvatar(i)"
+            >
             <img :src="require('../../assets/img/message/avatar/'+((i+1)>9? (i+1) : '0'+(i+1) )+'.gif')">
           </li>
         </ul>
       </div>
       <div class="content">
         <h4>留言内容 (<span class="red">必填</span>)</h4>
-        <textarea name="msg" cols="50" rows="10" v-model="message.msg"></textarea>
+        <textarea
+          name="msg"
+          cols="50"
+          rows="10"
+          v-model="message.msg"
+        ></textarea>
         <p id="silent">
           <span>是否为悄悄话(只有管理员才能看得见): </span>
-          <input type="checkbox">
+          <input type="checkbox"  v-model="message.isSecret">
         </p>
-        <button id="send" @click.prevent="send">发表</button>
+        <button
+          id="send"
+          @click.prevent="send"
+        >发表</button>
       </div>
     </form>
   </div>
@@ -40,9 +70,14 @@ export default {
         username: '',
         title: '',
         avatar: '',
-        msg: ''
-      }
+        msg: '',
+        isSecret: undefined //是否为悄悄话
+      },
     }
+  },
+
+  mounted() {
+    this.$refs.avatar[0].checked = true
   },
 
   methods: {
@@ -68,7 +103,7 @@ export default {
           this.message.msg = ''
           alert(data.data)
           this.$emit('refreshMsg')
-          window.scrollTo(0,210)  //滚动窗口到指定坐标
+          window.scrollTo(0, 210)  //滚动窗口到指定坐标
         }
       })
     }
