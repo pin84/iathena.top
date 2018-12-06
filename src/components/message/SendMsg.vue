@@ -101,6 +101,7 @@ export default {
       }).then(data => {
         if (!data.code) {
           this.message.msg = ''
+          this.message.isSecret = undefined
           alert(data.data)
           this.$emit('refreshMsg')
           window.scrollTo(0, 210)  //滚动窗口到指定坐标
