@@ -23,7 +23,7 @@
 export default {
   data() {
     return {
-      pageNum: [2, 4, 8, 16, 32],
+      pageNum: [4, 8, 16, 32],
       v: 0
     }
   },
