@@ -40,7 +40,7 @@
               >
               <h5>{{msg.username}}</h5>
             </div>
-            <div class="detail" >{{msg.msg}}</div>
+            <div class="detail" :class="{red:msg.isSecret === 1 }"  >{{msg.msg}}</div>
           </div>
         </li>
       </ul>
@@ -67,7 +67,7 @@
   </div>
 </template>
 
-
+s
 <script>
 import config from '../../config/config'
 import PageChange from './PageChange'
@@ -100,8 +100,8 @@ export default {
         return res.json()
       }).then(json => {
         
-        let d = json.data[0].created
-        // console.log(d);
+        let d = json.data
+        console.log(d);
         this.data = json.data
         this.$store.commit('setPages', json.pages)
         window.scrollTo(0, 180)
@@ -182,7 +182,7 @@ export default {
   padding-top 20px
   box-sizing border-box
   font-size 1.4rem
-  margin-bottom 60px
+  margin-bottom 20px
   .content
     width 80%
     margin 0 auto
@@ -237,6 +237,8 @@ export default {
             text-indent 1em
             text-align left
             word-break break-all
+            &.red
+              color red
     #isSearch
       span
         margin-right 10px
@@ -252,7 +254,7 @@ export default {
           background #FF6600
           cursor pointer
   .note
-    margin 20px 0
+    margin 40px 0 0 0
     width 100%
     text-align center
     color #006633    
