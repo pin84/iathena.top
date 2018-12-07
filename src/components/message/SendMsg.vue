@@ -25,7 +25,7 @@
         <ul class="list">
           <li
             class="item"
-            v-for="(item,i) in 16"
+            v-for="(item,i) in avatarSum"
             :key="i"
           >
             <input
@@ -66,6 +66,7 @@ import config from '../../config/config'
 export default {
   data() {
     return {
+      avatarSum:24, //头像的总编号数
       message: {
         username: '',
         title: '',
