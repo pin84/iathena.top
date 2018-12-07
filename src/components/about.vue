@@ -21,7 +21,7 @@
 </template>
 
 <script>
-import Contact from './contact/Contact'
+import Contact from './contact'
 export default {
 
   components:{

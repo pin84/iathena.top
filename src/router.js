@@ -1,8 +1,8 @@
 import Vue from 'vue'
 import Router from 'vue-router'
-import About from './components/About'
-import Job from './components/Job'
-import Skill from './components/Skill'
+import About from './components/about'
+import Job from './components/job'
+import Skill from './components/skill'
 import Experience from './components/Experience'
 import Message from './components/message'
 

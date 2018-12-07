@@ -28,13 +28,18 @@ export default {
     }
   },
 
-  mounted(){
+  mounted() {
     let s1 = this.$refs.select1
     s1.selectedIndex = this.$store.state.pageIndex
 
     let s2 = this.$refs.select2
+    console.log(this.pageNum.findIndex((num) => {
+      
+      return num === Number(this.$store.state.pageNum)
+    }))
     s2.selectedIndex = this.pageNum.findIndex((num) => {
-      return num ===Number(this.$store.state.pageNum) 
+
+      return num === Number(this.$store.state.pageNum)
     })
   },
   computed: {
@@ -62,12 +67,12 @@ export default {
       s1.selectedIndex = this.$store.state.pageIndex
     },
 
-    toLastPage(){
+    toLastPage() {
 
-      console.log(this.$store.state.pages )
+      console.log(this.$store.state.pages)
       this.$emit('toLastPage')
       let s1 = this.$refs.select1
-      s1.selectedIndex = this.$store.state.pages -1
+      s1.selectedIndex = this.$store.state.pages - 1
     },
 
     selectPage() {
