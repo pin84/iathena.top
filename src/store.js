@@ -9,7 +9,7 @@ Vue.use(Vuex)
 export default new Vuex.Store({
   state: {
     pageIndex: 0, // 当前页码
-    pageNum: 4, // 每页显示的条数
+    pageNum: 2, // 每页显示的条数
     pages: 0 // 总页数
   },
   mutations: {

@@ -54,9 +54,9 @@
       </li>
       <li>
         <img src="../assets/img/07.jpg" alt="">
-        <a href="https://pin84.github.io/live/02_jspractice/01_JavaScriptDrumKit/" target="_blank">
-          <h4>css+js</h4>
-          <p>来弹钢琴吧~~只支持PC端</p>
+        <a href="http://vuebase.iathena.top/#/todoList" target="_blank">
+          <h4>vue</h4>
+          <p>数据版的TodoList</p>
         </a>
       </li>
       <li>

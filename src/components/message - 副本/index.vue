@@ -26,7 +26,7 @@
       <ul class="msglist">
         <li
           class="item"
-          v-for="(msg,i) in currentData"
+          v-for="(msg,i) in data"
           :key="i"
         >
           <div class="top">
@@ -83,14 +83,12 @@ import utils from '@/utils/dateFormat'
 export default {
   data() {
     return {
-      allData: [],//存后台所有的数据 用于上一页、下一页的操作，不从数据库取数据
-      data: [], //从后台拿回来的数据，只有前两条
+      allData:[],//存后台所有的数据 
+      data: [], //从后台拿回来的数据 
       isSearch: false,
       searchKeyword: '', // 搜索关键字
       searchRes: [],
       maxSearchResLength: 32,
-      start: this.currentPageIndex || Number(this.$store.state.pageIndex),
-      end: this.currentPageNum || Number(this.$store.state.pageNum),
     }
   },
   components: {
@@ -100,27 +98,25 @@ export default {
 
   created() {
     this.initData()
-  },
-
-  computed: {
-    currentData: function () {
-      return this.data
-    },
-    currentPageNum: function () {
-      return Number(this.$store.state.pageNum)
-    },
-    currentPageIndex(){
-      return Number(this.$store.state.pageIndex)
-    }
+    this.getAllData()
   },
 
   methods: {
-    initData() {
-      fetch(`${config.url}/initData?pageNum=${this.$store.state.pageNum}`).then(res => {
+
+    getAllData() {
+      fetch(`${config.url}/getAllData`).then(res => {
         return res.json()
       }).then(json => {
-        this.allData = json.allData.reverse()
-        this.data = this.allData.slice(0,this.end)
+        console.log(json);
+        this.allData = json.data
+        
+      })
+    },
+    initData() {
+      fetch(`${config.url}/initData?pageIndex=${this.$store.state.pageIndex}&pageNum=${this.$store.state.pageNum}`).then(res => {
+        return res.json()
+      }).then(json => {
+        this.data = json.data
         this.$store.commit('setPages', json.pages)
         window.scrollTo(0, 180)
         if (this.isSearch) {  // isSearch 修改为false 显示分页条
@@ -150,66 +146,43 @@ export default {
       this.initData()
     },
 
-
     toPre() {
       if (this.$store.state.pageIndex === 0) return
       this.$store.commit('minus')
 
-      
-      this.start -= this.currentPageNum
-      this.end -= this.currentPageNum
-      //防止 this.start - this.currentPageNum 小于0的情况 end 同理
-      this.start = this.start < 0 ? 0 : this.start
-      this.end = this.end < this.currentPageNum ? this.currentPageNum : this.end
+      console.log(this.data);
 
-      this.data = []
-      this.data = this.allData.slice(this.start, this.end)
+
+      // this.initData()
     },
 
     toNext() {
       if (this.$store.state.pageIndex === this.$store.state.pages - 1) return
       this.$store.commit('increment')
-      
-      this.start += this.currentPageNum
-      this.end += this.currentPageNum
-      
-      this.data = []
-      this.data = this.allData.slice(this.start, this.end)
+
+      // this.initData()
     },
 
     toFirstPage() {
       if (this.$store.state.pageIndex === 0) return
       this.$store.commit('toFirstPage')
-      this.start = 0
-      this.end = Number(this.$store.state.pageNum)
-      this.data = this.allData.slice(this.start, this.end)
+      this.initData()
     },
 
     toLastPage() {
       if (this.$store.state.pageIndex === this.$store.state.pages - 1) return
       this.$store.commit('toLastPage')
-      this.start = this.allData.length - this.currentPageNum
-      this.end = this.allData.length
-      this.data = []
-      this.data = this.allData.slice(this.start, this.end)
+      this.initData()
     },
     selectPage(s1) {
       this.$store.state.pageIndex = s1
-      this.start = s1 * this.$store.state.pageNum
-      this.end = s1 * this.$store.state.pageNum + Number(this.$store.state.pageNum)
-      this.data = []
-      this.data = this.allData.slice(this.start, this.end)
+      this.initData()
     },
     changePageNum(num) {
       this.$store.commit('toFirstPage')
       this.$store.commit('setPageNum', num)
-      this.$store.commit('setPages', Math.ceil(this.allData.length / num))
-      this.start = 0
-      this.end = Number(num)
-      this.data = []
-      this.data = this.allData.slice(this.start, this.end)
+      this.initData()
     },
-
 
     toWriteMsg() {
       let send = this.$refs.send.$el.offsetTop
