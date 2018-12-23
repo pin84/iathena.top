@@ -5,6 +5,7 @@ import Job from './components/Job'
 import Skill from './components/Skill'
 import Experience from './components/Experience'
 import Message from './components/message'
+import Fireworks from './components/fireworks'
 
 Vue.use(Router)
 
@@ -14,7 +15,7 @@ export default new Router({
   routes: [
     {
       path: '/',
-      redirect: '/about',
+      redirect: '/fireworks',
     },
     {
       path: '/about',
@@ -31,6 +32,10 @@ export default new Router({
     {
       path: '/experience',
       component: Experience
+    },
+    {
+      path: '/fireworks',
+      component: Fireworks
     },
     {
       path: '/message',
