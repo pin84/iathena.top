@@ -14,6 +14,7 @@
         <div class="pin left"></div>
         <div class="pin right"></div>
       </div>
+
       <div class="signboard three">
         <div class="sign">html5、css3、js、vue、node、mysql</div>
         <div class="strings"></div>
@@ -26,11 +27,7 @@
 </template>
 
 <script>
-import Goddess from './goddess.vue'
 export default {
-  components: {
-    Goddess
-  }
 }
 </script>
 
