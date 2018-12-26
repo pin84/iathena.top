@@ -9,6 +9,7 @@
       class="container"
       width="800"
       height="400"
+      ref="firework"
     ></canvas>
     <canvas
       id="bg"
@@ -25,6 +26,8 @@
 </template>
 
 
+
+
 <script>
 
 export default {
@@ -38,6 +41,7 @@ export default {
         fireworkTime: { min: 30, max: 60 },
         //烟花参数本身有默认值 传入undefined则使用默认参数
         timer: null,
+        i: 0 //测试停止用
       },
       fireworkOpt: {
         x: undefined,
@@ -46,6 +50,7 @@ export default {
         yEnd: undefined,
         count: 2,   //炸裂后粒子数
         wait: undefined,  //消失后 => 炸裂  等待时间
+        status: 0,
       },
       firework: {
         x: undefined,
@@ -53,40 +58,84 @@ export default {
         width: 90,
         height: 140,
       },
-      fireworks:[],
+      fireworks: [],
     }
   },
 
   mounted() {
-
+    // this.move()
+    this.test()
   },
 
   methods: {
 
+    test() {
 
-    move(){
-      let ctx = this.$refs.canvasBg.getContext('2d')
-      requestAnimationFrame(this.move)
-      this.fireworks.forEach(item =>{
-        this.render(ctx,item)
 
-        // console.log(item);
-        
-      })
     },
 
 
-    render(ctx,firework) {
-      this.rise(firework)
-      let { x, y, width, height } = firework
+    move() {
+      let ctx = this.$refs.firework.getContext('2d')
+      this.config.i++
+      // this.timer = requestAnimationFrame(this.move)
 
-      ctx.clearRect(0, 0, 800, 400)
-      ctx.fillStyle = 'red'
-      ctx.fillRect(x, y, width, height)
+      ctx.clearRect(0, 0, 800, 400);
+      this.fireworks.forEach((item, index) => {
+        this.render(ctx, item)
+        if (item.status === false) {
+          this.fireworks.splice(index, 1)
+        }
 
-      // if (firework.y + firework.height < 0) {
-      //   cancelAnimationFrame(this.config.timer)
+      })
+
+      // if(this.config.i > 141 ){
+      //   cancelAnimationFrame(this.timer)
       // }
+    },
+
+
+    render(ctx, firework) {
+      switch (firework.status) {
+        case 1: //升空
+          this.rise(firework)
+          let { x, y, size, sAngle, eAngle, opacity } = firework
+
+
+          ctx.save();
+          ctx.beginPath();
+
+          ctx.translate(x, y);
+          ctx.scale(0.5, 1.5);
+          ctx.translate(-x, -y);
+          ctx.fillStyle = firework.color
+          // ctx.globalCompositeOperation = 'lighter';
+          // ctx.globalAlpha = opacity
+          ctx.arc(x, y, size, sAngle, eAngle, false)
+          ctx.fill();
+          ctx.restore();
+          break;
+
+        case 2:
+
+          // console.log(firework.wait);
+
+          if (--firework.wait <= 0) {
+            firework.status = 3
+          }
+          break;
+
+        case 3:
+
+
+          firework.status = false
+          break;
+      }
+
+
+      if (firework.y + firework.height < 0) {
+        cancelAnimationFrame(this.config.timer)
+      }
     },
 
 
@@ -98,10 +147,24 @@ export default {
     },
 
     rise(firework) {
-      // console.log(firework.y);
       let velocity = -3
-      firework.y += velocity
+      firework.y += velocity * 1
       velocity += 0.005
+
+      // //烟花升空到目标位置开始渐隐
+      if (firework.y - firework.yEnd <= 20) {
+        firework.opacity = (firework.y - firework.yEnd) / 20;
+      }
+
+      //如果到了目标位置 就开始第二个状态
+      if (firework.y <= firework.yEnd) {
+        firework.status = 2;
+      }
+
+      // 移除(在move()移除)
+      if (firework.y < 0) {
+        firework.status = false
+      }
     },
 
     generateFireworks() {
@@ -110,33 +173,30 @@ export default {
     },
 
     init(e) {
-      if (e.offsetY > 190) {
-        return
-      }
-
       let firework = {
-        x: Math.random() * 800,
+        x: e.offsetX,
         y: 380,
-        width: 90,
-        height: 140,
+        size: 5,
+        sAngle: 0,
+        eAngle: 2 * Math.PI,
+        opacity: 1,
+        yEnd: e.offsetY,
+        status: 1,
+        color: `hsla(${360 * Math.random() | 0},80%,60%,1)`,
+        wait: 30 + Math.floor(Math.random() * 30)
       }
-
       this.fireworks.push(firework)
 
-      console.log(this.fireworks);
-      
-      // this.generateFireworks()
       this.move()
 
-    }
+    },
+
   }
 
 }
-
-
-
-
 </script>
+
+
 
 
 <style lang='stylus' scoped>
@@ -154,6 +214,8 @@ export default {
   #bg
     background url('../../assets/img/fireworks/bg.jpg') #000 no-repeat bottom 
     z-index 5
+  #firework
+    z-index 8
   img
     position absolute
     bottom 0

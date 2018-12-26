@@ -211,7 +211,6 @@ const canvas = {
       !this.fireworks[i].render(this.fireworkCtx) && this.fireworks.splice(i, 1);
     }
   },
-
 }
 
 let firework = document.getElementById('firework')
