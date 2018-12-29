@@ -1,10 +1,10 @@
 <template>
   <div id="canvasBox">
-    <canvas
+    <!-- <canvas
       id="particleCtx"
       width="800"
       height="400"
-    ></canvas>
+    ></canvas> -->
     <canvas
       id="fireworksCtx"
       width="800"
@@ -12,7 +12,10 @@
       ref="fireworksCtx"
       @click="init"
     ></canvas>
-
+    <img
+      src="../../assets/img/fireworks/girl.png"
+      alt=""
+    >
   </div>
 </template>
 <script>
@@ -21,9 +24,7 @@ export default {
     return {
       fireworks: [],
       particles: [],
-      count: 50,
-      i: 1,
-      timer: null,
+      count: 100,
     }
   },
 
@@ -33,20 +34,31 @@ export default {
 
   methods: {
     init(e) {
+
+      if (e.offsetY > 190) {
+        return
+      }
+
       let firework = {
         x: e.offsetX,
         y: 380,
         size: 2,
         color: `hsla(${360 * Math.random() | 0},80%,60%,1)`,
-        yEnd: e.offsetY + 30,
+        yEnd: e.offsetY,
         opacity: 1,
-        timeout: 20,  // 95次调用后，移除
+        timeout: 95,  // 95次调用后，移除
         velocity: -3,
-        status: 1
+        status: 1,
+        particles: this.generatorParticle(e)
       }
+      this.fireworks.push(firework)
+    },
 
+
+    generatorParticle(e) {
       //微粒
       let radius = 1.2
+      let particles = []
       for (let i = 0; i < this.count; i++) {
         let rate = Math.random()
         let angle = Math.PI * 2 * Math.random()
@@ -59,41 +71,24 @@ export default {
           vx: radius * Math.cos(angle) * rate,
           vy: radius * Math.sin(angle) * rate,
           opacity: 1,
-          timeout: 95,  // 95次调用后，移除
         }
-
-        this.particles.push(particle)
+        particles.push(particle)
       }
-      this.fireworks.push(firework)
+      return particles
     },
 
     startAnimation() {
       let ctx = this.$refs.fireworksCtx.getContext('2d')
-      this.timer = requestAnimationFrame(this.startAnimation)
-      // ctx.clearRect(0, 0, 800, 400)
-      ctx.fillStyle = 'rgba(0,0,0,0.1)'
-      ctx.fillRect(0, 0, 800, 400)
+      requestAnimationFrame(this.startAnimation)
+      ctx.clearRect(0, 0, 800, 400)
+      // ctx.fillStyle = 'rgba(0,0,0,0.1)'
+      // ctx.fillRect(0, 0, 800, 400)
 
       this.fireworks.forEach((firework, index) => {
-
-
-        this.render(ctx, firework)
-
-
-        if (!firework) {
-          console.log('aaaaaaaaaaaaa');
-          
-        }
-
-        // if (firework.status === 4) {
-        //   this.fireworks.splice(index, 1)
-        // }
+        //如果返回false则删除firework
+        !this.render(ctx, firework) && this.fireworks.splice(index, 1)
       })
-
-
     },
-
-
 
     rise(firework) {
       firework.y += firework.velocity * 1
@@ -114,7 +109,7 @@ export default {
           ctx.beginPath()
 
           ctx.translate(x, y);
-          ctx.scale(0.8, 2);
+          ctx.scale(0.8, 2.5);
           ctx.translate(-x, -y);
 
           ctx.fillStyle = color
@@ -127,22 +122,34 @@ export default {
           break
 
         case 2:
-          if (--firework.timeout <= 0) {
-            firework.status = 3
-          }
+          //在烟花上升到指定高度时不做其他处理。执行第三阶段
+          // 可以做一些隐藏烟花的处理
+          firework.status = 3
+
           return true
           break
 
         case 3:
-          this.particles.forEach((particle, index) => {
-            this.particleRender(ctx, particle)
 
-            // 超时移除
-            if (--particle.timeout < 0) {
-              this.particles.splice(index, 1)
-            }
+
+          firework.color = firework.color.replace(/1\b/, '0.2')
+          ctx.save()
+          ctx.globalCompositeOperation = 'lighter';
+          ctx.globalAlpha = firework.opacity
+
+          ctx.fillStyle = firework.color
+
+          firework.particles.forEach((particle, index) => {
+            this.particleRender(ctx, particle)
           })
-          return false
+
+          ctx.fillRect(0, 0, 800, 400)
+          ctx.restore()
+
+          firework.opacity -= 0.01
+
+          return --firework.timeout > 0
+
           break
         default:
           return false
@@ -150,11 +157,10 @@ export default {
     },
 
     particleRender(ctx, particle) {
-
       let { x, y, size, color, opacity } = particle
       ctx.save()
       ctx.beginPath()
-      ctx.globalCompositeOperation = 'lighter';
+      ctx.globalCompositeOperation = 'lighter'
       ctx.globalAlpha = opacity;
 
       ctx.fillStyle = color
@@ -187,9 +193,12 @@ export default {
   position relative
   #fireworksCtx
     position absolute
-    background url('../../assets/img/fireworks/bg.jpg') no-repeat bottom 
-    
-  #particleCtx
+    background url('../../assets/img/fireworks/bg.jpg') no-repeat #000 bottom 
+  img 
     position absolute
-    background #000  
+    bottom -400px
+    left 454px
+    z-index 999
+    user-select none
+    
 </style>
