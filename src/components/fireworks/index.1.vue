@@ -1,19 +1,14 @@
 <template>
   <div id="fireworks">
-    <div id="canvasBox" v-if="PCOrPhone">
-      <div>
-        <canvas id="fireworksCtx" width="800" height="400" ref="fireworksCtx" @click="init"></canvas>
-        <img src="../../assets/img/fireworks/girl.png" alt="">
-      </div>
+    <div id="canvasBox">
+      <!-- <canvas
+      id="particleCtx"
+      width="800"
+      height="400"
+    ></canvas> -->
+      <canvas id="fireworksCtx" width="800" height="400" ref="fireworksCtx" @click="init"></canvas>
+      <img src="../../assets/img/fireworks/girl.png" alt="">
     </div>
-
-    <div id="canvasBox" v-else>
-      <div>
-        <canvas id="fireworksCtx" width="375" height="400" ref="fireworksCtx" @click="init"></canvas>
-        <!-- <img src="../../assets/img/fireworks/girl.png" alt=""> -->
-      </div>
-    </div>
-
     <dir id="text">
       那一夜 河对岸的烟火光彩耀眼 <br>
       震耳欲聋的声音 振奋着年少苦闷的情绪 <br>
@@ -32,21 +27,11 @@ export default {
       fireworks: [],
       particles: [],
       count: 100,
-      aa: false
-    }
-  },
-
-  computed: {
-    PCOrPhone: function () {
-      return /Android|webOS|iPhone|iPod|BlackBerry/i.test(navigator.userAgent) ? false : true
     }
   },
 
   mounted() {
     this.startAnimation()
-
-    console.log(navigator.userAgent)
-
   },
 
   methods: {
@@ -207,8 +192,8 @@ export default {
 </script>
 <style lang='stylus' scoped>
 #fireworks
-  // width 100vw
-  // height 100vh
+  // width 100%
+  // height 100%
   // margin 0 auto
   // display flex
   // flex-direction column
@@ -221,7 +206,7 @@ export default {
     margin 0 auto
     #fireworksCtx
       position absolute
-      background url('../../assets/img/fireworks/bg.jpg') no-repeat #000 bottom  
+      background url('../../assets/img/fireworks/bg.jpg') no-repeat #000 bottom 
     img 
       position absolute
       bottom 0
@@ -229,43 +214,13 @@ export default {
       z-index 999
       user-select none
   #text
-    width 800px
-    height 200px
     margin 0 auto
+    width 800px
+    // background url('../../assets/img/fireworks/garden-bg.jpg') 
     font-size 1.6rem
     color #fff
     padding 5px  0 0 20px
     line-height 28px
     box-sizing border-box
     user-select none
-@media screen and (max-width:480px)
-  #fireworks
-    padding 0
-    overflow hidden
-    #canvasBox
-      position relative
-      margin 0 auto
-      width 100%
-      height 400px
-      #fireworksCtx
-        width 100%
-        height 400px
-      img 
-        left 241px
-        z-index 999
-        user-select none
-    #text
-      width 100%
-      height 290px
-      // margin 0 auto
-      font-size 16px
-      color #fff
-      // padding 5px  0 0 20px
-      line-height 28px
-      box-sizing border-box
-      user-select none
-      box-sizing border-box
-      // border 1px solid red
-
-
 </style>

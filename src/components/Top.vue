@@ -91,7 +91,7 @@ nav
         height 60px
         line-height 60px
         // padding 0 2px
-        font-size 1.4rem
+        font-size 1.6rem
         font-weight 400 
         &.title
           display none
@@ -102,7 +102,7 @@ nav
       a
         height 50px
         line-height 50px
-        font-size 1.2rem  
+        font-size 1.4rem  
 .router-link-active
   background #006699
 </style>

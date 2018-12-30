@@ -48,7 +48,7 @@
       </li>
       <li>
         <img src="../assets/img/06.jpg" alt="">
-        <a href="https://pin84.github.io/live/02_jspractice/02_magnifier/" target="_blank">
+        <a href="https://pin84.github.io/live/01_web/08_magnifier/" target="_blank">
           <h4>淘宝网的放大镜效果</h4>
         </a>
       </li>
