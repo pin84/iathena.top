@@ -38,7 +38,7 @@ export default {
 
   computed: {
     PCOrPhone: function () {
-      return /Android|webOS|iPhone|iPod|BlackBerry/i.test(navigator.userAgent) ? false : true
+      return /Android|webOS|iPhone|BlackBerry/i.test(navigator.userAgent) ? false : true
     }
   },
 
@@ -53,6 +53,10 @@ export default {
     init(e) {
 
       if (e.offsetY > 190) {
+        return
+      }
+
+      if (this.fireworks.length > 7) {
         return
       }
 
@@ -120,7 +124,7 @@ export default {
     render(ctx, firework) {
       switch (firework.status) {
         case 1:
-          let { x, y, size, color } = firework
+          var { x, y, size, color } = firework
           x += Math.sin(Math.PI * 2 * Math.random()) / 1.2
           ctx.save()
           ctx.beginPath()
@@ -147,8 +151,6 @@ export default {
           break
 
         case 3:
-
-
           firework.color = firework.color.replace(/1\b/, '0.2')
           ctx.save()
           ctx.globalCompositeOperation = 'lighter';
@@ -156,7 +158,7 @@ export default {
 
           ctx.fillStyle = firework.color
 
-          firework.particles.forEach((particle, index) => {
+          firework.particles.forEach((particle) => {
             this.particleRender(ctx, particle)
           })
 

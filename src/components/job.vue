@@ -4,72 +4,71 @@
       <span>作品集</span>
     </div>
     <ul class="list">
-       <li>
-        <img src="../assets/img/02.jpg" alt="">
-        <a href="http://df.iathena.top" target="_blank">
-          <h4>静态页面-企业官网</h4>
-          <p>业务范围下的数据都是用ajax从后台请求</p>
-        </a>
-      </li>
-      <li>
-        <img src="../assets/img/01.jpg" alt="">
-        <a href="https://pin84.github.io/live/01_web/01_miaov/" target='_blank'>
-          <h4>静态页面-企业官网</h4>
-          <p></p>
-        </a>
-      </li>
-     
-      <li>
-        <img src="../assets/img/03.jpg" alt="">
-        <a href="https://pin84.github.io/live/05_css3/05_3dPictrues/" target="_blank">
-          <h4>css3 3D旋转</h4>
-          <p>请用 Google Chrome 浏览器打开(原因你懂的)</p>
-        </a>
-      </li>
-      <li>
-        <img src="../assets/img/04.jpg" alt="">
-        <a href="http://seller.iathena.top" target="_blank">
-          <h4>VUE 移动端，请将浏览器切换到手机端页面</h4>
-          <p>仿'饿了吗'APP，所有数据都用axios从后台请求</p>
-        </a>
-      </li>
-      <li>
-        <img src="../assets/img/08.jpg" alt="">
-        <a href="http://cxen.iathena.top" target="_blank">
-          <h4>VUE 移动端，请将浏览器切换到手机端页面</h4>
-          <p>前后端分离，新时代英语APP。</p>
-        </a>
-      </li>
-      <li>
-        <img src="../assets/img/05.jpg" alt="">
-        <a href="https://pin84.github.io/live/01_web/03_ResponsiveWeb/" target="_blank">
-          <h4>理财网站-响应式页面</h4>
-        </a>
-      </li>
-      <li>
-        <img src="../assets/img/06.jpg" alt="">
-        <a href="https://pin84.github.io/live/01_web/08_magnifier/" target="_blank">
-          <h4>淘宝网的放大镜效果</h4>
-        </a>
-      </li>
-      <li>
-        <img src="../assets/img/07.jpg" alt="">
-        <a href="http://vuebase.iathena.top/#/todoList" target="_blank">
-          <h4>vue</h4>
-          <p>数据版的TodoList</p>
-        </a>
-      </li>
-      <li>
-        <img src="../assets/img/08.jpg" alt="">
-        <a href="https://github.com/pin84" target="_blank">
-          <h4>更多请访问我的github</h4>
+      <li v-for="(li,index) in liData" :key="index">
+        <img style="width:100%;height:100%;" :src="require(`../assets/img/job/0${Math.ceil(Math.random()*8)}.jpg`)" alt="">
+        <a :href="li.src" target="_blank">
+          <h4>{{li.title}}</h4>
+          <p>{{li.detail}}</p>
         </a>
       </li>
     </ul>
   </div>
 </template>
 <script>
-export default {};
+export default {
+  data() {
+    return {
+      liData: [
+        {
+          src: 'http://df.iathena.top/',
+          title: '静态页面-企业官网',
+          detail: '业务范围下的数据都是用ajax从后台请求'
+        },
+        {
+          src: 'https://pin84.github.io/live/01_web/01_miaov/',
+          title: '静态页面-企业官网',
+          detail: ''
+        },
+        {
+          src: 'https://pin84.github.io/live/05_css3/05_3dPictrues/',
+          title: 'css3 3D旋转',
+          detail: '请用 Google Chrome 浏览器打开(原因你懂的)'
+        },
+        {
+          src: 'http://seller.iathena.top/',
+          title: 'VUE 移动端，请将浏览器切换到手机端页面',
+          detail: '仿 饿了吗APP，所有数据都用axios从后台请求'
+        },
+        {
+          src: 'http://cxen.iathena.top/',
+          title: 'VUE 移动端，请将浏览器切换到手机端页面',
+          detail: '前后端分离，新时代英语APP。'
+        },
+        {
+          src: 'https://pin84.github.io/live/01_web/03_ResponsiveWeb/',
+          title: '理财网站-响应式页面',
+          detail: ''
+        },
+        {
+          src: 'https://pin84.github.io/live/01_web/08_magnifier/',
+          title: '淘宝网的放大镜效果',
+          detail: ''
+        },
+        {
+          src: 'http://vuebase.iathena.top/#/todoList/',
+          title: 'todoList',
+          detail: 'VUE 数据版的TodoList'
+        },
+        {
+          src: 'https://github.com/pin84/',
+          title: '更多请访问我的github',
+          detail: ''
+        },
+      ]
+    }
+  }
+
+};
 </script>
 <style lang="stylus" scoped>
 .wrapper
@@ -95,7 +94,7 @@ export default {};
       position relative
       margin 4px
       transition 300ms
-      transform-origin 0 50%
+      transform-origin 50% 50%
       transform-style preserve-3d
       &:hover
         transform scale(1.04)

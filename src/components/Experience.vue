@@ -2,9 +2,9 @@
   <div class="experience">
     <ul class="list">
       <span class="line"></span>
-      <li class="item end">
+      <li class="item end" v-for="(li,index) in experience" :key="index">
         <div class="show">
-          <img src="../assets/img/daofeng_1.jpg" alt="">
+          <img src="../assets/img/experience/daofeng_1.jpg" alt="">
         </div>
         <div class="detail">
           <time>2017-3 ~ </time>
@@ -12,19 +12,19 @@
           <p>负责公司官网的日常维护及建设，配合公司出版物做移动端的APP</p>
         </div>
       </li>
-      <li class="item start">
+       <li class="item start">
         <div class="detail">
           <time>2014.05 ~ 2016.12</time>
           <h2>广州标际包装设备有限公司</h2>
           <p>公司主要生产检测仪器，用于检测包装袋中的水分，氧气等的含量。我主要负责公司生产的检测设备的安装培训以及售后服务.</p>
         </div>
         <div class="show">
-          <img src="../assets/img/biaoji_1.jpg" alt="">
+          <img src="../assets/img/experience/biaoji_1.jpg" alt="">
         </div>
       </li>
       <li class="item end">
         <div class="show">
-          <img src="../assets/img/04.jpg" alt="">
+          <img src="../assets/img/job/04.jpg" alt="">
         </div>
         <div class="detail">
           <time>2012.10 ~ 2014.02</time>
@@ -39,12 +39,12 @@
           <p>主要负责河南地区客户的CTP版材、软件以及设备的维护。在日常中，拜访客户，了解产品的使用情况。维护客户关系，为销售提供及时的信息</p>
         </div>
         <div class="show">
-          <img src="../assets/img/fuji_1.jpg" alt="">
+          <img src="../assets/img/experience/fuji_1.jpg" alt="">
         </div>
       </li>
       <li class="item end">
         <div class="show">
-          <img src="../assets/img/dazhuang.jpg" alt="">
+          <img src="../assets/img/experience/dazhuang.jpg" alt="">
         </div>
         <div class="detail">
           <time>2007.04 ~ 2011.05</time>
@@ -59,12 +59,12 @@
           <p>我的母校，在校的专业是化工机械。在校所学确定影响了我之后很长的一段工作时间。现如今，转做前端，似乎改变有点大，但这也正是乐趣所在。不是吗~~</p>
         </div>
         <div class="show">
-          <img src="../assets/img/nanning.jpg" alt="">
+          <img src="../assets/img/experience/nanning.jpg" alt="">
         </div>
       </li>
       <li class="item end">
         <div class="show">
-          <img style="opacity:.5;" src="../assets/img/shiguang_1.jpg" alt="">
+          <img style="opacity:.5;" src="../assets/img/experience/shiguang_1.jpg" alt="">
         </div>
         <div class="detail">
           <time>2000.9 ~ 2003.7</time>
@@ -80,7 +80,6 @@
 
 <script>
 export default {
-
 }
 </script>
 
