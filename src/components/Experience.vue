@@ -2,7 +2,7 @@
   <div class="experience">
     <ul class="list">
       <span class="line"></span>
-      <li class="item end" v-for="(li,index) in experience" :key="index">
+      <li class="item end" >
         <div class="show">
           <img src="../assets/img/experience/daofeng_1.jpg" alt="">
         </div>

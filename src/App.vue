@@ -5,9 +5,9 @@
       <router-link to="/about">About</router-link>
     </div> -->
     <Top />
-    <keep-alive>
+    <!-- <keep-alive> -->
       <router-view />
-    </keep-alive>
+    <!-- </keep-alive> -->
   </div>
 </template>
 

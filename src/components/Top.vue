@@ -16,9 +16,9 @@
         <router-link tag="li" to='/skill'>
           <a href="javascript:;">技术栈</a>
         </router-link>
-        <!-- <router-link tag="li" to='/experience'>
+        <router-link tag="li" to='/experience'>
           <a href="javascript:;">我的经历</a>
-        </router-link> -->
+        </router-link>
         <!-- <router-link tag="li" to='/blog'>
           <a href="javascript:;">我的博客</a>
         </router-link> -->
