@@ -114,11 +114,18 @@ export default {
     }
   },
 
+
   methods: {
+
+
     initData() {
-      fetch(`${config.url}/initData?pageNum=${this.$store.state.pageNum}`).then(res => {
+      fetch(`${config.url}/initData?pageNum=${this.$store.state.pageNum}`,{
+        cache:'reload',
+      }).then(res => {
         return res.json()
       }).then(json => {
+        console.log(json);
+        
         this.allData = json.allData.reverse()
         this.data = this.allData.slice(0,this.end)
         this.$store.commit('setPages', json.pages)

@@ -21,21 +21,23 @@
       <br>
       <div class="avatar">
         <p>请选择头像：</p>
-        <br>
+        <label for="">本地上传：</label>
+        <FileUpload />
         <ul class="list">
           <li
             class="item"
             v-for="(item,i) in avatarSum"
             :key="i"
+            v-show="false"
           >
             <input
               ref="avatar"
               class="ra"
               type="radio"
               name="avatar"
-              @click="selectedAvatar(i)"
+              @click="selectedAvatar(item)"
             >
-            <img :src="require('../../assets/img/message/avatar/'+((i+1)>9? (i+1) : '0'+(i+1) )+'.gif')">
+            <img :src="require(`../../assets/img/message/avatar/${item}.gif`)">
           </li>
         </ul>
       </div>
@@ -63,10 +65,11 @@
 
 <script>
 import config from '../../config/config'
+import FileUpload from './FileUpload'
 export default {
   data() {
     return {
-      avatarSum:24, //头像的总编号数
+      avatarSum:['11','15','18','04'], //头像的总编号数
       message: {
         username: '',
         title: '',
@@ -77,13 +80,18 @@ export default {
     }
   },
 
+  components:{
+FileUpload
+  },
+
   mounted() {
     this.$refs.avatar[0].checked = true
+    this.message.avatar = this.avatarSum[0]
   },
 
   methods: {
     selectedAvatar(i) {
-      this.message.avatar = (i + 1) > 9 ? (i + 1) : '0' + (i + 1)
+      this.message.avatar = i 
     },
 
     send() {
