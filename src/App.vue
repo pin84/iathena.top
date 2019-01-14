@@ -5,9 +5,9 @@
       <router-link to="/about">About</router-link>
     </div> -->
     <Top />
-    <!-- <keep-alive> -->
+    <keep-alive>
       <router-view />
-    <!-- </keep-alive> -->
+    </keep-alive>
   </div>
 </template>
 
@@ -41,11 +41,8 @@ export default {
 @import  './assets/stylus/common.styl'
 #app
   font-family 'Avenir', Helvetica, Arial, sans-serif
-  -webkit-font-smoothing antialiased
-  -moz-osx-font-smoothing grayscale
   // text-align center
   color #2c3e50
-
 #nav
   padding 30px
   a

@@ -2,34 +2,52 @@
 
   <nav>
     <div class="container">
-      <a href="/" class="title">
+      <a
+        href="/"
+        class="title"
+      >
         iAthena
       </a>
-      
+
       <ul class="pc">
-        <router-link tag="li" to='/about'>
+        <router-link
+          tag="li"
+          to='/about'
+        >
           <a href="javascript:;">关于我</a>
         </router-link>
-        <router-link tag="li" to='/job'>
+        <router-link
+          tag="li"
+          to='/job'
+        >
           <a href="javascript:;">作品集</a>
         </router-link>
-        <router-link tag="li" to='/skill'>
+        <router-link
+          tag="li"
+          to='/skill'
+        >
           <a href="javascript:;">技术栈</a>
         </router-link>
-        <router-link tag="li" to='/experience'>
+        <!-- <router-link tag="li" to='/experience'>
           <a href="javascript:;">我的经历</a>
-        </router-link>
+        </router-link> -->
         <!-- <router-link tag="li" to='/blog'>
           <a href="javascript:;">我的博客</a>
         </router-link> -->
         <!-- <router-link tag="li" to='/contact'>
           <a href="javascript:;">联系我</a>
         </router-link> -->
-        <router-link tag="li" to='/message'>
+        <router-link
+          tag="li"
+          to='/message'
+        >
           <a href="javascript:;">留言本</a>
         </router-link>
         <li>
-          <a href="http://books.iathena.top/css/cssTips.html" target="_blank">跃迁之路</a>
+          <a
+            href="http://books.iathena.top/css/cssTips.html"
+            target="_blank"
+          >跃迁之路</a>
         </li>
       </ul>
     </div>

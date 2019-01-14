@@ -22,12 +22,13 @@
       <div class="avatar">
         <p>请选择头像：</p>
         <label for="">本地上传：</label>
-        <!-- <FileUpload /> -->
+        <FileUpload />
         <ul class="list">
           <li
             class="item"
             v-for="(item,i) in avatarSum"
             :key="i"
+            v-show="false"
           >
             <input
               ref="avatar"

@@ -209,8 +209,9 @@ export default {
 </script>
 <style lang='stylus' scoped>
 #fireworks
-  // width 100vw
-  // height 100vh
+  position absolute
+  width 100%
+  height 100%
   // margin 0 auto
   // display flex
   // flex-direction column
@@ -242,8 +243,7 @@ export default {
     user-select none
 @media screen and (max-width:480px)
   #fireworks
-    padding 0
-    overflow hidden
+    padding-bottom 60px
     #canvasBox
       position relative
       margin 0 auto
@@ -258,16 +258,13 @@ export default {
         user-select none
     #text
       width 100%
-      height 290px
-      // margin 0 auto
       font-size 16px
       color #fff
-      // padding 5px  0 0 20px
+      padding-bottom 120px
       line-height 28px
       box-sizing border-box
       user-select none
       box-sizing border-box
-      // border 1px solid red
 
 
 </style>
