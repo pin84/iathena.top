@@ -212,11 +212,8 @@ export default {
   position absolute
   width 100%
   height 100%
-  // margin 0 auto
-  // display flex
-  // flex-direction column
   background url('../../assets/img/fireworks/garden-bg.jpg') 
-  padding 50px 0
+  padding 50px 0 0 0
   #canvasBox
     position relative
     width 800px 
@@ -243,7 +240,7 @@ export default {
     user-select none
 @media screen and (max-width:480px)
   #fireworks
-    padding-bottom 60px
+    padding 0 0 90px 0 
     #canvasBox
       position relative
       margin 0 auto
@@ -258,13 +255,9 @@ export default {
         user-select none
     #text
       width 100%
-      font-size 16px
+      font-size 1.4rem
       color #fff
-      padding-bottom 120px
       line-height 28px
-      box-sizing border-box
       user-select none
-      box-sizing border-box
-
 
 </style>

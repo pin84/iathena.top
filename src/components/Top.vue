@@ -109,7 +109,7 @@ nav
         height 60px
         line-height 60px
         // padding 0 2px
-        font-size 1.6rem
+        font-size 1.4rem
         font-weight 400 
         &.title
           display none
