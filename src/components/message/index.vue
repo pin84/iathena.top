@@ -73,7 +73,7 @@
   </div>
 </template>
 
-s
+
 <script>
 import config from '../../config/config'
 import PageChange from './PageChange'
@@ -124,8 +124,6 @@ export default {
       }).then(res => {
         return res.json()
       }).then(json => {
-        console.log(json);
-        
         this.allData = json.allData.reverse()
         this.data = this.allData.slice(0,this.end)
         this.$store.commit('setPages', json.pages)

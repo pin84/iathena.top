@@ -10,7 +10,10 @@ export default new Vuex.Store({
   state: {
     pageIndex: 0, // 当前页码
     pageNum: 2, // 每页显示的条数
-    pages: 0 // 总页数
+    pages: 0, // 总页数
+
+    //message
+    imgsrc:'' //传给cavas的src
   },
   mutations: {
     increment(state) {
@@ -30,6 +33,11 @@ export default new Vuex.Store({
     },
     setPageNum(state, num) {
       state.pageNum = num
+    },
+
+    //message
+    setImageSrc(state,str){
+      state.imgsrc = str
     }
   },
   actions: {
