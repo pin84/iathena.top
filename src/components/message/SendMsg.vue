@@ -25,7 +25,7 @@
       <br>
       <div class="avatar">
         <span>请选择头像：</span>
-        <CanvasSelectAvatar  @hiddenAvatarList='isShowAvatarList'/>
+        <CanvasSelectAvatar  @hiddenAvatarList='hiddenAvatarList'/>
         <ul
           class="list"
           v-show="isShowAvatarList"
@@ -93,24 +93,17 @@ export default {
       inputFile: ''
     };
   },
-
   components: {
     CanvasSelectAvatar
   },
-
   mounted() {
     this.$refs.avatar[0].checked = true;
     this.message.avatar = this.avatarSum[0];
   },
-  computed: {
-    inputFiles: function () {
-
-      return this.inputFile
-    }
-  },
-
-
   methods: {
+    hiddenAvatarList(){
+      this.isShowAvatarList = false
+    },
     selectedAvatar(i) {
       this.message.avatar = i
     },

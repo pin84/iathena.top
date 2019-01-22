@@ -263,6 +263,7 @@ export default {
     .msglist
       margin-top 40px   
       line-height 24px
+      height 420px
       .item
         border 1px dashed black 
         margin-bottom 20px
