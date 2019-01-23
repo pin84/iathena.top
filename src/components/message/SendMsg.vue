@@ -166,7 +166,8 @@ export default {
             cursor: pointer
 
   .content 
-    margin-top: 40px
+    position relative
+    margin-top 10px
     h4 
       margin-bottom: 10px
     textarea 

@@ -15,22 +15,41 @@
       v-show="showCanvas"
     >
 
-      <div class="notice">
-        {{notice}}
-        <div id="close-notice">x</div>
-      </div>
       <!-- <div class="reloadBtn">重新选择</div> -->
-      <div id="blankMask">
+      <!-- <div id="blankMask">
         <img src="../../assets/img/message/bg.png">
-      </div>
+      </div> -->
 
       <div id="canvasArea">
+        <div class="imgArea">
+          <canvas
+            class="imgCanvas"
+            ref="canvas"
+            width="300"
+            height="300"
+            @mousedown="setStartPoint"
+            @mousemove="cutImg"
+            @mouseup="stopCutImg"
+            @mouseleave="stopCutImg"
+          ></canvas>
+          <div
+            class="notice"
+            v-show="isShowNotice"
+          >
+            {{notice}}
+            <div
+              id="close-notice"
+              @click="closeNotic"
+            >x</div>
+          </div>
+        </div>
         <canvas
-          ref="canvas"
-          width="300"
-          height="300"
-          @mousedown="cutAvatar"
-        ></canvas>
+          class="resultCanvas"
+          ref="resultCanvas"
+          width="100"
+          height="100"
+        >
+        </canvas>
       </div>
       <div
         id="submitBtn"
@@ -56,11 +75,26 @@ export default {
   data() {
     return {
       notice: '拖拽鼠标框选所需要的区域',
+      isShowNotice: true,
       imgObj: new Image(), //装载input打开的图片
+      imgOptions: {
+        showImgWidth: undefined,
+        showImgHeight: undefined,
+        dy: undefined,
+        dw: undefined
+      },
+      cutImgFlag: false,
       showCanvas: true,
       isShowCurrentAvatar: false,
       startX: undefined,
       startY: undefined,
+      imgCtx: undefined,
+      resultCtx: undefined,
+      imgCanvasWidth: undefined,
+      imgCanvasHeight: undefined,
+      resultCanvasWidth: undefined,
+      resultCanvasHeight: undefined,
+      cutData: undefined,
     }
   },
   computed: {
@@ -73,8 +107,10 @@ export default {
   methods: {
     //将图片渲染到canvas
     loadImg() {
+
       this.showCanvas = true
       this.isShowCurrentAvatar = false
+      this.isShowNotice = true
       this.$emit('hiddenAvatarList')
 
       //fileReader() 异步从input中读取文件
@@ -85,6 +121,8 @@ export default {
         this.imgObj.src = e.target.result;
       }
 
+
+
       //图像加载完成后，用drawImage加载至canvas
       this.imgObj.onload = () => {
         //计算图片的长宽比。决定图像的显示方式
@@ -92,9 +130,21 @@ export default {
         let imgHeight = this.imgObj.height
         let rateHW = imgWidth / imgHeight
 
-        let canvas = this.$refs.canvas
-        let canvasWidth = canvas.width
-        let canvasHeight = canvas.height
+
+        //获取两个canvas 缓存到全局
+        let imgCanvas = this.$refs.canvas
+        let resultCanvas = this.$refs.resultCanvas
+        this.imgCanvasWidth = imgCanvas.width
+        this.imgCanvasHeight = imgCanvas.height
+        this.resultCanvasWidth = resultCanvas.width
+        this.resultCanvasHeight = resultCanvas.height
+        this.imgCtx = imgCanvas.getContext('2d')
+        this.resultCtx = resultCanvas.getContext('2d')
+
+
+
+        let canvasWidth = imgCanvas.width
+        let canvasHeight = imgCanvas.height
 
         //图片在canvas中的显示，大于canvas的尺寸，就缩小，小于就不变
         /**
@@ -104,73 +154,95 @@ export default {
          * dw:图片原点坐标距canvas原点的X轴距离
          */
         let showImgWidth, showImgHeight, dy, dw
+
         if (imgWidth > imgHeight) {
           showImgWidth = canvasWidth > imgWidth ? imgWidth : canvasWidth
           showImgHeight = Math.round(showImgWidth / rateHW)
           //图片在canvas居中
+          dw = undefined
           dy = (canvasHeight - showImgHeight) / 2
         } else {
           showImgHeight = canvasHeight > imgHeight ? imgHeight : canvasHeight
           showImgWidth = showImgHeight * rateHW
+          //图片在canvas居中
+          dy = undefined
           dw = (canvasWidth - showImgWidth) / 2
         }
 
+        //把 showImgWidth,showImgHeight, dy,dw 的值赋给全局变量，以传给cutImg()
+        this.imgOptions.showImgWidth = showImgWidth
+        this.imgOptions.showImgHeight = showImgHeight
+        this.imgOptions.dy = dy
+        this.imgOptions.dw = dw
+
         //canvas渲染图片
-        let ctx = canvas.getContext('2d')
-        ctx.clearRect(0, 0, canvasWidth, canvasHeight)
-        ctx.drawImage(this.imgObj, dw ? dw : 0, dy ? dy : 0, showImgWidth, showImgHeight)
-        ctx.fillStyle = 'rgba(0,0,0,0.5)'
-        ctx.fillRect(0, 0, canvasWidth, canvasHeight)
+        this.imgCtx.clearRect(0, 0, canvasWidth, canvasHeight)
+        this.imgCtx.drawImage(this.imgObj, dw ? dw : 0, dy ? dy : 0, showImgWidth, showImgHeight)
+        // this.imgCtx.fillStyle = 'rgba(0,0,0,0.5)'
+        // this.imgCtx.fillRect(0, 0, canvasWidth, canvasHeight)
       }
 
 
     },
+    setStartPoint(e) {
+      if (!this.imgObj.src) return
 
-    //鼠标截取图像,在canvas上按下鼠标触发
-    cutAvatar(e) {
       this.startX = e.offsetX
       this.startY = e.offsetY
-      let canvas = this.$refs.canvas
-
-
-      canvas.addEventListener('mousemove', this.getMouseMoveDistance)
-
-
-      canvas.addEventListener('mouseup', (e) => {
-        // console.log('----------',e.offsetX)
-        canvas.removeEventListener('mousemove', this.getMouseMoveDistance)
-      })
-
-      canvas.addEventListener('mouseleave', (e) => {
-        console.log('ssssssssss')
-        canvas.removeEventListener('mousemove', this.getMouseMoveDistance)
-      })
+      this.cutImgFlag = true
 
     },
 
-    getMouseMoveDistance(e) {
-
+    cutImg(e) {
       //https://segmentfault.com/a/1190000013038300
-      let dx = e.offsetX - this.startX
-      let dy = e.offsetY - this.startY
+      if (!this.cutImgFlag) return
 
-      let canvas = this.$refs.canvas
-      let ctx = canvas.getContext('2d')
-      ctx.fillStyle = 'red'
-      ctx.fillRect(this.startX, this.startY, dx, dy)
+      //鼠标移动的距离
+      let x = e.offsetX - this.startX
+      let y = e.offsetY - this.startY
+      //缓存drawImage的参数，给ctx使用，可以不用写这么长 
+      let dw = this.imgOptions.dw ? this.imgOptions.dw : 0
+      let dy = this.imgOptions.dy ? this.imgOptions.dy : 0
+      let showImgWidth = this.imgOptions.showImgWidth
+      let showImgHeight = this.imgOptions.showImgHeight
+
+
+      this.imgCtx.clearRect(0, 0, this.imgCanvasWidth, this.imgCanvasHeight)
+      this.imgCtx.drawImage(this.imgObj, dw, dy, showImgWidth, showImgHeight)
+      // this.imgCtx.fillStyle = 'rgba(0,0,0,0.5)'
+      // this.imgCtx.fillRect(0, 0, this.imgCanvasWidth, this.imgCanvasHeight)
+
+
+      //阴影部分
+      this.imgCtx.fillStyle = 'rgba(0,0,0,0.5)'
+      this.imgCtx.fillRect(0,0,100,100)
 
 
 
-      // console.log(e.offsetX);
+      //选区，并把选区的内容展示在预览区
+      if (x !== 0 && y !== 0) {
+        x = x > 100 ? 100 : x
+        y = y > 100 ? 100 : y
+        this.imgCtx.strokeRect(this.startX, this.startY, x, y);
+        this.cutData = this.imgCtx.getImageData(this.startX, this.startY, x, y)
+        this.resultCtx.clearRect(0, 0, this.resultCanvasWidth, this.resultCanvasHeight)
+        this.resultCtx.putImageData(this.cutData, 0, 0)
+      }
+
 
 
     },
-
-
+    stopCutImg() {
+      this.cutImgFlag = false
+    },
 
     uploadBtn() {
       this.showCanvas = false
       this.isShowCurrentAvatar = true
+    },
+
+    closeNotic() {
+      this.isShowNotice = false
     }
 
   }
@@ -191,58 +263,42 @@ export default {
       background #FF9900
   #fileUpload
     position relative
-    background #666
-    width 300px
-    height 300px
-    margin-bottom 20px
-    .notice
-      height 30px
-      line-height 30px
-      text-align center
-      background #ffffff
-      position absolute
-      width 90%
-      bottom 0
-      margin-left 5%
-      border-radius 2px
-      box-shadow 0 0 5px rgba(0,0,0,0.3)
-      user-select none
-      z-index 3
-      #close-notice
-        position absolute 
-        right 0px
-        top 0
-        width 30px
-        height 30px
-        line-height 30px
-        cursor pointer
-        font-size 16px
-        &:hover
-          background #eee
-    #blankMask
-      position absolute 
-      top 0
-      left 0
-      width 100%
-      height 100%
-      color red
-      // border 1px solid blue
-      background #ffffff
-      display flex
-      justify-content center
-      align-items center
-      // img
-      //   width 100%
-      //   height 100%
     #canvasArea
-      display flex
-      align-items center
-      justify-content center
-      height 100%
-      width 100%
-      canvas 
-        border 1px solid blue
-        z-index 2
+      position relative
+      .imgArea
+        position relative
+        display inline-block
+        .imgCanvas 
+          border 1px solid #ccc
+          background url('../../assets/img/message/bg.png') no-repeat center
+        .notice
+          height 30px
+          line-height 30px
+          text-align center
+          background #ffffff
+          position absolute
+          width 90%
+          bottom 0
+          margin-left 5%
+          border-radius 2px
+          box-shadow 0 0 5px rgba(0,0,0,0.3)
+          user-select none
+          z-index 3
+          #close-notice
+            position absolute 
+            right 0px
+            top 0
+            width 30px
+            height 30px
+            line-height 30px
+            cursor pointer
+            font-size 16px
+            &:hover
+              background #eee
+      .resultCanvas
+        border 1px solid #ccc 
+        display inline-block
+        // border-radius 50%
     #submitBtn
       display inline-block
       margin-top 5px
