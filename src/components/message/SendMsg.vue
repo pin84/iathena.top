@@ -25,7 +25,7 @@
       <br>
       <div class="avatar">
         <span>请选择头像：</span>
-        <CanvasSelectAvatar  @hiddenAvatarList='hiddenAvatarList'/>
+        <CanvasSelectAvatar  @hiddenAvatarList='hiddenAvatarList'  @setAvatarDataURL='setAvatarDataURL'/>
         <ul
           class="list"
           v-show="isShowAvatarList"
@@ -106,6 +106,10 @@ export default {
     },
     selectedAvatar(i) {
       this.message.avatar = i
+    },
+    setAvatarDataURL(imgURL){
+
+      console.log(imgURL);
     },
 
     send() {

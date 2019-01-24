@@ -21,7 +21,10 @@
       </div> -->
 
       <div id="canvasArea">
-        <div class="imgArea">
+        <div
+          class="imgArea"
+          :class="{'mouseHover' : cutImgMoveFlag}"
+        >
           <canvas
             class="imgCanvas"
             ref="canvas"
@@ -64,37 +67,57 @@
       v-if="isShowCurrentAvatar"
     >
       <img
-        src="../../assets/img/message/avatar/01.gif"
+        :src="dataURL"
         alt=""
+        ref="cutImg"
       >
     </div>
   </div>
 </template>
 <script>
+/**
+ * 用到的api:
+ *  new FileReader() web应用异步读取本地硬盘的文件
+ *      readAsDataURL  读取input中的文件 
+ * 
+ * canvas
+ *    drawImage  把base64格式的图片渲染至canvas
+ *    getImageData  从canvas中截取图片，返回一个base64格式的数据
+ *    putImageData  把一个base64格式的数据展示在一个canvas中
+ * 
+ */
+import config from '../../config/config'
 export default {
   data() {
     return {
       notice: '拖拽鼠标框选所需要的区域',
       isShowNotice: true,
       imgObj: new Image(), //装载input打开的图片
-      imgOptions: {
+      imgOptions: { //显示在图片canvas中的图片参数
         showImgWidth: undefined,
         showImgHeight: undefined,
-        dy: undefined,
-        dw: undefined
+        dy: undefined, //图片左上角距canvas左上角的y轴的距离 
+        dw: undefined, //图片左上角距canvas左上角的x轴的距离 
       },
-      cutImgFlag: false,
       showCanvas: true,
       isShowCurrentAvatar: false,
-      startX: undefined,
-      startY: undefined,
-      imgCtx: undefined,
-      resultCtx: undefined,
+      cutImgFlag: false,//是否开始截图的标志
+      startX: undefined,//开始截取的X坐标
+      startY: undefined,//开始截取的Y坐标
+      imgCanvas: undefined, //显示图片的canvas
+      imgCtx: undefined,//显示图片的canvas的Context('2d')
       imgCanvasWidth: undefined,
       imgCanvasHeight: undefined,
+      resultCanvas: undefined,//预览图片的canvas
+      resultCtx: undefined,//预览图片的canvas的Context('2d')
       resultCanvasWidth: undefined,
       resultCanvasHeight: undefined,
-      cutData: undefined,
+      cutData: undefined, //截取的图片的数据
+      //截取框的尺寸
+      cutW: 0,
+      cutH: 0,
+      dataURL: undefined, //保存截取后的数据
+      cutImgMoveFlag: false
     }
   },
   computed: {
@@ -107,7 +130,6 @@ export default {
   methods: {
     //将图片渲染到canvas
     loadImg() {
-
       this.showCanvas = true
       this.isShowCurrentAvatar = false
       this.isShowNotice = true
@@ -138,13 +160,16 @@ export default {
         this.imgCanvasHeight = imgCanvas.height
         this.resultCanvasWidth = resultCanvas.width
         this.resultCanvasHeight = resultCanvas.height
+        this.imgCanvas = imgCanvas
+        this.resultCanvas = resultCanvas
         this.imgCtx = imgCanvas.getContext('2d')
         this.resultCtx = resultCanvas.getContext('2d')
 
-
-
         let canvasWidth = imgCanvas.width
         let canvasHeight = imgCanvas.height
+
+        //每次重新选择图片时，都清空预览canvas的数据
+        this.resultCtx.clearRect(0, 0, this.resultCanvasWidth, this.resultCanvasHeight)
 
         //图片在canvas中的显示，大于canvas的尺寸，就缩小，小于就不变
         /**
@@ -178,8 +203,6 @@ export default {
         //canvas渲染图片
         this.imgCtx.clearRect(0, 0, canvasWidth, canvasHeight)
         this.imgCtx.drawImage(this.imgObj, dw ? dw : 0, dy ? dy : 0, showImgWidth, showImgHeight)
-        // this.imgCtx.fillStyle = 'rgba(0,0,0,0.5)'
-        // this.imgCtx.fillRect(0, 0, canvasWidth, canvasHeight)
       }
 
 
@@ -198,38 +221,31 @@ export default {
       if (!this.cutImgFlag) return
 
       //鼠标移动的距离
-      let x = e.offsetX - this.startX
-      let y = e.offsetY - this.startY
+      this.cutW = (e.offsetX - this.startX) > 100 ? 100 : (e.offsetX - this.startX)
+      this.cutH = (e.offsetY - this.startY) > 100 ? 100 : (e.offsetY - this.startY)
+
       //缓存drawImage的参数，给ctx使用，可以不用写这么长 
       let dw = this.imgOptions.dw ? this.imgOptions.dw : 0
       let dy = this.imgOptions.dy ? this.imgOptions.dy : 0
       let showImgWidth = this.imgOptions.showImgWidth
       let showImgHeight = this.imgOptions.showImgHeight
 
-
       this.imgCtx.clearRect(0, 0, this.imgCanvasWidth, this.imgCanvasHeight)
       this.imgCtx.drawImage(this.imgObj, dw, dy, showImgWidth, showImgHeight)
-      // this.imgCtx.fillStyle = 'rgba(0,0,0,0.5)'
-      // this.imgCtx.fillRect(0, 0, this.imgCanvasWidth, this.imgCanvasHeight)
-
 
       //阴影部分
-      this.imgCtx.fillStyle = 'rgba(0,0,0,0.5)'
-      this.imgCtx.fillRect(0,0,100,100)
-
-
+      this.imgCtx.fillStyle = 'rgba(0,0,0,0.3)'
+      this.imgCtx.fillRect(0, 0, this.imgCanvas.width, this.startY)
+      this.imgCtx.fillRect(this.startX + this.cutW, this.startY, this.imgCanvas.width - this.startX, this.imgCanvas.height - this.startY)
+      this.imgCtx.fillRect(0, this.startY, this.startX, this.imgCanvas.height - this.startY)
+      this.imgCtx.fillRect(this.startX, this.startY + this.cutH, this.cutW, this.imgCanvas.height - this.startY - this.cutH)
 
       //选区，并把选区的内容展示在预览区
-      if (x !== 0 && y !== 0) {
-        x = x > 100 ? 100 : x
-        y = y > 100 ? 100 : y
-        this.imgCtx.strokeRect(this.startX, this.startY, x, y);
-        this.cutData = this.imgCtx.getImageData(this.startX, this.startY, x, y)
+      if (this.cutW !== 0 && this.cutH !== 0) {
+        this.cutData = this.imgCtx.getImageData(this.startX, this.startY, this.cutW, this.cutH)
         this.resultCtx.clearRect(0, 0, this.resultCanvasWidth, this.resultCanvasHeight)
         this.resultCtx.putImageData(this.cutData, 0, 0)
       }
-
-
 
     },
     stopCutImg() {
@@ -239,6 +255,19 @@ export default {
     uploadBtn() {
       this.showCanvas = false
       this.isShowCurrentAvatar = true
+      this.dataURL = this.resultCanvas.toDataURL('image/jpeg', 1.0)
+
+      let blob = this.resultCanvas.toBlob()
+
+      //把头像文件以blod的形式保存到本地
+      fetch(`${config.url}/saveAvatarToLocal`, {
+        method: 'post',
+        body: blob
+      }).then(res => {
+        return res.json()
+      }).then(data => {
+        console.log(data);
+      })
     },
 
     closeNotic() {
@@ -295,6 +324,8 @@ export default {
             font-size 16px
             &:hover
               background #eee
+        &.mouseHover
+          cursor move      
       .resultCanvas
         border 1px solid #ccc 
         display inline-block
