@@ -44,9 +44,6 @@ export default {
 
   mounted() {
     this.startAnimation()
-
-    console.log(navigator.userAgent)
-
   },
 
   methods: {
@@ -99,7 +96,9 @@ export default {
     },
 
     startAnimation() {
-      let ctx = this.$refs.fireworksCtx.getContext('2d')
+      let fireworksCanvas = this.$refs.fireworksCtx
+      if(!fireworksCanvas) return
+      let ctx = fireworksCtx.getContext('2d')
       requestAnimationFrame(this.startAnimation)
       ctx.clearRect(0, 0, 800, 400)
       // ctx.fillStyle = 'rgba(0,0,0,0.1)'

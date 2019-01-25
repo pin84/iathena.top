@@ -117,7 +117,7 @@ export default {
       cutW: 0,
       cutH: 0,
       dataURL: undefined, //保存截取后的数据
-      cutImgMoveFlag: false
+      cutImgMoveFlag: false,
     }
   },
   computed: {
@@ -257,17 +257,41 @@ export default {
       this.isShowCurrentAvatar = true
       this.dataURL = this.resultCanvas.toDataURL('image/jpeg', 1.0)
 
-      let blob = this.resultCanvas.toBlob()
+      //把canvan中的图像保存成blob形式的文件，以保存到本地硬盘
+      this.resultCanvas.toBlob(blob => {
+        //上传到后台保存
+        var formData = new FormData()
+        formData.append("filename", "abc");  // 文件名
 
-      //把头像文件以blod的形式保存到本地
-      fetch(`${config.url}/saveAvatarToLocal`, {
-        method: 'post',
-        body: blob
-      }).then(res => {
-        return res.json()
-      }).then(data => {
-        console.log(data);
+        // JavaScript file-like 对象
+        formData.append("file", blob);
+
+        fetch(`${config.url}/saveAvatarToLocal`, {
+          method: 'POST',
+          // headers:{
+          //   'Content-Type':'multipart/form-data'
+          // },
+          body: formData
+        }).then(res => {
+          return res.json()
+        }).then(data => {
+          // console.log(data.size);
+        })
+
+
+        //测试用，读取blob中的url，用于显示图片
+        /*
+        let reader = new FileReader()
+        let src = undefined
+        reader.addEventListener('load', () => {
+          src = reader.result
+          console.log(src)
+        })
+        reader.readAsDataURL(blob)
+        */
       })
+
+
     },
 
     closeNotic() {
