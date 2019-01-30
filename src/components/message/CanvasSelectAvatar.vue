@@ -259,18 +259,20 @@ export default {
 
       //把canvan中的图像保存成blob形式的文件，以保存到本地硬盘
       this.resultCanvas.toBlob(blob => {
+
+        let a = blob
         //上传到后台保存
         var formData = new FormData()
         formData.append("filename", "abc");  // 文件名
 
         // JavaScript file-like 对象
-        formData.append("file", blob);
+        formData.append("file", a);
 
         fetch(`${config.url}/saveAvatarToLocal`, {
           method: 'POST',
-          // headers:{
-          //   'Content-Type':'multipart/form-data'
-          // },
+          headers:{
+            'Content-Type':'application/x-www-form-urlencoded'
+          },
           body: formData
         }).then(res => {
           return res.json()
