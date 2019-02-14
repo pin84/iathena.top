@@ -42,7 +42,7 @@
                 >
                 <img
                   v-else
-                  :src="require(`../../../public/uploads/${msg.avatar}`)"
+                  :src="require(`../../assets/uploads/${msg.avatar}`)"
                   alt=""
                 >
               </div>
