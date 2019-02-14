@@ -98,7 +98,7 @@ export default {
     startAnimation() {
       let fireworksCanvas = this.$refs.fireworksCtx
       if(!fireworksCanvas) return
-      let ctx = fireworksCtx.getContext('2d')
+      let ctx = fireworksCanvas.getContext('2d')
       requestAnimationFrame(this.startAnimation)
       ctx.clearRect(0, 0, 800, 400)
       // ctx.fillStyle = 'rgba(0,0,0,0.1)'
@@ -139,7 +139,7 @@ export default {
 
           this.rise(firework)
           return true
-          break
+          // break
 
         case 2:
           //在烟花上升到指定高度时不做其他处理。执行第三阶段
@@ -147,7 +147,7 @@ export default {
           firework.status = 3
 
           return true
-          break
+          // break
 
         case 3:
           firework.color = firework.color.replace(/1\b/, '0.2')
@@ -168,7 +168,7 @@ export default {
 
           return --firework.timeout > 0
 
-          break
+          // break
         default:
           return false
       }

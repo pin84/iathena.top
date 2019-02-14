@@ -42,7 +42,7 @@
                 >
                 <img
                   v-else
-                  :src="require(`../../assets/uploads/${msg.avatar}`)"
+                  :src="`https://iathena.top/static/${msg.avatar}`"
                   alt=""
                 >
               </div>
@@ -89,7 +89,7 @@
 import config from '../../config/config'
 import PageChange from './PageChange'
 import SendMsg from './SendMsg'
-import utils from '@/utils/dateFormat'
+// import utils from '@/utils/dateFormat'
 
 export default {
   data() {
