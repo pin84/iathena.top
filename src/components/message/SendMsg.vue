@@ -25,7 +25,10 @@
       <br>
       <div class="avatar">
         <span>请选择头像：</span>
-        <CanvasSelectAvatar  @hiddenAvatarList='hiddenAvatarList'  @setAvatarDataURL='setAvatarDataURL'/>
+        <CanvasSelectAvatar
+          @hiddenAvatarList='hiddenAvatarList'
+          @setAvatarName='setAvatarName'
+        />
         <ul
           class="list"
           v-show="isShowAvatarList"
@@ -86,7 +89,8 @@ export default {
         title: "",
         avatar: "",
         msg: "",
-        isSecret: undefined //是否为悄悄话
+        isSecret: undefined, //是否为悄悄话
+        isUploadAvatar: '0',
       },
       showSeletAvatar: false,
       isShowAvatarList: true,
@@ -101,15 +105,16 @@ export default {
     this.message.avatar = this.avatarSum[0];
   },
   methods: {
-    hiddenAvatarList(){
-      this.isShowAvatarList = false
+    hiddenAvatarList(boolean) {
+      this.isShowAvatarList = boolean
     },
     selectedAvatar(i) {
       this.message.avatar = i
     },
-    setAvatarDataURL(imgURL){
-
-      console.log(imgURL);
+    setAvatarName(filename) {
+      //接收从CanvasSelectAvatar传过来的头像名，并写入message中
+      this.message.avatar = filename
+      this.message.isUploadAvatar = '1'
     },
 
     send() {
@@ -122,6 +127,7 @@ export default {
         headers: {
           "Content-Type": "application/json"
         },
+
         body: JSON.stringify(this.message)
       })
         .then(res => {

@@ -9,7 +9,7 @@
         <div class="detail">
           <time>2017-3 ~ </time>
           <h2>广东道锋文化传媒</h2>
-          <p>负责公司官网的日常维护及建设，配合公司出版物做移动端的APP</p>
+          <p>负责公司官网的日常维护及建设</p>
         </div>
       </li>
        <li class="item start">

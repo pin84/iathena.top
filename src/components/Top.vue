@@ -28,9 +28,12 @@
         >
           <a href="javascript:;">技术栈</a>
         </router-link>
-        <!-- <router-link tag="li" to='/experience'>
+        <router-link
+          tag="li"
+          to='/experience'
+        >
           <a href="javascript:;">我的经历</a>
-        </router-link> -->
+        </router-link>
         <!-- <router-link tag="li" to='/blog'>
           <a href="javascript:;">我的博客</a>
         </router-link> -->
@@ -43,12 +46,12 @@
         >
           <a href="javascript:;">留言本</a>
         </router-link>
-        <li>
+        <!-- <li>
           <a
             href="http://books.iathena.top/css/cssTips.html"
             target="_blank"
           >跃迁之路</a>
-        </li>
+        </li> -->
       </ul>
     </div>
   </nav>

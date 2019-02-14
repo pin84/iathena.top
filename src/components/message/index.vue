@@ -34,10 +34,19 @@
           </div>
           <div class="bottom">
             <div class="avatar">
-              <img
-                :src="require(`../../assets/img/message/avatar/${msg.avatar}.gif`)"
-                alt=""
-              >
+              <div class="imgbox">
+                <img
+                  v-if="!msg.isUploadAvatar"
+                  :src="require(`../../assets/img/message/avatar/${msg.avatar}.gif`)"
+                  alt=""
+                >
+                <img
+                  v-else
+                  :src="require(`../../../public/uploads/${msg.avatar}`)"
+                  alt=""
+                >
+              </div>
+
               <h5>{{msg.username}}</h5>
             </div>
             <div
@@ -47,6 +56,7 @@
           </div>
         </li>
       </ul>
+      
       <div
         v-if='isSearch'
         id="isSearch"
@@ -54,8 +64,9 @@
         <span>搜索结果一共 <strong>{{data.length}}</strong> 条留言</span>
         <button @click="initData">确定</button>
       </div>
+
       <PageChange
-        v-else
+         v-if='!isSearch'
         @toLastPage="toLastPage"
         @toFirstPage="toFirstPage"
         @toPre="toPre"
@@ -63,8 +74,8 @@
         @selectPage="selectPage"
         @changePageNum="changePageNum"
       />
-
       <SendMsg
+       v-if='!isSearch'
         @refreshMsg="refreshMsg"
         ref="send"
       />
@@ -128,7 +139,7 @@ export default {
         this.data = this.allData.slice(0,this.end)
         this.$store.commit('setPages', json.pages)
         window.scrollTo(0, 180)
-        if (this.isSearch) {  // isSearch 修改为false 显示分页条
+        if(this.isSearch){
           this.isSearch = false
         }
       })
@@ -145,9 +156,9 @@ export default {
           json.data.length = this.maxSearchResLength
         }
         this.data = json.data
-        this.isSearch = true
         this.searchKeyword = ''
       })
+      this.isSearch = true
     },
 
     refreshMsg() {
@@ -263,7 +274,6 @@ export default {
     .msglist
       margin-top 40px   
       line-height 24px
-      height 420px
       .item
         border 1px dashed black 
         margin-bottom 20px
@@ -279,12 +289,21 @@ export default {
           text-align center
           background url('../../assets/img/message/avatar/bgorange.gif')  
           .avatar
+            display flex
             flex 0  0 150px
             background #fff
-            img
-              margin 10px 0
-            h5
-              margin-bottom 10px  
+            flex-direction column
+            // justify-content center
+            align-items center
+            padding 5px
+            .imgbox
+              width 100px
+              height 100px
+              margin-bottom 5px
+              img
+                width 100%
+                height 100%
+                border-radius 50%
           .detail
             padding 10px   
             font-size 1.4rem 

@@ -12,19 +12,16 @@
     </span>
     <div
       id="fileUpload"
-      v-show="showCanvas"
+      v-if="showCanvas"
     >
-
-      <!-- <div class="reloadBtn">重新选择</div> -->
-      <!-- <div id="blankMask">
-        <img src="../../assets/img/message/bg.png">
-      </div> -->
-
       <div id="canvasArea">
         <div
           class="imgArea"
           :class="{'mouseHover' : cutImgMoveFlag}"
         >
+          <div class="closeCanvas" @click="closeCanvas">
+            x
+          </div>
           <canvas
             class="imgCanvas"
             ref="canvas"
@@ -99,7 +96,7 @@ export default {
         dy: undefined, //图片左上角距canvas左上角的y轴的距离 
         dw: undefined, //图片左上角距canvas左上角的x轴的距离 
       },
-      showCanvas: true,
+      showCanvas: false,
       isShowCurrentAvatar: false,
       cutImgFlag: false,//是否开始截图的标志
       startX: undefined,//开始截取的X坐标
@@ -133,7 +130,7 @@ export default {
       this.showCanvas = true
       this.isShowCurrentAvatar = false
       this.isShowNotice = true
-      this.$emit('hiddenAvatarList')
+      this.$emit('hiddenAvatarList',false)
 
       //fileReader() 异步从input中读取文件
       let inputImg = this.$refs.selectedImg
@@ -258,46 +255,46 @@ export default {
       this.dataURL = this.resultCanvas.toDataURL('image/jpeg', 1.0)
 
       //把canvan中的图像保存成blob形式的文件，以保存到本地硬盘
-      this.resultCanvas.toBlob(blob => {
-
-        let a = blob
+      this.resultCanvas.toBlob((blob) => {
         //上传到后台保存
         var formData = new FormData()
         formData.append("filename", "abc");  // 文件名
-
         // JavaScript file-like 对象
-        formData.append("file", a);
+        formData.append("file", blob);
 
         fetch(`${config.url}/saveAvatarToLocal`, {
           method: 'POST',
-          headers:{
-            'Content-Type':'application/x-www-form-urlencoded'
-          },
           body: formData
         }).then(res => {
           return res.json()
         }).then(data => {
-          // console.log(data.size);
+          this.$emit('setAvatarName', data.filename)
         })
 
 
-        //测试用，读取blob中的url，用于显示图片
-        /*
-        let reader = new FileReader()
-        let src = undefined
-        reader.addEventListener('load', () => {
-          src = reader.result
-          console.log(src)
-        })
-        reader.readAsDataURL(blob)
-        */
       })
+
+      //   //测试用，读取blob中的url，用于显示图片
+      //   /*
+      //   let reader = new FileReader()
+      //   let src = undefined
+      //   reader.addEventListener('load', () => {
+      //     src = reader.result
+      //     console.log(src)
+      //   })
+      //   reader.readAsDataURL(blob)
+      //   */
+      // })
 
 
     },
 
     closeNotic() {
       this.isShowNotice = false
+    },
+    closeCanvas(){
+      this.showCanvas = false
+      this.$emit('hiddenAvatarList',true)
     }
 
   }
@@ -323,6 +320,17 @@ export default {
       .imgArea
         position relative
         display inline-block
+        .closeCanvas
+          position absolute 
+          width 20px
+          height 20px
+          border 1px solid #ccc
+          text-align center
+          top 0 
+          right 0
+          &:hover
+            cursor pointer
+            background #eee
         .imgCanvas 
           border 1px solid #ccc
           background url('../../assets/img/message/bg.png') no-repeat center
@@ -355,7 +363,7 @@ export default {
       .resultCanvas
         border 1px solid #ccc 
         display inline-block
-        // border-radius 50%
+        border-radius 50%
     #submitBtn
       display inline-block
       margin-top 5px
