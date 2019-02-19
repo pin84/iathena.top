@@ -6,7 +6,7 @@
         href="/"
         class="title"
       >
-        iAthena
+        青青子衿
       </a>
 
       <ul class="pc">
