@@ -17,38 +17,34 @@
       <span>联系我</span>
     </div>
     <Contact class="con" />
+
+    <!-- 引入的 web components  -->
+    <!-- <popup-info ref='pop'></popup-info>     -->
   </div>
 </template>
 
 <script>
 import Contact from './contact'
+//以下两个组件为测试用，
 import {SimplePromise} from './abc.js'
+import {popup} from './1.js'
 
 export default {
   components: {
-    Contact
+    Contact,
   },
-  mounted() {
-    this.test()
-  },
-  methods: {
-    test() {
-      const a = new SimplePromise()
-      a._resolve()
-    }
+ 
+  mounted(){
+    let aa = new SimplePromise()
+    aa.aa()
+    
+    
   }
+
+
 
 }
-class S {
-  constructor() {
 
-  }
-  print() {
-    console.log(aaaa);
-
-  }
-
-}
 </script>
 
 <style lang="stylus" scoped>

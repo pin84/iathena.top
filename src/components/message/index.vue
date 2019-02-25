@@ -42,7 +42,7 @@
                 >
                 <img
                   v-else
-                  :src="`https://iathena.top/static/${msg.avatar}`"
+                  :src="`http://106.13.93.149:9000/static/${msg.avatar}`"
                   alt=""
                 >
               </div>
