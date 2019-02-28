@@ -22,6 +22,10 @@
           placeholder="无标题"
         >
       </div>
+      <div id="login">
+        <Login  id="login-wrapper"/>
+        <!-- <span><i class="btn-login">登录</i>后，更多操作</span> -->
+      </div>
       <br>
       <div class="avatar">
         <span>请选择头像：</span>
@@ -80,6 +84,7 @@
 <script>
 import config from "../../config/config";
 import CanvasSelectAvatar from "./CanvasSelectAvatar";
+import Login from '../login'
 export default {
   data() {
     return {
@@ -98,7 +103,8 @@ export default {
     };
   },
   components: {
-    CanvasSelectAvatar
+    CanvasSelectAvatar,
+    Login
   },
   mounted() {
     this.$refs.avatar[0].checked = true;
@@ -157,8 +163,21 @@ export default {
   box-sizing border-box
   font-size 1.4rem
   .userinfo 
+    display inline-block 
     #username, #title 
       padding: 3px 5px
+  #login
+    display inline-block 
+    vertical-align top 
+    // #login-wrapper
+    //   position absolute
+    .btn-login
+      margin 0 5px
+      color blue
+      display inline-block
+      &:hover
+        cursor pointer
+        text-decoration underline
   .avatar 
     #selectAvatar
       padding 5px 0

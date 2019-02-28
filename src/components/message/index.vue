@@ -18,11 +18,10 @@
             placeholder="输入关键字搜索留言"
             v-model="searchKeyword"
           >
-
           <button @click="searchMsg">搜索</button>
         </div>
       </div>
-
+      <!-- <Login class="btn-login"/> -->
       <ul class="msglist">
         <li
           class="item"
@@ -56,7 +55,7 @@
           </div>
         </li>
       </ul>
-      
+
       <div
         v-if='isSearch'
         id="isSearch"
@@ -66,7 +65,7 @@
       </div>
 
       <PageChange
-         v-if='!isSearch'
+        v-if='!isSearch'
         @toLastPage="toLastPage"
         @toFirstPage="toFirstPage"
         @toPre="toPre"
@@ -75,7 +74,7 @@
         @changePageNum="changePageNum"
       />
       <SendMsg
-       v-if='!isSearch'
+        v-if='!isSearch'
         @refreshMsg="refreshMsg"
         ref="send"
       />
@@ -90,6 +89,7 @@ import config from '../../config/config'
 import PageChange from './PageChange'
 import SendMsg from './SendMsg'
 // import utils from '@/utils/dateFormat'
+
 
 export default {
   data() {
@@ -106,7 +106,7 @@ export default {
   },
   components: {
     PageChange,
-    SendMsg
+    SendMsg,
   },
 
   created() {
@@ -120,7 +120,7 @@ export default {
     currentPageNum: function () {
       return Number(this.$store.state.pageNum)
     },
-    currentPageIndex(){
+    currentPageIndex() {
       return Number(this.$store.state.pageIndex)
     }
   },
@@ -130,16 +130,16 @@ export default {
 
 
     initData() {
-      fetch(`${config.url}/initData?pageNum=${this.$store.state.pageNum}`,{
-        cache:'reload',
+      fetch(`${config.url}/initData?pageNum=${this.$store.state.pageNum}`, {
+        cache: 'reload',
       }).then(res => {
         return res.json()
       }).then(json => {
         this.allData = json.allData.reverse()
-        this.data = this.allData.slice(0,this.end)
+        this.data = this.allData.slice(0, this.end)
         this.$store.commit('setPages', json.pages)
         window.scrollTo(0, 180)
-        if(this.isSearch){
+        if (this.isSearch) {
           this.isSearch = false
         }
       })
@@ -171,7 +171,7 @@ export default {
       if (this.$store.state.pageIndex === 0) return
       this.$store.commit('minus')
 
-      
+
       this.start -= this.currentPageNum
       this.end -= this.currentPageNum
       //防止 this.start - this.currentPageNum 小于0的情况 end 同理
@@ -185,10 +185,10 @@ export default {
     toNext() {
       if (this.$store.state.pageIndex === this.$store.state.pages - 1) return
       this.$store.commit('increment')
-      
+
       this.start += this.currentPageNum
       this.end += this.currentPageNum
-      
+
       this.data = []
       this.data = this.allData.slice(this.start, this.end)
     },
@@ -259,15 +259,23 @@ export default {
       display flex
       justify-content space-between
       input
-        margin 0 10px
-        padding 3px 8px
+        padding 3px 8px 
+        border 1px solid #ccc
+        outline none
+        transition all .3s
+        &:hover
+          border 1px solid #6699CC
+        &:focus
+          border 1px solid #6699CC
       button
-        padding 3px 5px
+        padding 1px 5px 
         cursor pointer
+        vertical-align top
         &.write
           background #FF9900 
           border none 
           outline none
+          padding 3px 5px
           box-shadow 3px 3px 2px  #666
         &.write:hover
           background #FF6600

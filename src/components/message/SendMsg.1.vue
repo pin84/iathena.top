@@ -84,7 +84,7 @@ export default {
   },
 
   components: {
-    FileUpload
+    FileUpload,
   },
 
   mounted() {
