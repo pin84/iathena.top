@@ -28,10 +28,11 @@
       </div>
       <br>
       <div class="avatar">
-        <span>请选择头像：</span>
+        <span>请选择头像或</span>
         <CanvasSelectAvatar
           @hiddenAvatarList='hiddenAvatarList'
           @setAvatarName='setAvatarName'
+          class="CanvasSelectAvatar"
         />
         <ul
           class="list"
@@ -179,8 +180,9 @@ export default {
         cursor pointer
         text-decoration underline
   .avatar 
-    #selectAvatar
-      padding 5px 0
+    margin-top 10px
+    .CanvasSelectAvatar
+      display inline-block
     .list 
       display: flex;
       flex-wrap: wrap;

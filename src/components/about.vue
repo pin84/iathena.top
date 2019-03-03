@@ -26,8 +26,8 @@
 <script>
 import Contact from './contact'
 //以下两个组件为测试用，
-import {SimplePromise} from './abc.js'
-import {popup} from './1.js'
+// import {SimplePromise} from './abc.js'
+// import {popup} from './1.js'
 
 export default {
   components: {

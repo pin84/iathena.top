@@ -306,13 +306,14 @@ export default {
 #avatar
   position relative
   #upladAvatar
-    display inline-block
-    margin-bottom 10px
-    background #6699CC
-    padding 2px 5px
-    border-radius 2px
-    &:hover
+    label
+      display block
+      border-radius 2px
+      padding 2px 5px
       background #FF9900
+      &:hover
+        cursor pointer
+        background #FF6600
   #fileUpload
     position relative
     #canvasArea
