@@ -27,39 +27,72 @@
       action=""
       id="register"
       v-if="isShowRegister"
+      autocomplete="off"
     >
       <label for="">用&ensp;户&ensp;名：</label>
       <input
         type="text"
         placeholder="请输入昵称,不能有特殊符号"
         v-model="userInfo.name"
-        @input='abc'
+        @input='checkUsername'
       >
-      <span class="notice">
+      <span
+        class="notice"
+        v-if="isShowUsernameStatus"
+      >
         <span
           class="ok"
-          v-show="isUsernameOk"
+          v-if="isUsernameOk"
         >&radic;</span>
         <span
+          v-else
           class="ng"
-          v-show="isUsernameOk"
         >&times;</span>
       </span><br>
       <label for="">密<span>&#12288;&#12288;</span>码：</label>
       <input
         type="password"
-        placeholder="6到12位，必须包含英文和数字"
+        placeholder="6位以上且必须包含英文和数字"
+        v-model="userInfo.pwd"
+        @input="checkPWD"
       >
-      <span class="notice"><span class="ok">&radic;</span> <span class="ng">&times;</span></span><br>
+      <span
+        class="notice"
+        v-if="isShowPWDStatus"
+      >
+        <span
+          class="ok"
+          v-if="isPWDok"
+        >&radic;</span>
+        <span
+          class="ng"
+          v-else
+        >&times;</span>
+      </span><br>
       <label for="">确认密码：</label>
       <input
         type="password"
         placeholder="再次输入密码"
+        v-model="userInfo.repwd"
+        @focus="recheckPWD"
+        @input="recheckPWD"
       >
-      <span class="notice"><span class="ok">&radic;</span><span>密码不一致</span> </span>
+      <span
+        class="notice"
+        v-if="ifShowRePWDStatus"
+      >
+        <span
+          class="ok"
+          v-if="isRePWDok"
+        >&radic;</span>
+        <span v-else>密码不一致</span>
+      </span>
       <div id="btn">
         <div>
-          <button @click.prevent="">确认注册</button>
+          <button
+            @click.prevent="register"
+            v-bind:disabled="!isUsernameOk || !isPWDok || !isRePWDok "
+          >确认注册</button>
         </div>
         <!-- <div>
           <button>立即登录</button>
@@ -79,25 +112,46 @@ export default {
     return {
       isShowRegister: true,
       isClose: true,
+      isShowUsernameStatus: false,
       isUsernameOk: false,
+      isShowPWDStatus: false,
+      isPWDok: false,
+      ifShowRePWDStatus: false,
+      isRePWDok: false,
+      isDisable: true,
       userInfo: {
         name: '',
         pwd: '',
-        rePwd: ''
+        repwd: ''
       }
     }
   },
   methods: {
-    abc(){
-      console.log(this.userInfo.name.match(/\d{2}/g))
-      // if(this.userInfo.name )
+    checkUsername() {
+      this.userInfo.name ? this.isShowUsernameStatus = true : this.isShowUsernameStatus = false
+      let flag = this.userInfo.name.match(/^[\u4e00-\u9fa5_0-9a-zA-Z]{2,}$/g)
+      flag ? this.isUsernameOk = true : this.isUsernameOk = false
+    },
+    checkPWD() {
+      this.userInfo.pwd ? this.isShowPWDStatus = true : this.isShowPWDStatus = false
+      let flag = this.userInfo.pwd.match(/(?=.*\d)(?=.*[a-z]).{2,}$/)
+      flag ? this.isPWDok = true : this.isPWDok = false
+
+  
+      // let rePWDflag = this.userInfo.pwd === this.userInfo.repwd
+      // rePWDflag ? this.isRePWDok = true : this.isRePWDok = false
 
     },
-    aaa() {
-      console.log('aaaaaaaa')
+    recheckPWD() {
+      this.ifShowRePWDStatus = true
+      let flag = this.userInfo.pwd === this.userInfo.repwd
+      flag ? this.isRePWDok = true : this.isRePWDok = false
+
     },
     register() {
-      this.isShowRegister = true
+      // this.isShowRegister = true
+      console.log('aaaaaa');
+
     },
     closeRegister() {
       this.isClose = false
