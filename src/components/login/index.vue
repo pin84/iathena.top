@@ -15,11 +15,12 @@
       <input type="password"><br>
       <div id="btn">
         <div>
+          <span>用户名或密码错误！</span>
           <button>登录</button>
         </div>
         <div>
-          <span>没有账号？</span>
-          <button @click.prevent="register">立即注册</button>
+          <label>没有账号？</label>
+          <button @click.prevent="showRegister">立即注册</button>
         </div>
       </div>
     </form>
@@ -35,6 +36,7 @@
         placeholder="请输入昵称,不能有特殊符号"
         v-model="userInfo.name"
         @input='checkUsername'
+        @blur="hasUsername"
       >
       <span
         class="notice"
@@ -42,12 +44,13 @@
       >
         <span
           class="ok"
-          v-if="isUsernameOk"
+          v-if="isUsernameOk===0"
         >&radic;</span>
         <span
-          v-else
+          v-else-if="isUsernameOk===1"
           class="ng"
         >&times;</span>
+        <span v-else-if="isUsernameOk===2">用户名已存在</span>
       </span><br>
       <label for="">密<span>&#12288;&#12288;</span>码：</label>
       <input
@@ -91,7 +94,7 @@
         <div>
           <button
             @click.prevent="register"
-            v-bind:disabled="!isUsernameOk || !isPWDok || !isRePWDok "
+            v-bind:disabled=" isUsernameOk !== 0 || !isPWDok || !isRePWDok "
           >确认注册</button>
         </div>
         <!-- <div>
@@ -99,6 +102,12 @@
         </div> -->
       </div>
     </form>
+    <div
+      id="successTip"
+      v-if="isShowSuccessTip"
+      ref="successTip"
+    >
+    </div>
     <span
       class="close"
       title="关闭"
@@ -107,13 +116,15 @@
   </div>
 </template>
 <script>
+import config from '../../config/config'
+import { setTimeout } from 'timers';
 export default {
   data() {
     return {
-      isShowRegister: true,
+      isShowRegister: false,
       isClose: true,
       isShowUsernameStatus: false,
-      isUsernameOk: false,
+      isUsernameOk: 0,
       isShowPWDStatus: false,
       isPWDok: false,
       ifShowRePWDStatus: false,
@@ -123,38 +134,77 @@ export default {
         name: '',
         pwd: '',
         repwd: ''
-      }
+      },
+      isShowSuccessTip: true
     }
   },
   methods: {
     checkUsername() {
       this.userInfo.name ? this.isShowUsernameStatus = true : this.isShowUsernameStatus = false
       let flag = this.userInfo.name.match(/^[\u4e00-\u9fa5_0-9a-zA-Z]{2,}$/g)
-      flag ? this.isUsernameOk = true : this.isUsernameOk = false
+
+      flag ? this.isUsernameOk = 0 : this.isUsernameOk = 1
+    },
+
+    hasUsername() {
+      fetch(`${config.url}/hasUsername?name=${this.userInfo.name}`).then(res => {
+        return res.json()
+      }).then(data => {
+        data.code === 1 ? this.isUsernameOk = 2 : this.isUsernameOk = 0
+
+      })
     },
     checkPWD() {
       this.userInfo.pwd ? this.isShowPWDStatus = true : this.isShowPWDStatus = false
       let flag = this.userInfo.pwd.match(/(?=.*\d)(?=.*[a-z]).{2,}$/)
       flag ? this.isPWDok = true : this.isPWDok = false
 
-  
-      // let rePWDflag = this.userInfo.pwd === this.userInfo.repwd
-      // rePWDflag ? this.isRePWDok = true : this.isRePWDok = false
-
+      this.recheckPWD()
     },
     recheckPWD() {
-      this.ifShowRePWDStatus = true
+      this.userInfo.repwd ? this.ifShowRePWDStatus = true : this.ifShowRePWDStatus = false
       let flag = this.userInfo.pwd === this.userInfo.repwd
       flag ? this.isRePWDok = true : this.isRePWDok = false
 
     },
     register() {
-      // this.isShowRegister = true
-      console.log('aaaaaa');
-
+      fetch(`${config.url}/register`, {
+        method: 'post',
+        headers: {
+          "Content-Type": "application/json"
+        },
+        body: JSON.stringify(this.userInfo)
+      }).then(res => {
+        return res.json()
+      }).then(data => {
+        if (data.code === 0) {
+          this.$refs.successTip.style.transform = 'translate(-50%,-50%) scale(1)'
+          setTimeout(() => {
+            this.$refs.successTip.style.transform = 'translate(-50%,-50%) scale(0)'
+            this.isShowRegister = false
+            this.resetStatus()
+          }, 2000)
+        }
+      })
     },
     closeRegister() {
-      this.isClose = false
+      this.isShowRegister ? this.isShowRegister = false : this.isClose = false
+      this.resetStatus()
+    },
+    showRegister() {
+      this.isShowRegister = true
+    },
+    resetStatus() {
+      this.userInfo.name = ''
+      this.userInfo.pwd = ''
+      this.userInfo.repwd = ''
+      //还原状态
+      this.isUsernameOk = 0
+      this.isPWDok = false
+      this.isRePWDok = false
+      this.isShowUsernameStatus = false
+      this.isShowPWDStatus = false
+      this.ifShowRePWDStatus = false
     }
   }
 }
@@ -162,13 +212,14 @@ export default {
 <style lang='stylus' scoped>
   .wrapper
     position relative
-    width 366px
+    width 380px
     height 215px
     border 1px solid #ccc
     padding 20px 0 20px 10px
     border-radius 5px
     box-shadow 3px 3px  3px  #ccc
     box-sizing border-box
+    user-select none
     #login , #register
       input
         width 185px
@@ -176,8 +227,9 @@ export default {
         padding 0 5px
         margin-top 10px
       button 
-        margin 10px 90px 0 0 
+        margin 10px 100px 0 0 
         padding 1px 4px 
+        user-select none
         &:hover
           cursor pointer
       #btn
@@ -191,7 +243,24 @@ export default {
         font-weight 600
         span.ok
           color green
-            
+    #successTip
+      position absolute 
+      top 50%
+      left 50%
+      transform translate(-50%,-50%) scale(0)
+      opacity 1
+      transition all .8s 
+      &::before
+        display block
+        text-align center
+        content:'\2714'
+        font-size 48px
+        color #FF6666
+        width 80px
+        height 60px
+        line-height 60px
+        background rgba(51,102,102,.8)
+        border-radius 5px
     .close
       position absolute  
       width 20px
