@@ -307,7 +307,7 @@ export default {
   position relative
   #upladAvatar
     label
-      display block
+      display inline-block
       border-radius 2px
       padding 2px 5px
       background #FF9900

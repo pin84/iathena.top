@@ -10,13 +10,27 @@
       v-if="!isShowRegister"
     >
       <label for="">用&ensp;户&ensp;名：</label>
-      <input type="text"><br>
+      <input
+        type="text"
+        v-model="loginUserInfo.name"
+        @input="inputUserInfo"
+      ><br>
       <label for="">密<span>&#12288;&#12288;</span>码：</label>
-      <input type="password"><br>
+      <input
+        type="password"
+        v-model="loginUserInfo.pwd"
+        @input="inputUserInfo"
+      ><br>
       <div id="btn">
         <div>
-          <span>用户名或密码错误！</span>
-          <button>登录</button>
+          <span
+            class="tip"
+            v-if="isShowTip"
+          >用户名或密码错误！</span>
+          <button
+            @click.prevent="login"
+            v-else
+          >登录</button>
         </div>
         <div>
           <label>没有账号？</label>
@@ -121,8 +135,8 @@ import { setTimeout } from 'timers';
 export default {
   data() {
     return {
-      isShowRegister: false,
-      isClose: true,
+      isClose: true, //整个面板
+      isShowRegister: false, //显示登录还是注册面板
       isShowUsernameStatus: false,
       isUsernameOk: 0,
       isShowPWDStatus: false,
@@ -135,10 +149,41 @@ export default {
         pwd: '',
         repwd: ''
       },
-      isShowSuccessTip: true
+      isShowSuccessTip: true,
+      loginUserInfo: {
+        name: '',
+        pwd: ''
+      },
+      isShowTip: false
     }
   },
   methods: {
+    //以下为登录的方法
+    inputUserInfo() {
+      this.isShowTip = false
+    },
+    login() {
+      fetch(`${config.url}/login`, {
+        credentials: 'include',
+        method: 'POST',
+        headers: {
+          "Content-Type": "application/json"
+        },
+        body: JSON.stringify(this.loginUserInfo)
+      }).then(res => {
+        return res.json()
+      }).then(data => {
+        if (data.code === 1) {
+          this.isShowTip = true
+          return
+        }
+
+        this.$emit('loginSuccess', data.user)
+
+      })
+    },
+
+    //以下为注册的方法
     checkUsername() {
       this.userInfo.name ? this.isShowUsernameStatus = true : this.isShowUsernameStatus = false
       let flag = this.userInfo.name.match(/^[\u4e00-\u9fa5_0-9a-zA-Z]{2,}$/g)
@@ -190,6 +235,9 @@ export default {
     closeRegister() {
       this.isShowRegister ? this.isShowRegister = false : this.isClose = false
       this.resetStatus()
+      if (!this.isClose) {
+        this.$emit('closeLogin')
+      }
     },
     showRegister() {
       this.isShowRegister = true
@@ -212,7 +260,7 @@ export default {
 <style lang='stylus' scoped>
   .wrapper
     position relative
-    width 380px
+    width 370px
     height 215px
     border 1px solid #ccc
     padding 20px 0 20px 10px
@@ -220,9 +268,10 @@ export default {
     box-shadow 3px 3px  3px  #ccc
     box-sizing border-box
     user-select none
+    background #fff
     #login , #register
       input
-        width 185px
+        width 180px
         height 20px
         padding 0 5px
         margin-top 10px
@@ -236,6 +285,14 @@ export default {
         display flex
         flex-direction column
         align-items flex-end
+        .tip
+          display inline-block
+          color red
+          margin-right 100px
+          margin-top 10px
+          height 23px
+          line-height 23px
+
       .notice
         display inline-block
         color red    

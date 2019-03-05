@@ -3,14 +3,41 @@
     <hr style="margin-bottom:20px;">
     <form action>
       <div class="userinfo">
-        <label for="username">昵称:</label>
-        <input
-          type="text"
-          id="username"
-          autocomplete="off"
-          v-model="message.username"
-          placeholder="访客"
+        <div
+          style="display:inline-block"
+          v-if="isShowLoginWrapper === 0  ||  isShowLoginWrapper === 3"
         >
+          <label for="username">昵称:</label>
+          <input
+            type="text"
+            id="username"
+            autocomplete="off"
+            v-model="message.username"
+            placeholder="访客"
+            ref="userInput"
+            v-if="isShowLoginWrapper === 0"
+          >
+          <span v-if="isShowLoginWrapper === 3">&ensp;{{message.username}} &ensp;|&ensp;
+            <span @click="logout" class="logout">退出</span>
+          </span>
+        </div>
+        <div
+          id="login"
+          v-if="isShowLoginWrapper === 1 "
+        >
+          <Login
+            id="login-wrapper"
+            @closeLogin='closeLogin'
+            @loginSuccess='loginSuccess'
+          ></Login>
+        </div>
+
+        <span v-if="isShowLoginWrapper === 0">
+          <span>&ensp;或</span>
+          <i
+            class="btn-login"
+            @click="showLogin"
+          >登录</i>&ensp;后,更多操作</span>
         <br>
         <br>
         <label for="title">标题:</label>
@@ -22,13 +49,10 @@
           placeholder="无标题"
         >
       </div>
-      <div id="login">
-        <Login  id="login-wrapper"/>
-        <!-- <span><i class="btn-login">登录</i>后，更多操作</span> -->
-      </div>
+
       <br>
       <div class="avatar">
-        <span>请选择头像或</span>
+        <span v-if="isShowAvatarList">请选择头像或 &ensp;</span>
         <CanvasSelectAvatar
           @hiddenAvatarList='hiddenAvatarList'
           @setAvatarName='setAvatarName'
@@ -78,6 +102,7 @@
         >发表</button>
       </div>
     </form>
+    <span class="close" @click="closeWrapper">X</span>
   </div>
 </template>
 
@@ -89,6 +114,7 @@ import Login from '../login'
 export default {
   data() {
     return {
+      close: false,
       avatarSum: ["11", "15", "18", "04"], //头像的总编号数
       message: {
         username: "",
@@ -100,18 +126,45 @@ export default {
       },
       showSeletAvatar: false,
       isShowAvatarList: true,
-      inputFile: ''
+      inputFile: '',
+      isShowLoginWrapper: 0 //登录窗口隐藏
     };
   },
   components: {
     CanvasSelectAvatar,
     Login
   },
-  mounted() {
+  created(){
+    console.log('====',document.cookie);
+    
+  },
+  updated() {
     this.$refs.avatar[0].checked = true;
     this.message.avatar = this.avatarSum[0];
   },
   methods: {
+    logout() {
+      console.log('logout');
+      this.isShowLoginWrapper = 0
+      this.reset()
+    },
+    loginSuccess(user) {
+      this.isShowLoginWrapper = 3
+      this.$nextTick(() => {
+        // let input = this.$refs.userInput
+        // input.style.display = 'none'
+        this.message.username = user
+      })
+    },
+    closeLogin() {
+      this.isShowLoginWrapper = 0
+    },
+    showLogin() {
+      this.isShowLoginWrapper = 1
+      // let scroll = window.scrollTop
+      // console.log(scroll);
+    },
+
     hiddenAvatarList(boolean) {
       this.isShowAvatarList = boolean
     },
@@ -150,6 +203,12 @@ export default {
           }
         });
     },
+    closeWrapper(){
+      this.$emit('closeSendMsgWrapper')
+    },
+    reset() {
+      this.message.username = ''
+    }
   }
 };
 </script>
@@ -159,19 +218,19 @@ export default {
 .red 
   color: red
 .sendMsg 
+  position relative
   width 100%
   margin-top 20px
   box-sizing border-box
   font-size 1.4rem
+  box-shadow 2px 2px 3px 3px #ccc
   .userinfo 
     display inline-block 
     #username, #title 
       padding: 3px 5px
-  #login
-    display inline-block 
-    vertical-align top 
-    // #login-wrapper
-    //   position absolute
+    #login
+      display inline-block 
+      vertical-align top 
     .btn-login
       margin 0 5px
       color blue
@@ -179,6 +238,11 @@ export default {
       &:hover
         cursor pointer
         text-decoration underline
+    .logout
+      text-decoration underline
+      &:hover
+        cursor pointer 
+        color #CC0033  
   .avatar 
     margin-top 10px
     .CanvasSelectAvatar
@@ -215,9 +279,20 @@ export default {
     #send 
       padding: 0 5px
       &:hover 
-        cursor: pointer
-
-
+        cursor pointer
+  .close
+    position absolute
+    top 0px 
+    right 0
+    display inline-block
+    text-align center
+    width 20px
+    height 20px
+    line-height 20px
+    background #cccccc
+    &:hover
+      cursor pointer
+      background #888
 @media screen and (max-width: 480px) {
   .sendMsg {
     padding: 5px;

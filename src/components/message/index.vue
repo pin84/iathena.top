@@ -74,8 +74,9 @@
         @changePageNum="changePageNum"
       />
       <SendMsg
-        v-if='!isSearch'
+        v-if='isShowSendMsg'
         @refreshMsg="refreshMsg"
+        @closeSendMsgWrapper='closeSendMsgWrapper'
         ref="send"
       />
     </div>
@@ -102,6 +103,7 @@ export default {
       maxSearchResLength: 32,
       start: this.currentPageIndex || Number(this.$store.state.pageIndex),
       end: this.currentPageNum || Number(this.$store.state.pageNum),
+      isShowSendMsg: false,
     }
   },
   components: {
@@ -131,6 +133,7 @@ export default {
 
     initData() {
       fetch(`${config.url}/initData?pageNum=${this.$store.state.pageNum}`, {
+        method:'GET',
         cache: 'reload',
       }).then(res => {
         return res.json()
@@ -159,6 +162,7 @@ export default {
         this.searchKeyword = ''
       })
       this.isSearch = true
+      this.isShowSendMsg = false
     },
 
     refreshMsg() {
@@ -228,10 +232,14 @@ export default {
 
 
     toWriteMsg() {
-      let send = this.$refs.send.$el.offsetTop
-      window.scrollTo(0, send - 85)
+      this.isShowSendMsg = true
+      this.$nextTick(function () {
+        window.scrollTo(0, 500);
+      })
     },
-
+    closeSendMsgWrapper() {
+      this.isShowSendMsg = false
+    }
 
 
 
