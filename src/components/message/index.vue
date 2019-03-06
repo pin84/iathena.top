@@ -133,6 +133,7 @@ export default {
 
     initData() {
       fetch(`${config.url}/initData?pageNum=${this.$store.state.pageNum}`, {
+        credentials:'include',
         method:'GET',
         cache: 'reload',
       }).then(res => {

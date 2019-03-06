@@ -18,6 +18,7 @@
     </div>
     <Contact class="con" />
 
+
     <!-- 引入的 web components  -->
     <!-- <popup-info ref='pop'></popup-info>     -->
   </div>
@@ -33,15 +34,6 @@ export default {
   components: {
     Contact,
   },
- 
-  mounted(){
-    let aa = new SimplePromise()
-    aa.aa()
-    
-    
-  }
-
-
 
 }
 
@@ -52,7 +44,6 @@ export default {
   width 100%
   display flex
   flex-direction column
-  // justify-content center
   align-items center
   background url(./contact/bg.jpg) no-repeat center
   background-size cover

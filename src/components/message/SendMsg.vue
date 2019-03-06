@@ -18,7 +18,10 @@
             v-if="isShowLoginWrapper === 0"
           >
           <span v-if="isShowLoginWrapper === 3">&ensp;{{message.username}} &ensp;|&ensp;
-            <span @click="logout" class="logout">退出</span>
+            <span
+              @click="logout"
+              class="logout"
+            >退出</span>
           </span>
         </div>
         <div
@@ -102,9 +105,13 @@
         >发表</button>
       </div>
     </form>
-    <span class="close" @click="closeWrapper">X</span>
+    <span
+      class="close"
+      @click="closeWrapper"
+    >X</span>
   </div>
 </template>
+
 
 
 <script>
@@ -134,13 +141,11 @@ export default {
     CanvasSelectAvatar,
     Login
   },
-  created(){
-    console.log('====',document.cookie);
-    
-  },
-  updated() {
-    this.$refs.avatar[0].checked = true;
-    this.message.avatar = this.avatarSum[0];
+  created() {
+    this.$nextTick(() => {
+      this.$refs.avatar[0].checked = true;
+      this.message.avatar = this.avatarSum[0];
+    })
   },
   methods: {
     logout() {
@@ -169,6 +174,8 @@ export default {
       this.isShowAvatarList = boolean
     },
     selectedAvatar(i) {
+      console.log(i);
+
       this.message.avatar = i
     },
     setAvatarName(filename) {
@@ -197,13 +204,13 @@ export default {
           if (!data.code) {
             this.message.msg = "";
             this.message.isSecret = undefined;
-            alert(data.data);
+            // alert(data.data);
             this.$emit("refreshMsg");
             window.scrollTo(0, 210); //滚动窗口到指定坐标
           }
         });
     },
-    closeWrapper(){
+    closeWrapper() {
       this.$emit('closeSendMsgWrapper')
     },
     reset() {
