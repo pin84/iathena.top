@@ -177,11 +177,13 @@ export default {
           this.isShowTip = true
           return
         }
-
-        this.$emit('loginSuccess', data.user)
-
+        
+        let name = data.user
+        this.$emit('loginSuccess',name) //sendMsg
+        localStorage.setItem('userInfo', name);
       })
     },
+
 
     //以下为注册的方法
     checkUsername() {

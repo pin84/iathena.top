@@ -134,7 +134,8 @@ export default {
       showSeletAvatar: false,
       isShowAvatarList: true,
       inputFile: '',
-      isShowLoginWrapper: 0 //登录窗口隐藏
+      isShowLoginWrapper: 0,//登录窗口隐藏
+      currentUser: undefined //给退出登陆用
     };
   },
   components: {
@@ -142,25 +143,48 @@ export default {
     Login
   },
   created() {
+    let userInfo = localStorage.getItem('userInfo')
+    if (userInfo) {
+      this.isShowLoginWrapper = 3
+      this.message.username = userInfo
+    }
+
     this.$nextTick(() => {
       this.$refs.avatar[0].checked = true;
       this.message.avatar = this.avatarSum[0];
     })
   },
+
+
+
+
   methods: {
+
     logout() {
-      console.log('logout');
       this.isShowLoginWrapper = 0
+      let username = localStorage.getItem('userInfo')
+      localStorage.removeItem('userInfo')
+
+      fetch(`${config.url}/logout?name=${username}`, {
+        credentials: 'include',
+      }).then(res => {
+        return res.json()
+      }).then(data => {
+        console.log(data)
+      })
+
+
       this.reset()
     },
+
     loginSuccess(user) {
       this.isShowLoginWrapper = 3
       this.$nextTick(() => {
-        // let input = this.$refs.userInput
-        // input.style.display = 'none'
         this.message.username = user
       })
     },
+
+
     closeLogin() {
       this.isShowLoginWrapper = 0
     },

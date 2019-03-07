@@ -84,7 +84,6 @@
   </div>
 </template>
 
-
 <script>
 import config from '../../config/config'
 import PageChange from './PageChange'
@@ -104,6 +103,7 @@ export default {
       start: this.currentPageIndex || Number(this.$store.state.pageIndex),
       end: this.currentPageNum || Number(this.$store.state.pageNum),
       isShowSendMsg: false,
+      propsUserInfo: undefined
     }
   },
   components: {
@@ -125,16 +125,16 @@ export default {
     currentPageIndex() {
       return Number(this.$store.state.pageIndex)
     }
+
+
   },
 
 
   methods: {
-
-
     initData() {
       fetch(`${config.url}/initData?pageNum=${this.$store.state.pageNum}`, {
-        credentials:'include',
-        method:'GET',
+        credentials: 'include',
+        method: 'GET',
         cache: 'reload',
       }).then(res => {
         return res.json()
@@ -142,10 +142,18 @@ export default {
         this.allData = json.allData.reverse()
         this.data = this.allData.slice(0, this.end)
         this.$store.commit('setPages', json.pages)
-        window.scrollTo(0, 180)
+        // window.scrollTo(0, 180)
+
         if (this.isSearch) {
           this.isSearch = false
         }
+
+        //判断是否登陆。如果没有。就移除本地储存的信息
+        let userInfo = json.userInfo
+        if(!userInfo){
+          localStorage.removeItem('userInfo')
+        }
+
       })
     },
 
@@ -233,6 +241,9 @@ export default {
 
 
     toWriteMsg() {
+      
+      this.initData()
+
       this.isShowSendMsg = true
       this.$nextTick(function () {
         window.scrollTo(0, 500);
