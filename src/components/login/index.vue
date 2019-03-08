@@ -177,10 +177,7 @@ export default {
           this.isShowTip = true
           return
         }
-        
-        let name = data.user
-        this.$emit('loginSuccess',name) //sendMsg
-        localStorage.setItem('userInfo', name);
+        this.$emit('loginSuccess',data.name) //sendMsg
       })
     },
 

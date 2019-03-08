@@ -85,6 +85,7 @@ export default {
       s1.selectedIndex = '0'
     },
 
+
     toPre() {
       this.$emit('toPre')
       let s1 = this.$refs.select1

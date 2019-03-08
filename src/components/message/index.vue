@@ -8,10 +8,9 @@
         >
       </div>
       <div class="search">
-        <button
-          class="write"
-          @click="toWriteMsg"
-        >签写留言</button>
+        <BtnWriteMsg
+          @toWriteMsg="toWriteMsg"
+        />
         <div>
           <input
             type="text"
@@ -28,30 +27,36 @@
           v-for="(msg,i) in currentData"
           :key="i"
         >
-          <div class="top">
-            <span>标题:</span> <span>{{msg.title}}</span> <span class="name">{{msg.username}}</span> <time><span>发表于:</span>{{msg.created}}</time>
-          </div>
-          <div class="bottom">
-            <div class="avatar">
-              <div class="imgbox">
-                <img
-                  v-if="!msg.isUploadAvatar"
-                  :src="require(`../../assets/img/message/avatar/${msg.avatar}.gif`)"
-                  alt=""
-                >
-                <img
-                  v-else
-                  :src="`http://106.13.93.149:9000/static/${msg.avatar}`"
-                  alt=""
-                >
-              </div>
-
-              <h5>{{msg.username}}</h5>
+          <div v-if="msg.isShow">
+            <div class="top">
+              <span>标题:</span> <span>{{msg.title}}</span> <span class="name">{{msg.username}}</span> <time><span>发表于:</span>{{msg.created}}</time>
+              <span
+                class="del"
+                @click="delMsg(msg.id,msg.username)"
+              >删除</span>
             </div>
-            <div
-              class="detail"
-              :class="{red:msg.isSecret === 1 }"
-            >{{msg.msg}}</div>
+            <div class="bottom">
+              <div class="avatar">
+                <div class="imgbox">
+                  <img
+                    v-if="!msg.isUploadAvatar"
+                    :src="require(`../../assets/img/message/avatar/${msg.avatar}.gif`)"
+                    alt=""
+                  >
+                  <img
+                    v-else
+                    :src="`http://106.13.93.149:9000/static/${msg.avatar}`"
+                    alt=""
+                  >
+                </div>
+
+                <h5>{{msg.username}}</h5>
+              </div>
+              <div
+                class="detail"
+                :class="{red:msg.isSecret === 1 }"
+              >{{msg.msg}}</div>
+            </div>
           </div>
         </li>
       </ul>
@@ -88,6 +93,7 @@
 import config from '../../config/config'
 import PageChange from './PageChange'
 import SendMsg from './SendMsg'
+import BtnWriteMsg from './BtnWriteMsg'
 // import utils from '@/utils/dateFormat'
 
 
@@ -109,6 +115,7 @@ export default {
   components: {
     PageChange,
     SendMsg,
+    BtnWriteMsg,
   },
 
   created() {
@@ -116,6 +123,7 @@ export default {
   },
 
   computed: {
+
     currentData: function () {
       return this.data
     },
@@ -139,21 +147,14 @@ export default {
       }).then(res => {
         return res.json()
       }).then(json => {
-        this.allData = json.allData.reverse()
-        this.data = this.allData.slice(0, this.end)
+        this.allData = json.returnData.reverse()
+        this.data = this.allData.slice(this.start, this.end)
         this.$store.commit('setPages', json.pages)
         // window.scrollTo(0, 180)
 
         if (this.isSearch) {
           this.isSearch = false
         }
-
-        //判断是否登陆。如果没有。就移除本地储存的信息
-        let userInfo = json.userInfo
-        if(!userInfo){
-          localStorage.removeItem('userInfo')
-        }
-
       })
     },
 
@@ -193,6 +194,9 @@ export default {
 
       this.data = []
       this.data = this.allData.slice(this.start, this.end)
+
+     
+      
     },
 
     toNext() {
@@ -204,6 +208,8 @@ export default {
 
       this.data = []
       this.data = this.allData.slice(this.start, this.end)
+
+       console.log(this.end);
     },
 
     toFirstPage() {
@@ -241,9 +247,6 @@ export default {
 
 
     toWriteMsg() {
-      
-      this.initData()
-
       this.isShowSendMsg = true
       this.$nextTick(function () {
         window.scrollTo(0, 500);
@@ -251,6 +254,19 @@ export default {
     },
     closeSendMsgWrapper() {
       this.isShowSendMsg = false
+    },
+    delMsg(id, name) {
+      
+      fetch(`${config.url}/delMsg?id=${id}&name=${name}`, {
+        credentials: 'include'
+      }).then(res => {
+        return res.json()
+      }).then(json => {
+
+        alert(json.data)
+        this.initData()
+      })
+
     }
 
 
@@ -291,14 +307,7 @@ export default {
         padding 1px 5px 
         cursor pointer
         vertical-align top
-        &.write
-          background #FF9900 
-          border none 
-          outline none
-          padding 3px 5px
-          box-shadow 3px 3px 2px  #666
-        &.write:hover
-          background #FF6600
+      
     .msglist
       margin-top 40px   
       line-height 24px
@@ -308,10 +317,18 @@ export default {
         .top
           background #FFA042
           padding 5px 10px
+          position relative
+          user-select none
           span
             margin-right 10px
             &.name
               color #fff
+            &.del
+              position absolute
+              right 0  
+              &:hover
+                color red
+                cursor pointer
         .bottom
           display flex
           text-align center

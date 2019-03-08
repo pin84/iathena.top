@@ -143,12 +143,15 @@ export default {
     Login
   },
   created() {
-    let userInfo = localStorage.getItem('userInfo')
-    if (userInfo) {
+
+    //如果登陆，则显示用户名
+    let name = document.cookie.replace(/(?:(?:^|.*;\s*)userInfo\s*\=\s*([^;]*).*$)|^.*$/, "$1");
+    if (name) {
       this.isShowLoginWrapper = 3
-      this.message.username = userInfo
+      this.message.username = name
     }
 
+    //默认选择第一个头像
     this.$nextTick(() => {
       this.$refs.avatar[0].checked = true;
       this.message.avatar = this.avatarSum[0];
@@ -162,18 +165,13 @@ export default {
 
     logout() {
       this.isShowLoginWrapper = 0
-      let username = localStorage.getItem('userInfo')
-      localStorage.removeItem('userInfo')
-
-      fetch(`${config.url}/logout?name=${username}`, {
+      fetch(`${config.url}/logout`, {
         credentials: 'include',
       }).then(res => {
         return res.json()
       }).then(data => {
         console.log(data)
       })
-
-
       this.reset()
     },
 
@@ -182,6 +180,7 @@ export default {
       this.$nextTick(() => {
         this.message.username = user
       })
+
     },
 
 
