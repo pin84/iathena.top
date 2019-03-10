@@ -1,5 +1,5 @@
 <template>
-  <div class="wrapper">
+  <div class="about">
     <div class="title">
       <span>关于我</span>
     </div>
@@ -42,7 +42,7 @@ export default {
 </script>
 
 <style lang="stylus" scoped>
-.wrapper
+.about
   width 100%
   display flex
   flex-direction column

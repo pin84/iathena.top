@@ -1,20 +1,18 @@
 <template>
-  <div class="wrapper">
-    <div class="title">
-      <span>作品集</span>
+  <div class="job">
+    <h3>作品集</h3>
+    <div class="works">
+      <SeaWave class='item' />
+      <ThreeDImage class='item' />
+      <Eclipse class='item' />
     </div>
-    <ul class="list">
-      <li v-for="(li,index) in liData" :key="index">
-        <img style="width:100%;height:100%;" :src="require(`../assets/img/job/0${Math.ceil(Math.random()*8)}.jpg`)" alt="">
-        <a :href="li.src" target="_blank">
-          <h4>{{li.title}}</h4>
-          <p>{{li.detail}}</p>
-        </a>
-      </li>
-    </ul>
+   
   </div>
 </template>
 <script>
+import SeaWave from './works/SeaWave'
+import ThreeDImage from './works/ThreeDImage'
+import Eclipse from './works/Eclipse'
 export default {
   data() {
     return {
@@ -66,96 +64,28 @@ export default {
         },
       ]
     }
+  },
+  components: {
+    SeaWave,
+    ThreeDImage,
+    Eclipse
   }
-
 };
 </script>
 <style lang="stylus" scoped>
-.wrapper
+.job
   width 80%
   padding-bottom 30px
   margin 0 auto
-  display flex
-  flex-direction column
-  .title
-    font-size 3rem
-    margin 3rem 0
-    font-weight 600
-    span
-      padding .5rem 0
-      border-bottom 2px solid #E87E04
-  .list
+  h3
+    display inline-block
+    font-size 24px
+    line-height 40px
+    padding .5rem 0
+    border-bottom 2px solid #E87E04
+    margin-bottom 20px
+  .works
     display flex
+    justify-content space-around
     flex-wrap wrap
-    justify-content  space-between
-    perspective 750px
-    li
-      width 24%
-      position relative
-      margin 4px
-      transition 300ms
-      transform-origin 50% 50%
-      transform-style preserve-3d
-      &:hover
-        transform scale(1.04)
-        a
-          opacity 1
-          
-      img
-        width 100%
-        height 100%
-      a
-        position absolute
-        top 0
-        left 0
-        width 100%
-        height 100%
-        background rgba(0, 0, 0, 0.5)
-        color #fff
-        display flex
-        flex-direction column 
-        align-items center
-        justify-content center
-        font-size 1.4rem
-        opacity 0
-        box-sizing border-box
-        padding 30px
-        line-height 25px
-        h4
-          margin-bottom 10px  
-      // &:hover
-      //   transform scale(1.04)
-      //   a
-      //     opacity 1
-
-
-@media screen and (max-width:900px)
-  .wrapper
-    width 95%
-    .list
-      display flex
-      justify-content start
-      li
-        width 31%
-        margin 4px
-        
-@media screen and (max-width:480px)
-  .wrapper
-    width 95%
-    .list
-      display flex
-      margin-bottom 80px
-      li
-        width 48%
-        margin 2px
-        a
-          opacity 1
-          font-size 1.3rem
-          line-height 18px
-          padding 15px
-          font-weight 100
-          h4
-            font-weight 100
-        &:hover  
-          transform scale(1)    
 </style>

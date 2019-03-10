@@ -37,8 +37,7 @@ export default {
 }
 </script>
 
-<style lang="stylus">
-@import  './assets/stylus/common.styl'
+<style lang="stylus" scoped>
 #app
   font-family 'Avenir', Helvetica, Arial, sans-serif
   // text-align center

@@ -1,5 +1,5 @@
 <template>
-  <div class="wrapper">
+  <div class="skill">
       <div class="signboard one">
         <div class="sign">html5、css3、js</div>
         <div class="strings"></div>
@@ -32,7 +32,7 @@ export default {
 </script>
 
 <style lang='stylus' scoped>
-.wrapper
+.skill
   width 100%
   height 100vh
   min-height 700px

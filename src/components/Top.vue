@@ -40,12 +40,12 @@
         <!-- <router-link tag="li" to='/contact'>
           <a href="javascript:;">联系我</a>
         </router-link> -->
-        <router-link
+        <!-- <router-link
           tag="li"
           to='/message'
         >
           <a href="javascript:;">留言本</a>
-        </router-link>
+        </router-link> -->
         <!-- <li>
           <a
             href="http://books.iathena.top/css/cssTips.html"
@@ -84,6 +84,7 @@ nav
       &.title 
         font-size: 2rem;
         font-weight: 600;
+        padding: 0 
     .pc
       display flex
     .phone
@@ -94,7 +95,7 @@ nav
     // position fixed
     z-index 2
     .container 
-      width 90%
+      width 95%
       justify-content space-between
       a
         padding 0 5px
