@@ -1,6 +1,6 @@
 <template>
   <a
-    href="https://pin84.github.io/live/01_web/03_ResponsiveWeb/"
+    :href="url"
     id="bookWrapper"
     target="_brank"
   >
@@ -8,20 +8,23 @@
       <span>HTML</span>
     </div>
     <div class="desc">
-      <p class="title">degdgdsc</p>
-      <p class="detail">fsdf</p>
+      <!-- <p class="title">新时代英语</p> -->
+      <p class="detail">VUE 移动端，新时代英语</p>
     </div>
   </a>
 </template>
 <script>
 export default {
+props:{
+  url:''
+}
 
 }
 </script>
 <style lang='stylus' scoped>
 @import './common.styl'
 #bookWrapper
-  // position relative
+  position relative
   display block
   width 260px
   height 260px
@@ -96,5 +99,6 @@ export default {
         content '<development />'
         display block
         font-size 10px
-
+  .desc
+    height 30px
 </style>

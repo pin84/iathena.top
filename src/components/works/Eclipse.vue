@@ -8,6 +8,10 @@
       <div class="sun"></div>
       <div class="moon"></div>
     </div>
+    <div class="desc">
+      <p class="title">放大镜</p>
+      <p class="detail">淘宝网的放大镜效果</p>
+    </div>
   </a>
 </template>
 
@@ -22,6 +26,7 @@ export default {
 
 
 <style lang='stylus' scoped>
+@import './common.styl'
 #eclipse
   position relative
   display inline-block
@@ -49,9 +54,11 @@ export default {
     .sun
       background-color gold
       box-shadow 0 0 50px 10px white
+      transform translateY(-20%)
     .moon
       background-color slategray 
-      transform translateX(-10%)
-      
-
+      transform translate(-10% ,-20%)
+    
+  .desc
+    height 80px
 </style>

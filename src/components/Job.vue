@@ -8,8 +8,10 @@
         class='item'
         :url='dataList.tb.url'
       />
-      <Books class="item"/>
+      <Books class="item" :url='dataList.xsden.url'/>
+      <Pen class="item" />
     </div>
+
 
   </div>
 </template>
@@ -18,6 +20,7 @@ import SeaWave from './works/SeaWave'
 import ThreeDImage from './works/ThreeDImage'
 import Eclipse from './works/Eclipse'
 import Books from './works/Books'
+import Pen from './works/Pen'
 export default {
   data() {
     return {
@@ -73,6 +76,10 @@ export default {
           name: '淘宝放大镜',
           url: 'https://pin84.github.io/live/01_web/08_magnifier/'
         },
+        xsden: {
+          name: '新时代英语',
+          url: 'http://cxen.iathena.top/'
+        },
       }
 
     }
@@ -82,6 +89,7 @@ export default {
     ThreeDImage,
     Eclipse,
     Books,
+    Pen
   }
 };
 </script>
