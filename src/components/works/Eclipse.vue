@@ -1,6 +1,7 @@
 <template>
   <a
-    href=""
+    :href="url"
+    target="_blank"
     id="eclipse"
   >
     <div class="sky">
@@ -13,7 +14,9 @@
 
 <script>
 export default {
-
+  props:{
+    url:''
+  }
 }
 </script>
 
@@ -32,7 +35,8 @@ export default {
   .sky
     width 100%
     height 100%
-    background skyblue  
+    // background skyblue  
+    background rgba(0,0,0,0.9)
     display flex
     align-items center
     justify-content center
@@ -42,7 +46,9 @@ export default {
       width 50%
       height 50%
       border-radius 50%
+    .sun
       background-color gold
+      box-shadow 0 0 50px 10px white
     .moon
       background-color slategray 
       transform translateX(-10%)

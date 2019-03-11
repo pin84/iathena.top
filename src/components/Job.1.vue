@@ -17,6 +17,7 @@
 <script>
 export default {
   data() {
+
     return {
       liData: [
         {
@@ -71,91 +72,91 @@ export default {
 };
 </script>
 <style lang="stylus" scoped>
-.wrapper
-  width 80%
-  padding-bottom 30px
-  margin 0 auto
-  display flex
-  flex-direction column
-  .title
-    font-size 3rem
-    margin 3rem 0
-    font-weight 600
-    span
-      padding .5rem 0
-      border-bottom 2px solid #E87E04
-  .list
-    display flex
-    flex-wrap wrap
-    justify-content  space-between
-    perspective 750px
-    li
-      width 24%
-      position relative
-      margin 4px
-      transition 300ms
-      transform-origin 50% 50%
-      transform-style preserve-3d
-      &:hover
-        transform scale(1.04)
-        a
-          opacity 1
+// .wrapper
+//   width 80%
+//   padding-bottom 30px
+//   margin 0 auto
+//   display flex
+//   flex-direction column
+//   .title
+//     font-size 3rem
+//     margin 3rem 0
+//     font-weight 600
+//     span
+//       padding .5rem 0
+//       border-bottom 2px solid #E87E04
+//   .list
+//     display flex
+//     flex-wrap wrap
+//     justify-content  space-between
+//     perspective 750px
+//     li
+//       width 24%
+//       position relative
+//       margin 4px
+//       transition 300ms
+//       transform-origin 50% 50%
+//       transform-style preserve-3d
+//       &:hover
+//         transform scale(1.04)
+//         a
+//           opacity 1
           
-      img
-        width 100%
-        height 100%
-      a
-        position absolute
-        top 0
-        left 0
-        width 100%
-        height 100%
-        background rgba(0, 0, 0, 0.5)
-        color #fff
-        display flex
-        flex-direction column 
-        align-items center
-        justify-content center
-        font-size 1.4rem
-        opacity 0
-        box-sizing border-box
-        padding 30px
-        line-height 25px
-        h4
-          margin-bottom 10px  
-      // &:hover
-      //   transform scale(1.04)
-      //   a
-      //     opacity 1
+//       img
+//         width 100%
+//         height 100%
+//       a
+//         position absolute
+//         top 0
+//         left 0
+//         width 100%
+//         height 100%
+//         background rgba(0, 0, 0, 0.5)
+//         color #fff
+//         display flex
+//         flex-direction column 
+//         align-items center
+//         justify-content center
+//         font-size 1.4rem
+//         opacity 0
+//         box-sizing border-box
+//         padding 30px
+//         line-height 25px
+//         h4
+//           margin-bottom 10px  
+//       // &:hover
+//       //   transform scale(1.04)
+//       //   a
+//       //     opacity 1
 
 
-@media screen and (max-width:900px)
-  .wrapper
-    width 95%
-    .list
-      display flex
-      justify-content start
-      li
-        width 31%
-        margin 4px
+// @media screen and (max-width:900px)
+//   .wrapper
+//     width 95%
+//     .list
+//       display flex
+//       justify-content start
+//       li
+//         width 31%
+//         margin 4px
         
-@media screen and (max-width:480px)
-  .wrapper
-    width 95%
-    .list
-      display flex
-      margin-bottom 80px
-      li
-        width 48%
-        margin 2px
-        a
-          opacity 1
-          font-size 1.3rem
-          line-height 18px
-          padding 15px
-          font-weight 100
-          h4
-            font-weight 100
-        &:hover  
-          transform scale(1)    
+// @media screen and (max-width:480px)
+//   .wrapper
+//     width 95%
+//     .list
+//       display flex
+//       margin-bottom 80px
+//       li
+//         width 48%
+//         margin 2px
+//         a
+//           opacity 1
+//           font-size 1.3rem
+//           line-height 18px
+//           padding 15px
+//           font-weight 100
+//           h4
+//             font-weight 100
+//         &:hover  
+//           transform scale(1)    
 </style>

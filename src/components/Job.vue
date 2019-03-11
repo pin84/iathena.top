@@ -4,15 +4,20 @@
     <div class="works">
       <SeaWave class='item' />
       <ThreeDImage class='item' />
-      <Eclipse class='item' />
+      <Eclipse
+        class='item'
+        :url='dataList.tb.url'
+      />
+      <Books class="item"/>
     </div>
-   
+
   </div>
 </template>
 <script>
 import SeaWave from './works/SeaWave'
 import ThreeDImage from './works/ThreeDImage'
 import Eclipse from './works/Eclipse'
+import Books from './works/Books'
 export default {
   data() {
     return {
@@ -62,13 +67,21 @@ export default {
           title: '更多请访问我的github',
           detail: ''
         },
-      ]
+      ],
+      dataList: {
+        tb: {
+          name: '淘宝放大镜',
+          url: 'https://pin84.github.io/live/01_web/08_magnifier/'
+        },
+      }
+
     }
   },
   components: {
     SeaWave,
     ThreeDImage,
-    Eclipse
+    Eclipse,
+    Books,
   }
 };
 </script>
@@ -88,4 +101,6 @@ export default {
     display flex
     justify-content space-around
     flex-wrap wrap
+    .item
+      margin 5px 0
 </style>
