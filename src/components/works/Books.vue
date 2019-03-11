@@ -8,8 +8,8 @@
       <span>HTML</span>
     </div>
     <div class="desc">
-      <h1>degdgdsc</h1>
-      <h3>fsdf</h3>
+      <p class="title">degdgdsc</p>
+      <p class="detail">fsdf</p>
     </div>
   </a>
 </template>
@@ -19,7 +19,7 @@ export default {
 }
 </script>
 <style lang='stylus' scoped>
-@import url('./common.styl');
+@import './common.styl'
 #bookWrapper
   // position relative
   display block

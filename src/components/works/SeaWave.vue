@@ -1,6 +1,6 @@
 <template>
   <a href="http://df.iathena.top/" target='_brank' class="seawave">
-      <div class='des'>
+      <div class='desc'>
         <p class="title">静态页面-企业官网</p>
         <p class='detail'>业务范围下的数据都是用ajax从后台请求</p>
       </div> 
@@ -19,6 +19,7 @@ export default {
 
 
 <style lang='stylus' scoped>
+@import './common.styl';
   .seawave
     position relative
     display block
@@ -36,32 +37,6 @@ export default {
     overflow hidden
     &:hover
       box-shadow 0 2px 30px #FF0033
-    .des
-      position absolute
-      padding 10px
-      width 100%
-      height 150px
-      bottom 0
-      color #fff
-      z-index 1
-      box-sizing border-box
-      overflow hidden
-      .title
-        font-size 20px
-        font-family serif 
-        text-align center
-        line-height 40px
-        // text-transform uppercase
-        // letter-spacing 0.4em
-        // position absolute 
-        width 100%
-      .detail
-        text-indent 2em 
-        font-size 16px
-        line-height 18px
-        // white-space pre-wrap
-        word-break break-all
-        // word-wrap:break-word; 
     .wave
       // display inline-block
       position absolute 

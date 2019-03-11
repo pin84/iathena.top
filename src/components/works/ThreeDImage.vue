@@ -28,6 +28,7 @@ export default {
 
 
 <style lang='stylus' scoped>
+@import './common.styl';
 .three
   position relative
   width 260px
@@ -67,40 +68,10 @@ export default {
         position absolute 
         animation marquee 5s linear infinite
 
-  .desc
-    position absolute
-    padding 10px
-    width 100%
-    height 100px
-    bottom 0
-    color #fff
-    z-index 1
-    box-sizing border-box
-    overflow hidden
-    // background #336666
-    opacity 0.9
-
-    .title
-      font-size 20px
-      font-family serif 
-      text-align center
-      line-height 40px
-      // text-transform uppercase
-      // letter-spacing 0.4em
-      // position absolute 
-      width 100%
-    .detail
-      text-indent 2em 
-      font-size 16px
-      line-height 18px
-      // white-space pre-wrap
-      word-break break-all
-      // word-wrap:break-word; 
 @keyframes marquee{
   from {left:100%}
   to{left:-100%}
 }
-
 //第一个延迟
 .three .three_3d .inner:first-child span 
   animation-delay: 2.5s;
