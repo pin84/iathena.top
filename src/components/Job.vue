@@ -10,7 +10,8 @@
       />
       <Books class="item" :url='dataList.xsden.url'/>
       <Pen class="item"  :url='dataList.ToDo.url'/>
-      <MacBook class="item"/>
+      <MacBook class="item" :url='dataList.responsePage.url'/>
+      <Note class="item" />
     </div>
 
 
@@ -23,6 +24,7 @@ import Eclipse from './works/Eclipse'
 import Books from './works/Books'
 import Pen from './works/Pen'
 import MacBook from './works/MacBook'
+import Note from './works/Note'
 export default {
   data() {
     return {
@@ -86,6 +88,10 @@ export default {
           name: '数据库版的ToDoList',
           url: 'http://vuebase.iathena.top/#/todoList/'
         },
+        responsePage:{
+          name:'响应式页面',
+          url:'https://pin84.github.io/live/01_web/03_ResponsiveWeb/'
+        }
       }
 
     }
@@ -96,7 +102,8 @@ export default {
     Eclipse,
     Books,
     Pen,
-    MacBook
+    MacBook,
+    Note
   }
 };
 </script>
