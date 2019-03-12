@@ -82,11 +82,11 @@ export default {
         },
         xsden: {
           name: '新时代英语',
-          url: 'http://cxen.iathena.top/'
+          url: 'http://xsden.html8.info/'
         },
         ToDo: {
           name: '数据库版的ToDoList',
-          url: 'http://vuebase.iathena.top/#/todoList/'
+          url: 'http://todo.html8.info/#/todoList/'
         },
         responsePage:{
           name:'响应式页面',

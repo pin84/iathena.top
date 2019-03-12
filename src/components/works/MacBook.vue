@@ -30,7 +30,7 @@ export default {
   width 260px
   height 260px
   border-radius 5px
-  background-color #ccc
+  background-color #99CC99
   box-shadow 0 2px 30px rgba(0,0,0,0.2)
   &:hover
     box-shadow 0 2px 30px #FF0033
