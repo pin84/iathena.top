@@ -9,7 +9,8 @@
         :url='dataList.tb.url'
       />
       <Books class="item" :url='dataList.xsden.url'/>
-      <Pen class="item" />
+      <Pen class="item"  :url='dataList.ToDo.url'/>
+      <MacBook class="item"/>
     </div>
 
 
@@ -21,6 +22,7 @@ import ThreeDImage from './works/ThreeDImage'
 import Eclipse from './works/Eclipse'
 import Books from './works/Books'
 import Pen from './works/Pen'
+import MacBook from './works/MacBook'
 export default {
   data() {
     return {
@@ -80,6 +82,10 @@ export default {
           name: '新时代英语',
           url: 'http://cxen.iathena.top/'
         },
+        ToDo: {
+          name: '数据库版的ToDoList',
+          url: 'http://vuebase.iathena.top/#/todoList/'
+        },
       }
 
     }
@@ -89,7 +95,8 @@ export default {
     ThreeDImage,
     Eclipse,
     Books,
-    Pen
+    Pen,
+    MacBook
   }
 };
 </script>
