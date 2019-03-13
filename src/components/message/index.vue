@@ -45,7 +45,7 @@
                   >
                   <img
                     v-else
-                    :src="`http://106.13.93.149:9000/static/${msg.avatar}`"
+                    :src="`${url}/static/${msg.avatar}`"
                     alt=""
                   >
                 </div>
@@ -109,7 +109,8 @@ export default {
       start: this.currentPageIndex || Number(this.$store.state.pageIndex),
       end: this.currentPageNum || Number(this.$store.state.pageNum),
       isShowSendMsg: false,
-      propsUserInfo: undefined
+      propsUserInfo: undefined,
+      url:config.avartorUrl
     }
   },
   components: {
@@ -136,7 +137,6 @@ export default {
 
 
   },
-
 
   methods: {
     initData() {

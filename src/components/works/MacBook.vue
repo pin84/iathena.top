@@ -9,8 +9,8 @@
       <span class="base"></span>
     </div>
     <div class="desc">
-      <p class="title">ToDoList</p>
-      <p class="detail">数据库版的ToDoList</p>
+      <p class="title">响应式布局</p>
+      <p class="detail">理财网站响应式布局</p>
     </div>
 
   </a>

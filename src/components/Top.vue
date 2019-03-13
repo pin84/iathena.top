@@ -40,12 +40,12 @@
         <!-- <router-link tag="li" to='/contact'>
           <a href="javascript:;">联系我</a>
         </router-link> -->
-        <!-- <router-link
+        <router-link
           tag="li"
           to='/message'
         >
           <a href="javascript:;">留言本</a>
-        </router-link> -->
+        </router-link>
         <!-- <li>
           <a
             href="http://books.iathena.top/css/cssTips.html"

@@ -145,7 +145,7 @@ export default {
   created() {
 
     //如果登陆，则显示用户名
-    let name = document.cookie.replace(/(?:(?:^|.*;\s*)userInfo\s*\=\s*([^;]*).*$)|^.*$/, "$1");
+    let name = document.cookie.replace(/(?:(?:^|.*;\s*)userInfo\s*\=\s*([^;]*).*$)|^.*$/, "$1")
 
     console.log('============',name)
     if (name) {
@@ -159,6 +159,7 @@ export default {
       this.message.avatar = this.avatarSum[0];
     })
   },
+
 
 
 

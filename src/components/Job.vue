@@ -11,7 +11,7 @@
       <Books class="item" :url='dataList.xsden.url'/>
       <Pen class="item"  :url='dataList.ToDo.url'/>
       <MacBook class="item" :url='dataList.responsePage.url'/>
-      <Note class="item" />
+      <Arrow class="item" :url='dataList.github.url'/>
       <ToBeContinue class="item" />
     </div>
 
@@ -25,7 +25,7 @@ import Eclipse from './works/Eclipse'
 import Books from './works/Books'
 import Pen from './works/Pen'
 import MacBook from './works/MacBook'
-import Note from './works/Note'
+import Arrow from './works/Arrow'
 import ToBeContinue from './works/ToBeContinue'
 export default {
   data() {
@@ -93,6 +93,10 @@ export default {
         responsePage:{
           name:'响应式页面',
           url:'https://pin84.github.io/live/01_web/03_ResponsiveWeb/'
+        },
+        github:{
+          name:'github',
+          url:'https://github.com/pin84/'
         }
       }
 
@@ -105,7 +109,7 @@ export default {
     Books,
     Pen,
     MacBook,
-    Note,
+    Arrow,
     ToBeContinue,
   }
 };

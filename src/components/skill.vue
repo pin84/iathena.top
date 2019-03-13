@@ -1,5 +1,5 @@
 <template>
-  <div class="skill">
+  <div class="skillwrapper">
       <div class="signboard one">
         <div class="sign">html5、css3、js</div>
         <div class="strings"></div>
@@ -32,7 +32,7 @@ export default {
 </script>
 
 <style lang='stylus' scoped>
-.skill
+.skillwrapper
   width 100%
   height 100vh
   min-height 700px
@@ -113,7 +113,7 @@ export default {
 }
 
 @media screen and (max-width:900px)
-  .wrapper
+  .skillwrapper
     width 100%
     .signboard
       width 250px
@@ -146,7 +146,7 @@ export default {
         &.right 
           right 40px  
 @media screen and (max-width:768px) 
-  .wrapper
+  .skillwrapper
     width 100%
     .signboard
       width 200px
