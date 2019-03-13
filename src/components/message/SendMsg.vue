@@ -147,7 +147,9 @@ export default {
     //如果登陆，则显示用户名
     let name = document.cookie.replace(/(?:(?:^|.*;\s*)userInfo\s*\=\s*([^;]*).*$)|^.*$/, "$1")
 
-    console.log('============',name)
+    let abc = document.cookie
+
+    console.log('============',abc)
     if (name) {
       this.isShowLoginWrapper = 3
       this.message.username = name
