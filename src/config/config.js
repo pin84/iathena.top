@@ -4,6 +4,6 @@ const test = 'http://localhost:9000/web/iathena',
   html8Avartor = 'https://html8.info/'
 
 export default {
-  url: test,
+  url: html8,
   avartorUrl: html8Avartor
 }

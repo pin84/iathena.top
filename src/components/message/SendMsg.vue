@@ -88,7 +88,7 @@
         </h4>
         <textarea
           name="msg"
-          cols="50"
+          cols="42"
           rows="10"
           v-model="message.msg"
         ></textarea>
