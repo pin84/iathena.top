@@ -309,7 +309,7 @@ export default {
         vertical-align top
       
     .msglist
-      margin-top 40px   
+      margin-top 10px   
       line-height 24px
       .item
         border 1px dashed black 

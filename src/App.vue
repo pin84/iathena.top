@@ -1,9 +1,5 @@
 <template>
   <div id="app">
-    <!-- <div id="nav">
-      <router-link to="/">Home</router-link> |
-      <router-link to="/about">About</router-link>
-    </div> -->
     <Top />
     <keep-alive>
       <router-view />
@@ -20,11 +16,6 @@ export default {
   components: {
     Top
   },
-  data() {
-    return {
-      isClose: false
-    }
-  },
   created() {
     // //在页面加载时读取localStorage里的状态信息
     // localStorage.getItem("pageInfo") && this.$store.replaceState(JSON.parse(localStorage.getItem("pageInfo")))
@@ -39,9 +30,9 @@ export default {
 
 <style lang="stylus" scoped>
 // #app
-//   font-family 'Avenir', Helvetica, Arial, sans-serif
-//   // text-align center
-//   color #2c3e50
+  // font-family 'Avenir', Helvetica, Arial, sans-serif
+  // text-align center
+  // color #2c3e50
 // #nav
 //   padding 30px
 //   a

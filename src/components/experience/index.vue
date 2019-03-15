@@ -1,10 +1,13 @@
 <template>
   <div class="experience">
-    <!-- <ul class="list">
+    <ul class="list">
       <span class="line"></span>
-      <li class="item end" >
+      <li class="item end">
         <div class="show">
-          <img src="../assets/img/experience/daofeng_1.jpg" alt="">
+          <img
+            src="../../assets/img/experience/daofeng_1.jpg"
+            alt=""
+          >
         </div>
         <div class="detail">
           <time>2017-3 ~ </time>
@@ -12,19 +15,25 @@
           <p>负责公司官网的日常维护及建设</p>
         </div>
       </li>
-       <li class="item start">
+      <li class="item start">
         <div class="detail">
           <time>2014.05 ~ 2016.12</time>
           <h2>广州标际包装设备有限公司</h2>
           <p>公司主要生产检测仪器，用于检测包装袋中的水分，氧气等的含量。我主要负责公司生产的检测设备的安装培训以及售后服务.</p>
         </div>
         <div class="show">
-          <img src="../assets/img/experience/biaoji_1.jpg" alt="">
+          <img
+            src="../../assets/img/experience/biaoji_1.jpg"
+            alt=""
+          >
         </div>
       </li>
       <li class="item end">
         <div class="show">
-          <img src="../assets/img/job/04.jpg" alt="">
+          <img
+            src="../../assets/img/job/04.jpg"
+            alt=""
+          >
         </div>
         <div class="detail">
           <time>2012.10 ~ 2014.02</time>
@@ -39,12 +48,18 @@
           <p>主要负责河南地区客户的CTP版材、软件以及设备的维护。在日常中，拜访客户，了解产品的使用情况。维护客户关系，为销售提供及时的信息</p>
         </div>
         <div class="show">
-          <img src="../assets/img/experience/fuji_1.jpg" alt="">
+          <img
+            src="../../assets/img/experience/fuji_1.jpg"
+            alt=""
+          >
         </div>
       </li>
       <li class="item end">
         <div class="show">
-          <img src="../assets/img/experience/dazhuang.jpg" alt="">
+          <img
+            src="../../assets/img/experience/dazhuang.jpg"
+            alt=""
+          >
         </div>
         <div class="detail">
           <time>2007.04 ~ 2011.05</time>
@@ -59,12 +74,19 @@
           <p>我的母校，在校的专业是化工机械。在校所学确定影响了我之后很长的一段工作时间。现如今，转做前端，似乎改变有点大，但这也正是乐趣所在。不是吗~~</p>
         </div>
         <div class="show">
-          <img src="../assets/img/experience/nanning.jpg" alt="">
+          <img
+            src="../../assets/img/experience/nanning.jpg"
+            alt=""
+          >
         </div>
       </li>
       <li class="item end">
         <div class="show">
-          <img style="opacity:.5;" src="../assets/img/experience/shiguang_1.jpg" alt="">
+          <img
+            style="opacity:.5;"
+            src="../../assets/img/experience/shiguang_1.jpg"
+            alt=""
+          >
         </div>
         <div class="detail">
           <time>2000.9 ~ 2003.7</time>
@@ -73,18 +95,18 @@
         </div>
       </li>
 
-    </ul> -->
+    </ul>
 
-<Letter />
+    <!-- <Letter /> -->
   </div>
 </template>
 
 
 <script>
-import Letter from './experience/Letter'
+// import Letter from './experience/Letter'
 export default {
-  components:{
-Letter
+  components: {
+    // Letter
   }
 }
 </script>
@@ -92,11 +114,45 @@ Letter
 
 <style lang='stylus' scoped>
 .experience
-  width 100%
-  height 100%
-  padding-top 50px
-  margin-bottom 80px
-  box-sizing border-box
+  // width 100%
+  // height 100%
+  // padding-top 50px
+  // margin-bottom 80px
+  // box-sizing border-box
+  position relative
+  padding 50px 0
+  background-color #efefef
+  background-image  linear-gradient(#e7e6e6 1px, transparent 0), linear-gradient(90deg, #e7e6e6 1px, transparent 0)
+  background-size 21px 21px, 21px 21px
+  background-position center
+  // &::before,
+  // &::after
+  //   content: '';
+  //   position: absolute;
+  //   z-index: 0;
+  //   left: 50%;
+  //   transform: translateX(-50%);
+  //   display: inline-block;
+  //   background-color: #fff;
+  //   height: 28px;
+  //   box-shadow 68px 0 0 0 #fff, 
+  //             calc(68px * 2) 0 0 0 #fff, 
+  //             calc(68px * 3) 0 0 0 #fff, 
+  //             calc(68px * 4) 0 0 0 #fff, 
+  //             calc(68px * 5) 0 0 0 #fff, 
+  //             calc(68px * 6) 0 0 0 #fff, 
+  //             -68px 0 0 0 #fff, 
+  //             calc(68px * -2) 0 0 0 #fff, 
+  //             calc(68px * -3) 0 0 0 #fff, 
+  //             calc(68px * -4) 0 0 0 #fff, 
+  //             calc(68px * -5) 0 0 0 #fff;
+  // &::before 
+  //     top: 0;
+  //     width: 20px;
+  // &::after 
+  //   top: 26px;
+  //   width: 38px;
+  //   border-radius: 50%;            
   .list
     position relative
     width 80% 
@@ -112,9 +168,9 @@ Letter
       top 0
     .item
       display flex
-      margin-bottom 60px
-      // border 1px solid blue
-      // justify-content center
+      margin-top 50px
+      &:first-of-type
+        margin-top 0
       &.end
         justify-content flex-end
         .show 
