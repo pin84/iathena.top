@@ -12,6 +12,7 @@
       <Pen class="item"  :url='dataList.ToDo.url'/>
       <MacBook class="item" :url='dataList.responsePage.url'/>
       <Arrow class="item" :url='dataList.github.url'/>
+      <Candle class="item" />
       <ToBeContinue class="item" />
     </div>
 
@@ -27,6 +28,7 @@ import Pen from './works/Pen'
 import MacBook from './works/MacBook'
 import Arrow from './works/Arrow'
 import ToBeContinue from './works/ToBeContinue'
+import Candle from './works/Candle'
 export default {
   data() {
     return {
@@ -111,6 +113,7 @@ export default {
     MacBook,
     Arrow,
     ToBeContinue,
+    Candle
   }
 };
 </script>
