@@ -1,7 +1,8 @@
 <template>
   <a
-    href=""
+    :href="url"
     id="candleWrapper"
+    target="_blank"
   >
     <div id="candle">
       <span class="glow"></span>
@@ -9,14 +10,23 @@
       <span class="thread"></span>
     </div>
 
+    <div class="desc">
+      <p class="title">vue移动端</p>
+      <p class='detail'>伪'饿了吗'app,数据都为模拟数据</p>
+    </div>
+
   </a>
 </template>
 <script>
 export default {
+  props:{
+    url:''
+  }
 
 }
 </script>
 <style lang='stylus' scoped>
+@import './common'
 #candleWrapper
   position relative
   display block
@@ -99,7 +109,7 @@ export default {
         background linear-gradient(white 80%,transparent)
         border-radius 50% 50% 20% 20%
         box-shadow 0 -6px 4px darkorange
-        animation move 5s linear infinite
+        animation move 5s linear infinite,enlarge 6s linear infinite
     .glow
       position absolute 
       width 50px
@@ -108,7 +118,7 @@ export default {
       border-radius 50%
       top -105px
       filter blur(40px)
-      // animation blink 500ms infinite
+      animation blink 1500ms linear infinite
 @keyframes move {
   0%,100%{
     transform:rotate(2deg)
@@ -119,16 +129,17 @@ export default {
 }
 @keyframes enlarge {
   0%,100% {
-    height: 120px
-    top -120px
+    height: 80px
+    top -80px
   }
   50%{
-    height:140px
+    height:90px
+    top -90
   }
 }
 @keyframes blink {
     to {
-        filter: blur(6em) opacity(0.8);
+        filter: blur(50px) opacity(0.8);
     }
 }
     

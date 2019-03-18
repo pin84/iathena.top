@@ -11,8 +11,8 @@
       <Books class="item" :url='dataList.xsden.url'/>
       <Pen class="item"  :url='dataList.ToDo.url'/>
       <MacBook class="item" :url='dataList.responsePage.url'/>
+      <Candle class="item"  :url='dataList.vueElm.url'/>
       <Arrow class="item" :url='dataList.github.url'/>
-      <Candle class="item" />
       <ToBeContinue class="item" />
     </div>
 
@@ -95,6 +95,10 @@ export default {
         responsePage:{
           name:'响应式页面',
           url:'https://pin84.github.io/live/01_web/03_ResponsiveWeb/'
+        },
+        vueElm:{
+          name:'vue-elm',
+          url:'http://seller.html8.info/'
         },
         github:{
           name:'github',
