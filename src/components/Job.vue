@@ -13,6 +13,7 @@
       <MacBook class="item" :url='dataList.responsePage.url'/>
       <Candle class="item"  :url='dataList.vueElm.url'/>
       <Arrow class="item" :url='dataList.github.url'/>
+      <Note class="item"/>
       <ToBeContinue class="item" />
     </div>
 
@@ -29,6 +30,7 @@ import MacBook from './works/MacBook'
 import Arrow from './works/Arrow'
 import ToBeContinue from './works/ToBeContinue'
 import Candle from './works/Candle'
+import Note from './works/Note'
 export default {
   data() {
     return {
@@ -117,7 +119,8 @@ export default {
     MacBook,
     Arrow,
     ToBeContinue,
-    Candle
+    Candle,
+    Note
   }
 };
 </script>
