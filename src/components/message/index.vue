@@ -11,16 +11,8 @@
         <BtnWriteMsg
           @toWriteMsg="toWriteMsg"
         />
-        <div>
-          <input
-            type="text"
-            placeholder="输入关键字搜索留言"
-            v-model="searchKeyword"
-          >
-          <button @click="searchMsg">搜索</button>
-        </div>
+        <SearchBtn @searchMsg='searchMsg'/>
       </div>
-      <!-- <Login class="btn-login"/> -->
       <ul class="msglist">
         <li
           class="item"
@@ -94,6 +86,7 @@ import config from '../../config/config'
 import PageChange from './PageChange'
 import SendMsg from './SendMsg'
 import BtnWriteMsg from './BtnWriteMsg'
+import SearchBtn from './SearchBtn'
 // import utils from '@/utils/dateFormat'
 
 
@@ -117,6 +110,7 @@ export default {
     PageChange,
     SendMsg,
     BtnWriteMsg,
+    SearchBtn
   },
 
   created() {
@@ -158,7 +152,8 @@ export default {
       })
     },
 
-    searchMsg() {
+    searchMsg(keyword) {
+      this.searchKeyword = keyword
       if (!this.searchKeyword) {
         return alert('请输入关键字搜索，可以搜索标题、作者、留言内容')
       }
@@ -286,28 +281,13 @@ export default {
   .content
     width 80%
     margin 0 auto
-    .banner
-      img
-        width 100%
-        height 100%
+    .banner img
+      width 100%
+      height 100%
     .search
-      margin-top 10px
-      display flex
+      display flex 
       justify-content space-between
-      input
-        padding 3px 8px 
-        border 1px solid #ccc
-        outline none
-        transition all .3s
-        &:hover
-          border 1px solid #6699CC
-        &:focus
-          border 1px solid #6699CC
-      button
-        padding 1px 5px 
-        cursor pointer
-        vertical-align top
-      
+      align-items flex-end
     .msglist
       margin-top 10px   
       line-height 24px

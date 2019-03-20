@@ -1,5 +1,5 @@
 <template>
-  <a
+  <span
     href=""
     id="noteWrapper"
   >
@@ -12,9 +12,11 @@
         <span></span>
       </div>
     </div>
-
-    <h1>note</h1>
-  </a>
+    <div class="desc">
+      <p class="title">暂时什么都没有哦</p>
+      <p class='detail'></p>
+    </div>
+  </span>
 </template>
 <script>
 export default {
@@ -22,6 +24,7 @@ export default {
 }
 </script>
 <style lang='stylus' scoped>
+@import './common'
 #noteWrapper
   position relative
   display block
@@ -41,6 +44,9 @@ export default {
     --sw 5px //定义当前对象轮廓的宽度
     width 150px
     height 100px
+    top 30px
+    left 50%
+    transform translateX(-50%)
     background-color white
     border var(--sw) solid cadetBlue	
     border-radius var(--sw)
@@ -59,7 +65,7 @@ export default {
       justify-content space-between
       padding 8% 5%
       box-sizing border-box
-      animation flip 4s linear infinite
+      animation flip 6s linear infinite
       transform-origin left 
       transform-style preserve-3d
       span
@@ -68,7 +74,7 @@ export default {
         border-top var(--sw) solid cadetblue
         border-radius inherit
         transform-origin left
-        animation  4s linear infinite
+        animation  6s linear infinite
         transform scaleX(0)
         &:nth-child(1)
           animation-name stroke-1
