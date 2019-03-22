@@ -1,21 +1,6 @@
 <template>
-  <div class="experience">
-    <section>
-      <h2>广东道锋文化传媒</h2>
-      <picture>
-        <source
-          srcset='../../assets/img/experience/df.webp'
-          type="image/webp"
-        >
-        <img
-          src="../../assets/img/experience/daofeng_1.jpg"
-          alt=""
-        >
-      </picture>
-      <p>负责公司官网的日常维护及建设</p>
-    </section>
-
-    <!-- <ul class="list">
+  <section class="experience">
+    <ul class="list">
       <span class="line"></span>
       <li class="item end">
         <div class="show">
@@ -110,14 +95,16 @@
         </div>
       </li>
 
-    </ul> -->
-  </div>
+    </ul>
+  </section>
 </template>
 
 
 <script>
+// import Letter from './experience/Letter'
 export default {
   components: {
+    // Letter
   }
 }
 </script>
