@@ -1,5 +1,8 @@
 <template>
   <div class="job">
+    <picture>
+
+    </picture>
     <h3>作品集</h3>
     <div class="works">
       <SeaWave class='item' />
@@ -12,9 +15,12 @@
       <Pen class="item"  :url='dataList.ToDo.url'/>
       <MacBook class="item" :url='dataList.responsePage.url'/>
       <Candle class="item"  :url='dataList.vueElm.url'/>
-      <Arrow class="item" :url='dataList.github.url'/>
       <Note class="item"/>
+      <Arrow class="item" :url='dataList.github.url'/>
       <ToBeContinue class="item" />
+    </div>
+    <div>
+
     </div>
 
 
@@ -126,6 +132,7 @@ export default {
 </script>
 <style lang="stylus" scoped>
 .job
+  
   width 80%
   padding-bottom 30px
   margin 0 auto
