@@ -1,8 +1,13 @@
 <template>
   <div class="experience">
-    <section>
-      <h2>广东道锋文化传媒</h2>
-      <picture>
+    <section
+      class="item"
+      v-for="(item,index) in data"
+      :key="index"
+    >
+      <time>{{item.time}} </time>
+
+      <picture class="pic">
         <source
           srcset='../../assets/img/experience/df.webp'
           type="image/webp"
@@ -12,7 +17,11 @@
           alt=""
         >
       </picture>
-      <p>负责公司官网的日常维护及建设</p>
+      <div>
+        <h2>{{item.name}}</h2>
+        <p class="place">{{item.place}}</p>
+        <p>负责公司官网的日常维护及建设</p>
+      </div>
     </section>
 
     <!-- <ul class="list">
@@ -113,99 +122,95 @@
     </ul> -->
   </div>
 </template>
-
-
 <script>
 export default {
+  data() {
+    return {
+      data: {
+        df: {
+          time: 2017.03,
+          name: '广东道锋文化',
+          place: '技术部/网站管理'
+        },
+        // bj: {
+        //   time: '2014.05 - 2016.12',
+        //   name: '广州标际包装设备有限公司',
+        //   place: '技术部/售后服务'
+        // },
+      }
+    }
+  },
   components: {
   }
 }
 </script>
-
-
 <style lang='stylus' scoped>
 .experience
-  // width 100%
-  // height 100%
-  // padding-top 50px
-  // margin-bottom 80px
-  // box-sizing border-box
   position relative
-  padding 50px 0
+  width 100%
+  height 100vh
+  padding 50px 0 
   background-color #efefef
   background-image  linear-gradient(#e7e6e6 1px, transparent 0), linear-gradient(90deg, #e7e6e6 1px, transparent 0)
   background-size 21px 21px, 21px 21px
   background-position center
-  // &::before,
-  // &::after
-  //   content: '';
-  //   position: absolute;
-  //   z-index: 0;
-  //   left: 50%;
-  //   transform: translateX(-50%);
-  //   display: inline-block;
-  //   background-color: #fff;
-  //   height: 28px;
-  //   box-shadow 68px 0 0 0 #fff, 
-  //             calc(68px * 2) 0 0 0 #fff, 
-  //             calc(68px * 3) 0 0 0 #fff, 
-  //             calc(68px * 4) 0 0 0 #fff, 
-  //             calc(68px * 5) 0 0 0 #fff, 
-  //             calc(68px * 6) 0 0 0 #fff, 
-  //             -68px 0 0 0 #fff, 
-  //             calc(68px * -2) 0 0 0 #fff, 
-  //             calc(68px * -3) 0 0 0 #fff, 
-  //             calc(68px * -4) 0 0 0 #fff, 
-  //             calc(68px * -5) 0 0 0 #fff;
-  // &::before 
-  //     top: 0;
-  //     width: 20px;
-  // &::after 
-  //   top: 26px;
-  //   width: 38px;
-  //   border-radius: 50%;            
-  .list
+  display flex
+  flex-direction column
+  align-items center
+  .item
+    padding 26px 0 40px 20px
+    border-left 1px solid burlywood
     position relative
-    width 80% 
-    margin 0 auto 
-    // border 1px solid red
-    .line
+    display flex
+    background red
+    &::before
+      content ''
       position absolute
-      display block
-      // width 1px
-      border-left 2px solid #336699
-      height 100%
-      left 50%
       top 0
-    .item
-      display flex
-      margin-top 50px
-      &:first-of-type
-        margin-top 0
-      &.end
-        justify-content flex-end
-        .show 
-          margin-right 50px
-      &.start
-        justify-content flex-start
-        text-align right
-        .detail 
-          margin-right 50px
-      .show
-        flex 0 0 150px
-        width 150px
-        height 150px
-        border-radius 50%
-        overflow hidden
-        img
-          display block
-          width 100%
-          height 100%
-      .detail
-        width 48%
-        font-size 1.4rem 
-        h2
-          margin 10px 0
-        p
-          text-indent 2em  
+      left 0
+      display block
+      width 15px
+      height 15px
+      border-radius 50%
+      background-color burlywood
+      transform translate(-50%,-50%)
+      
+    time
+      padding 5px 10px
+      background burlywood
+      position absolute
+      left 30px
+      top -12px
+      &::before
+        content ''  
+        position absolute 
+        left -40px
+        top 0
+        border-style solid 
+        border-width calc(26px /2) 20px
+        border-color transparent burlywood transparent transparent
+    h2
+      font-size 18px
+      line-height 36px
+    .place
+      color #FF9900
+      font-size 16px
+    .pic
+      display block
+      width 150px
+      height 100px
+      // border-radius 50%
+      overflow hidden
+      img 
+        width 100%
+        height 100%
+
+.experience .item time:hover{
+  cursor: move;
+  .experience .item {
+    background-color: #fff;
+  }
+}
+
+
 </style>
