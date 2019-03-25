@@ -241,6 +241,7 @@ export default {
   height 100%
   background url('../../assets/img/fireworks/garden-bg.webp') 
   padding 50px 0 0 0
+  box-sizing border-box
   #canvasBox
     position relative
     width 800px 
