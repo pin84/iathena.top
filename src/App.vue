@@ -29,7 +29,6 @@ export default {
 
   },
   methods: {
-
     //检查是支持webp格式
     check() {
       let isWebp = document.createElement('canvas').toDataURL('image/webp').indexOf('data:image/webp') == 0
