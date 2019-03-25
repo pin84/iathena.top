@@ -39,7 +39,6 @@
           ref="fireworksCtx"
           @click="init"
         ></canvas>
-        <!-- <img src="../../assets/img/fireworks/girl.png" alt=""> -->
       </div>
     </div>
 
