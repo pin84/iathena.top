@@ -47,7 +47,7 @@ export default {
   display flex
   flex-direction column
   align-items center
-  background url(./contact/bg.jpg) no-repeat center
+  background url(./contact/bg.webp) no-repeat center
   background-size cover
   .title
     font-size 3rem

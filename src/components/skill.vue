@@ -38,6 +38,7 @@ export default {
   min-height 700px
   position relative
   background url(../assets/img/bg3.jpg)   no-repeat center center
+  background url(../assets/img/bg3.webp)   no-repeat center center
   background-size cover
   .signboard
     width 400px

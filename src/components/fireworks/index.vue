@@ -1,15 +1,44 @@
 <template>
   <div id="fireworks">
-    <div id="canvasBox" v-if="PCOrPhone">
+    <div
+      id="canvasBox"
+      v-if="PCOrPhone"
+    >
       <div>
-        <canvas id="fireworksCtx" width="800" height="400" ref="fireworksCtx" @click="init"></canvas>
-        <img src="../../assets/img/fireworks/girl.png" alt="">
+        <canvas
+          id="fireworksCtx"
+          width="800"
+          height="400"
+          ref="fireworksCtx"
+          @click="init"
+        ></canvas>
+
+        <picture class="banner">
+          <source
+            srcset='../../assets/img/fireworks/girl.webp'
+            type="image/webp"
+          >
+          
+          <img
+            src="../../assets/img/fireworks/girl.png"
+            alt=""
+          >
+        </picture>
       </div>
     </div>
 
-    <div id="canvasBox" v-else>
+    <div
+      id="canvasBox"
+      v-else
+    >
       <div>
-        <canvas id="fireworksCtx" width="375" height="400" ref="fireworksCtx" @click="init"></canvas>
+        <canvas
+          id="fireworksCtx"
+          width="375"
+          height="400"
+          ref="fireworksCtx"
+          @click="init"
+        ></canvas>
         <!-- <img src="../../assets/img/fireworks/girl.png" alt=""> -->
       </div>
     </div>
@@ -97,7 +126,7 @@ export default {
 
     startAnimation() {
       let fireworksCanvas = this.$refs.fireworksCtx
-      if(!fireworksCanvas) return
+      if (!fireworksCanvas) return
       let ctx = fireworksCanvas.getContext('2d')
       requestAnimationFrame(this.startAnimation)
       ctx.clearRect(0, 0, 800, 400)
@@ -139,7 +168,7 @@ export default {
 
           this.rise(firework)
           return true
-          // break
+        // break
 
         case 2:
           //在烟花上升到指定高度时不做其他处理。执行第三阶段
@@ -147,7 +176,7 @@ export default {
           firework.status = 3
 
           return true
-          // break
+        // break
 
         case 3:
           firework.color = firework.color.replace(/1\b/, '0.2')
@@ -168,7 +197,7 @@ export default {
 
           return --firework.timeout > 0
 
-          // break
+        // break
         default:
           return false
       }
@@ -211,7 +240,7 @@ export default {
   position absolute
   width 100%
   height 100%
-  background url('../../assets/img/fireworks/garden-bg.jpg') 
+  background url('../../assets/img/fireworks/garden-bg.webp') 
   padding 50px 0 0 0
   #canvasBox
     position relative
@@ -220,7 +249,7 @@ export default {
     margin 0 auto
     #fireworksCtx
       position absolute
-      background url('../../assets/img/fireworks/bg.jpg') no-repeat #000 bottom  
+      background url('../../assets/img/fireworks/bg.webp') no-repeat #000 bottom  
     img 
       position absolute
       bottom 0

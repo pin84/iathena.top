@@ -1,37 +1,19 @@
 <template>
-  <div class="experience">
-    <section
-      class="item"
-      v-for="(item,index) in data"
-      :key="index"
-    >
-      <time>{{item.time}} </time>
-
-      <picture class="pic">
-        <source
-          srcset='../../assets/img/experience/df.webp'
-          type="image/webp"
-        >
-        <img
-          src="../../assets/img/experience/daofeng_1.jpg"
-          alt=""
-        >
-      </picture>
-      <div>
-        <h2>{{item.name}}</h2>
-        <p class="place">{{item.place}}</p>
-        <p>负责公司官网的日常维护及建设</p>
-      </div>
-    </section>
-
-    <!-- <ul class="list">
+  <section class="experience">
+    <ul class="list">
       <span class="line"></span>
       <li class="item end">
         <div class="show">
-          <img
-            src="../../assets/img/experience/daofeng_1.jpg"
-            alt=""
-          >
+          <picture class="pic">
+            <source
+              srcset='../../assets/img/experience/df.webp'
+              type="image/webp"
+            >
+            <img
+              src="../../assets/img/experience/daofeng_1.jpg"
+              alt=""
+            >
+          </picture>
         </div>
         <div class="detail">
           <time>2017-3 ~ </time>
@@ -46,18 +28,32 @@
           <p>公司主要生产检测仪器，用于检测包装袋中的水分，氧气等的含量。我主要负责公司生产的检测设备的安装培训以及售后服务.</p>
         </div>
         <div class="show">
-          <img
-            src="../../assets/img/experience/biaoji_1.jpg"
-            alt=""
-          >
+          <picture class="pic">
+            <source
+              srcset='../../assets/img/experience/bj.webp'
+              type="image/webp"
+            >
+            <img
+              src="../../assets/img/experience/biaoji_1.jpg"
+              alt=""
+            >
+          </picture>
+
         </div>
       </li>
       <li class="item end">
         <div class="show">
-          <img
-            src="../../assets/img/job/04.jpg"
-            alt=""
-          >
+          <picture class="pic">
+            <source
+              srcset='../../assets/img/experience/04.webp'
+              type="image/webp"
+            >
+            <img
+              src="../../assets/img/experience/04.jpg"
+              alt=""
+            >
+          </picture>
+
         </div>
         <div class="detail">
           <time>2012.10 ~ 2014.02</time>
@@ -72,18 +68,30 @@
           <p>主要负责河南地区客户的CTP版材、软件以及设备的维护。在日常中，拜访客户，了解产品的使用情况。维护客户关系，为销售提供及时的信息</p>
         </div>
         <div class="show">
-          <img
-            src="../../assets/img/experience/fuji_1.jpg"
-            alt=""
-          >
+          <picture class="pic">
+            <source
+              srcset='../../assets/img/experience/fj.webp'
+              type="image/webp"
+            >
+            <img
+              src="../../assets/img/experience/fuji_1.jpg"
+              alt=""
+            >
+          </picture>
         </div>
       </li>
       <li class="item end">
         <div class="show">
-          <img
-            src="../../assets/img/experience/dazhuang.jpg"
-            alt=""
-          >
+          <picture class="pic">
+            <source
+              srcset='../../assets/img/experience/dz.webp'
+              type="image/webp"
+            >
+            <img
+              src="../../assets/img/experience/dazhuang.jpg"
+              alt=""
+            >
+          </picture>
         </div>
         <div class="detail">
           <time>2007.04 ~ 2011.05</time>
@@ -98,19 +106,30 @@
           <p>我的母校，在校的专业是化工机械。在校所学确定影响了我之后很长的一段工作时间。现如今，转做前端，似乎改变有点大，但这也正是乐趣所在。不是吗~~</p>
         </div>
         <div class="show">
-          <img
-            src="../../assets/img/experience/nanning.jpg"
-            alt=""
-          >
+          <picture class="pic">
+            <source
+              srcset='../../assets/img/experience/nn.webp'
+              type="image/webp"
+            >
+            <img
+              src="../../assets/img/experience/nanning.jpg"
+              alt=""
+            >
+          </picture>
         </div>
       </li>
       <li class="item end">
         <div class="show">
-          <img
-            style="opacity:.5;"
-            src="../../assets/img/experience/shiguang_1.jpg"
-            alt=""
-          >
+          <picture class="pic">
+            <source
+              srcset='../../assets/img/experience/time.webp'
+              type="image/webp"
+            >
+            <img
+              src="../../assets/img/experience/shiguang_1.jpg"
+              alt=""
+            >
+          </picture>
         </div>
         <div class="detail">
           <time>2000.9 ~ 2003.7</time>
@@ -119,98 +138,71 @@
         </div>
       </li>
 
-    </ul> -->
-  </div>
+    </ul>
+  </section>
 </template>
+
+
 <script>
+// import Letter from './experience/Letter'
 export default {
-  data() {
-    return {
-      data: {
-        df: {
-          time: 2017.03,
-          name: '广东道锋文化',
-          place: '技术部/网站管理'
-        },
-        // bj: {
-        //   time: '2014.05 - 2016.12',
-        //   name: '广州标际包装设备有限公司',
-        //   place: '技术部/售后服务'
-        // },
-      }
-    }
-  },
   components: {
+    // Letter
   }
 }
 </script>
+
+
 <style lang='stylus' scoped>
 .experience
   position relative
-  width 100%
-  height 100vh
-  padding 50px 0 
+  padding 50px 0
   background-color #efefef
   background-image  linear-gradient(#e7e6e6 1px, transparent 0), linear-gradient(90deg, #e7e6e6 1px, transparent 0)
   background-size 21px 21px, 21px 21px
   background-position center
-  display flex
-  flex-direction column
-  align-items center
-  .item
-    padding 26px 0 40px 20px
-    border-left 1px solid burlywood
+  .list
     position relative
-    display flex
-    background red
-    &::before
-      content ''
+    width 80% 
+    margin 0 auto 
+    // border 1px solid red
+    .line
       position absolute
+      display block
+      // width 1px
+      border-left 2px solid #336699
+      height 100%
+      left 50%
       top 0
-      left 0
-      display block
-      width 15px
-      height 15px
-      border-radius 50%
-      background-color burlywood
-      transform translate(-50%,-50%)
-      
-    time
-      padding 5px 10px
-      background burlywood
-      position absolute
-      left 30px
-      top -12px
-      &::before
-        content ''  
-        position absolute 
-        left -40px
-        top 0
-        border-style solid 
-        border-width calc(26px /2) 20px
-        border-color transparent burlywood transparent transparent
-    h2
-      font-size 18px
-      line-height 36px
-    .place
-      color #FF9900
-      font-size 16px
-    .pic
-      display block
-      width 150px
-      height 100px
-      // border-radius 50%
-      overflow hidden
-      img 
-        width 100%
-        height 100%
-
-.experience .item time:hover{
-  cursor: move;
-  .experience .item {
-    background-color: #fff;
-  }
-}
-
-
+    .item
+      display flex
+      margin-top 50px
+      &:first-of-type
+        margin-top 0
+      &.end
+        justify-content flex-end
+        .show 
+          margin-right 50px
+      &.start
+        justify-content flex-start
+        text-align right
+        .detail 
+          margin-right 50px
+      .show
+        flex 0 0 150px
+        width 150px
+        height 150px
+        border-radius 50%
+        overflow hidden
+        img
+          display block
+          width 100%
+          height 100%
+      .detail
+        width 48%
+        font-size 1.4rem 
+        h2
+          margin 10px 0
+        p
+          text-indent 2em  
 </style>

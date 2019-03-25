@@ -1,17 +1,19 @@
 <template>
   <div class="message">
     <div class="content">
-      <div class="banner">
+      <picture class="banner">
+        <source
+          srcset='../../assets/img/message/banner.webp'
+          type="image/webp"
+        >
         <img
           src="../../assets/img/message/banner.jpg"
           alt=""
         >
-      </div>
+      </picture>
       <div class="search">
-        <BtnWriteMsg
-          @toWriteMsg="toWriteMsg"
-        />
-        <SearchBtn @searchMsg='searchMsg'/>
+        <BtnWriteMsg @toWriteMsg="toWriteMsg" />
+        <SearchBtn @searchMsg='searchMsg' />
       </div>
       <ul class="msglist">
         <li
@@ -103,7 +105,7 @@ export default {
       end: this.currentPageNum || Number(this.$store.state.pageNum),
       isShowSendMsg: false,
       propsUserInfo: undefined,
-      url:config.avartorUrl
+      url: config.avartorUrl
     }
   },
   components: {
@@ -190,8 +192,8 @@ export default {
       this.data = []
       this.data = this.allData.slice(this.start, this.end)
 
-     
-      
+
+
     },
 
     toNext() {
@@ -204,7 +206,7 @@ export default {
       this.data = []
       this.data = this.allData.slice(this.start, this.end)
 
-       console.log(this.end);
+      console.log(this.end);
     },
 
     toFirstPage() {
@@ -251,7 +253,7 @@ export default {
       this.isShowSendMsg = false
     },
     delMsg(id, name) {
-      
+
       fetch(`${config.url}/delMsg?id=${id}&name=${name}`, {
         credentials: 'include'
       }).then(res => {
