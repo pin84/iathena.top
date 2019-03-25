@@ -314,7 +314,7 @@ export default {
         .bottom
           display flex
           text-align center
-          background url('../../assets/img/message/avatar/bgorange.gif')  
+          background url('../../assets/img/message/avatar/bg.webp')  
           .avatar
             display flex
             flex 0  0 150px
