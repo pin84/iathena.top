@@ -39,7 +39,7 @@ export default {
             ua.match(/opera.([\d.]+)/) ? browser = 'opera' :
               ua.match(/version\/([\d.]+).*safari/) ? browser = 'safari' : 0
       if (browser === 'ie' || browser === 'safari') {
-        alert('不支持的图片格式，目前不支持edge18以下、ie浏览器及safari浏览器。请升级您的浏览器')
+        alert('不支持的图片格式，目前不支持ie、safari浏览器。请升级您的浏览器')
       }
 
       // let isWebp = document.createElement('canvas').toDataURL('image/webp').indexOf('data:image/webp') === 0
