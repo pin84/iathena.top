@@ -166,17 +166,6 @@ export default {
   background-image  linear-gradient(#e7e6e6 1px, transparent 0), linear-gradient(90deg, #e7e6e6 1px, transparent 0)
   background-size 21px 21px, 21px 21px
   background-position center
-  .print-btn
-    padding 6px 10px
-    border none
-    outline none 
-    background #FF6600
-    color #fff
-    cursor pointer
-    position absolute 
-    top -35px
-    left 10px
-    border-radius 5px
   .list
     position relative
     width 80% 

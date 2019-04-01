@@ -1,5 +1,6 @@
 <template>
   <div class="about">
+    <button @click="web2pdf" ref="btn" class="print-btn">保存简历到PDF</button>
     <div class="title">
       <span>关于我</span>
     </div>
@@ -38,6 +39,12 @@ export default {
     Contact,
   },
 
+  methods:{
+    web2pdf(){
+      window.print()
+    }
+  }
+
 }
 
 
@@ -45,6 +52,9 @@ export default {
 </script>
 
 <style lang="stylus" scoped>
+.print-btn
+  top 40px
+  left 80%
 .about
   width 100%
   display flex
@@ -52,6 +62,7 @@ export default {
   align-items center
   background url(./contact/bg.webp) no-repeat center
   background-size cover
+  position relative
   .title
     font-size 3rem
     font-weight 600
