@@ -1,6 +1,6 @@
 <template>
 
-  <nav>
+  <nav id="print-nav">
     <div class="container">
       <a
         href="/"

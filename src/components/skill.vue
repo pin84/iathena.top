@@ -22,7 +22,6 @@
         <div class="pin left"></div>
         <div class="pin right"></div>
       </div>
-
   </div>
 </template>
 
@@ -95,6 +94,14 @@ export default {
         left 80px
       &.right 
         right 80px
+
+
+
+@media print {
+  
+}
+
+
 @keyframes onemove{
   from{
     transform:rotate(10deg)
