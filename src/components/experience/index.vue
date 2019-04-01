@@ -1,7 +1,11 @@
 <template>
   <section class="experience">
+    <button
+      @click="web2pdf"
+      ref="btn"
+      class="print-btn"
+    >保存简历到PDF</button>
     <ul class="list">
-      <button @click="web2pdf" ref="btn" class="print-btn">保存简历到PDF</button>
       <span class="line"></span>
       <li class="item end">
         <div class="show">
@@ -149,8 +153,8 @@ export default {
   components: {
     // Letter
   },
-  methods:{
-    web2pdf(){
+  methods: {
+    web2pdf() {
       window.print()
     }
   }
@@ -166,6 +170,9 @@ export default {
   background-image  linear-gradient(#e7e6e6 1px, transparent 0), linear-gradient(90deg, #e7e6e6 1px, transparent 0)
   background-size 21px 21px, 21px 21px
   background-position center
+  .print-btn
+    top 10px
+    left 80%
   .list
     position relative
     width 80% 
