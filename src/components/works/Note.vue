@@ -1,6 +1,7 @@
 <template>
-  <span
-    href=""
+  <a
+    :href="url"
+    target="_blank"
     id="noteWrapper"
   >
     <div class="book">
@@ -13,14 +14,16 @@
       </div>
     </div>
     <div class="desc">
-      <p class="title">暂时什么都没有哦</p>
-      <p class='detail'></p>
+      <p class="title">美团网</p>
+      <p class='detail'>服务端渲染的美团网  ssr/element-ui/vue/koa/</p>
     </div>
-  </span>
+  </a>
 </template>
 <script>
 export default {
-
+  props:{
+    url:''
+  }
 }
 </script>
 <style lang='stylus' scoped>
