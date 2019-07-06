@@ -1,5 +1,4 @@
 <template>
-
   <nav id="print-nav">
     <div class="container">
       <a

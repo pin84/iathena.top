@@ -9,10 +9,10 @@
 
 <script>
 // @ is an alias to /src
-import Top from '@/components/Top'
+import Top from "@/components/Top";
 
 export default {
-  name: 'home',
+  name: "home",
   components: {
     Top
   },
@@ -25,21 +25,29 @@ export default {
     //   localStorage.setItem("pageInfo", JSON.stringify(this.$store.state))
     // })
 
-    this.check()
-
+    this.check();
   },
   methods: {
+
+
+
     //检查是支持webp格式
     check() {
-      let ua = navigator.userAgent.toLowerCase()
-      let browser
-      ua.match(/trident\/([\d.]+)/) ? browser = 'ie' :
-        ua.match(/firefox\/([\d.]+)/) ? browser = 'firefox' :
-          ua.match(/chrome\/([\d.]+)/) ? browser = 'chrome' :
-            ua.match(/opera.([\d.]+)/) ? browser = 'opera' :
-              ua.match(/version\/([\d.]+).*safari/) ? browser = 'safari' : 0
-      if (browser === 'ie' || browser === 'safari') {
-        alert('不支持的图片格式，目前不支持ie、safari浏览器。请升级您的浏览器')
+      let ua = navigator.userAgent.toLowerCase();
+      let browser;
+      ua.match(/trident\/([\d.]+)/)
+        ? (browser = "ie")
+        : ua.match(/firefox\/([\d.]+)/)
+        ? (browser = "firefox")
+        : ua.match(/chrome\/([\d.]+)/)
+        ? (browser = "chrome")
+        : ua.match(/opera.([\d.]+)/)
+        ? (browser = "opera")
+        : ua.match(/version\/([\d.]+).*safari/)
+        ? (browser = "safari")
+        : 0;
+      if (browser === "ie" || browser === "safari") {
+        alert("不支持的图片格式，目前不支持ie、safari浏览器。请升级您的浏览器");
       }
 
       // let isWebp = document.createElement('canvas').toDataURL('image/webp').indexOf('data:image/webp') === 0
@@ -48,11 +56,12 @@ export default {
       // }
     }
   }
-}
+};
 </script>
 
 <style lang="stylus" scoped>
-#app
-  font-family 'Avenir', Helvetica, Arial, sans-serif
-  color #2c3e50
+#app {
+  font-family: 'Avenir', Helvetica, Arial, sans-serif;
+  color: #2c3e50;
+}
 </style>

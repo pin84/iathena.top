@@ -1,46 +1,36 @@
 <template>
   <div class="job">
-    <picture>
-
-    </picture>
+    <picture></picture>
     <h3>作品集</h3>
     <div class="works">
-
-      <Candle class="item"  :url='dataList.vueElm.url'/>
-      <Note class="item" :url='dataList.mt.url'/>
+      <Candle class="item" :url="dataList.vueElm.url"/>
+      <Note class="item" :url="dataList.mt.url"/>
     </div>
     <hr>
     <div class="works">
-      <ThreeDImage class='item' />
-      <SeaWave class='item' />
-      <Eclipse
-        class='item'
-        :url='dataList.tb.url'
-      />
-      <Books class="item" :url='dataList.xsden.url'/>
-      <Pen class="item"  :url='dataList.ToDo.url'/>
-      <MacBook class="item" :url='dataList.responsePage.url'/>
-      <Arrow class="item" :url='dataList.github.url'/>
-      <ToBeContinue class="item"  />
+      <ThreeDImage class="item"/>
+      <SeaWave class="item"/>
+      <Eclipse class="item" :url="dataList.tb.url"/>
+      <Books class="item" :url="dataList.xsden.url"/>
+      <Pen class="item" :url="dataList.ToDo.url"/>
+      <MacBook class="item" :url="dataList.responsePage.url"/>
+      <Arrow class="item" :url="dataList.github.url"/>
+      <ToBeContinue class="item"/>
     </div>
-    <div>
-
-    </div>
-
-
+    <div></div>
   </div>
 </template>
 <script>
-import SeaWave from './works/SeaWave'
-import ThreeDImage from './works/ThreeDImage'
-import Eclipse from './works/Eclipse'
-import Books from './works/Books'
-import Pen from './works/Pen'
-import MacBook from './works/MacBook'
-import Arrow from './works/Arrow'
-import ToBeContinue from './works/ToBeContinue'
-import Candle from './works/Candle'
-import Note from './works/Note'
+import SeaWave from "./works/SeaWave";
+import ThreeDImage from "./works/ThreeDImage";
+import Eclipse from "./works/Eclipse";
+import Books from "./works/Books";
+import Pen from "./works/Pen";
+import MacBook from "./works/MacBook";
+import Arrow from "./works/Arrow";
+import ToBeContinue from "./works/ToBeContinue";
+import Candle from "./works/Candle";
+import Note from "./works/Note";
 export default {
   data() {
     return {
@@ -93,36 +83,35 @@ export default {
       // ],
       dataList: {
         mt: {
-          name: '美团网',
-          url: 'http://mt.html8.info/'
+          name: "美团网",
+          url: "http://mt.html8.info/"
         },
         tb: {
-          name: '淘宝放大镜',
-          url: 'https://pin84.github.io/live/01_web/08_magnifier/'
+          name: "淘宝放大镜",
+          url: "https://pin84.github.io/live/01_web/08_magnifier/"
         },
         xsden: {
-          name: '新时代英语',
-          url: 'http://xsden.html8.info/'
+          name: "新时代英语",
+          url: "http://xsden.html8.info/"
         },
         ToDo: {
-          name: '数据库版的ToDoList',
-          url: 'http://todo.html8.info/#/todoList/'
+          name: "数据库版的ToDoList",
+          url: "http://todo.html8.info/#/todoList/"
         },
-        responsePage:{
-          name:'响应式页面',
-          url:'https://pin84.github.io/live/01_web/03_ResponsiveWeb/'
+        responsePage: {
+          name: "响应式页面",
+          url: "https://pin84.github.io/live/01_web/03_ResponsiveWeb/"
         },
-        vueElm:{
-          name:'vue-elm',
-          url:'http://seller.html8.info/'
+        vueElm: {
+          name: "vue-elm",
+          url: "http://seller.html8.info/"
         },
-        github:{
-          name:'github',
-          url:'https://github.com/pin84/'
+        github: {
+          name: "github",
+          url: "https://github.com/pin84/"
         }
       }
-
-    }
+    };
   },
   components: {
     SeaWave,
@@ -139,21 +128,28 @@ export default {
 };
 </script>
 <style lang="stylus" scoped>
-.job
-  width 80%
-  padding-bottom 30px
-  margin 0 auto
-  h3
-    display inline-block
-    font-size 24px
-    line-height 40px
-    padding .5rem 0
-    border-bottom 2px solid #E87E04
-    margin-bottom 20px
-  .works
-    display flex
-    justify-content flex-start
-    flex-wrap wrap
-    .item
-      margin 10px 5px 10px 0
+.job {
+  width: 80%;
+  padding-bottom: 30px;
+  margin: 0 auto;
+
+  h3 {
+    display: inline-block;
+    font-size: 24px;
+    line-height: 40px;
+    padding: 0.5rem 0;
+    border-bottom: 2px solid #E87E04;
+    margin-bottom: 20px;
+  }
+
+  .works {
+    display: flex;
+    justify-content: flex-start;
+    flex-wrap: wrap;
+
+    .item {
+      margin: 10px 5px 10px 0;
+    }
+  }
+}
 </style>
