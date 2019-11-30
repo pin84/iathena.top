@@ -7,6 +7,30 @@
     >保存简历到PDF</button>
     <ul class="list">
       <span class="line"></span>
+       <li class="item start">
+        <div class="detail">
+          <time>2019 ~ </time>
+          <h2>广州市为人软件科技有限公司</h2>
+          <p>上下链  微信公众号开发.</p>
+          <span>微信扫一扫，了解更多。</span>
+          <div class="qr-box">
+            <img src="@/assets/img/sxlQRcode.png" alt="">
+          </div>
+        </div>
+        <div class="show">
+          <picture class="pic">
+            <source
+              srcset='../../assets/img/experience/bj.webp'
+              type="image/webp"
+            >
+            <img
+              src="../../assets/img/experience/biaoji_1.jpg"
+              alt=""
+            >
+          </picture>
+
+        </div>
+      </li>
       <li class="item end">
         <div class="show">
           <picture class="pic">
@@ -21,9 +45,13 @@
           </picture>
         </div>
         <div class="detail">
-          <time>2017-3 ~ </time>
+          <time>2017-3 ~ 2019-3</time>
           <h2>广东道锋文化传媒</h2>
           <p>负责公司官网的日常维护及建设</p>
+          <p>
+            <span>在线地址：</span>
+            <a href="http://www.dfvan.com/a/wenhua/index.html">道锋集团官网</a>
+          </p>
         </div>
       </li>
       <li class="item start">
@@ -200,6 +228,16 @@ export default {
         text-align right
         .detail 
           margin-right 50px
+          .qr-box
+            width 100%
+            height 100px
+            margin-top 10px
+            display flex
+            justify-content flex-end
+            img
+              display inline-block
+              width 100px
+              height 100px
       .show
         flex 0 0 150px
         width 150px
