@@ -9,13 +9,18 @@
       </a>
 
       <ul class="pc">
-        <router-link
-          tag="li"
-          to='/about'
+        <li
+          v-for="(item ,index) in routes"
+          :key="index"
+          :class="{'router-link-active':i===index}"
+          @click="routeTo(item,index)"
         >
-          <a href="javascript:;">关于我</a>
-        </router-link>
-        <router-link
+       
+          <a href="javascript:;">{{item}}</a>
+        </li>
+
+
+        <!-- <router-link
           tag="li"
           to='/job'
         >
@@ -33,30 +38,53 @@
         >
           <a href="javascript:;">我的经历</a>
         </router-link>
-        <!-- <router-link tag="li" to='/blog'>
-          <a href="javascript:;">我的博客</a>
-        </router-link> -->
-        <!-- <router-link tag="li" to='/contact'>
-          <a href="javascript:;">联系我</a>
-        </router-link> -->
         <router-link
           tag="li"
           to='/message'
+
         >
           <a href="javascript:;">留言本</a>
-        </router-link>
-        <!-- <li>
-          <a
-            href="http://books.iathena.top/css/cssTips.html"
-            target="_blank"
-          >跃迁之路</a>
-        </li> -->
+        </router-link> -->
+       
       </ul>
     </div>
   </nav>
 </template>
 <script>
 export default {
+  data(){
+    return {
+      i:0,
+      routes:['关于我','技术栈','作品集','我的经历','留言本']
+    }
+  },
+  methods:{
+    routeTo(router,index){
+      if(router === '留言本'){
+        return alert('由于更换服务器。功能暂停使用.');
+      }
+      this.i = index
+      switch(router){
+        case '关于我':
+          this.$router.push('about')
+          break;
+        case '技术栈':
+          this.$router.push('/skill')
+          break;
+        case '作品集':
+          this.$router.push('/job')
+          break;
+        case '我的经历':
+          this.$router.push('/experience')
+          break;
+        case '留言本':
+           alert('由于更换服务器。功能暂停使用.');
+           
+          // this.$router.push('/message')
+          break;
+      }
+    }
+  }
 };
 </script>
 <style lang="stylus" scoped>
