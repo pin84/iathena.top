@@ -6,7 +6,7 @@ import Skill from './components/Skill'
 import Experience from './components/experience/index'
 import Message from './components/message'
 import Fireworks from './components/fireworks'
-import ThreeDImage from './components/works/ThreeDImage'
+// import ThreeDImage from './components/works/ThreeDImage'
 
 Vue.use(Router)
 

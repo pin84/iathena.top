@@ -42,7 +42,7 @@
       </div>
     </div>
 
-    <dir id="text">
+    <div id="text">
       那一夜 河对岸的烟火光彩耀眼 <br>
       震耳欲聋的声音 振奋着年少苦闷的情绪 <br>
       我们目不转睛地看着瞬间出现又消逝的奇幻瑰丽 <br>
@@ -50,7 +50,10 @@
       想起我们如火花般的青春 <br>
       然后想起我们此刻灿烂的时光 <br>
       一切都是真的 一切都不是真的…
-    </dir>
+    </div>
+    <div class="beian">
+     <a class="beian" href="http://www.beian.miit.gov.cn">粤ICP备19021187号</a>
+    </div>
   </div>
 </template>
 <script>
@@ -238,7 +241,7 @@ export default {
 #fireworks
   position absolute
   width 100%
-  height 100%
+  // height 100%
   background url('../../assets/img/fireworks/garden-bg.webp') 
   padding 50px 0 0 0
   box-sizing border-box
@@ -266,6 +269,10 @@ export default {
     line-height 28px
     box-sizing border-box
     user-select none
+  .beian
+    font-size 12px
+    color #fff  
+    text-align center
 @media screen and (max-width:480px)
   #fireworks
     padding 0 0 90px 0 

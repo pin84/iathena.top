@@ -7,7 +7,6 @@
       ref="fireworksCtx"
       @click="init"
     ></canvas>
-
   </div>
 </template>
 <script>
