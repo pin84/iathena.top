@@ -52,7 +52,7 @@
       一切都是真的 一切都不是真的…
     </div>
     <div class="beian">
-     <a class="beian" href="http://www.beian.miit.gov.cn">粤ICP备19021187号</a>
+     <a class="text" href="http://www.beian.miit.gov.cn">粤ICP备19021187号</a>
     </div>
   </div>
 </template>
@@ -239,11 +239,11 @@ export default {
 </script>
 <style lang='stylus' scoped>
 #fireworks
-  position absolute
+  // position absolute
   width 100%
-  // height 100%
+  height 100%
   background url('../../assets/img/fireworks/garden-bg.webp') 
-  padding 50px 0 0 0
+  padding 50px 0 
   box-sizing border-box
   #canvasBox
     position relative
@@ -270,9 +270,15 @@ export default {
     box-sizing border-box
     user-select none
   .beian
+    position absolute
+    bottom 20px
+    left 50%
+    transform  transition(-50%)
     font-size 12px
     color #fff  
     text-align center
+    .text
+      color #fff
 @media screen and (max-width:480px)
   #fireworks
     padding 0 0 90px 0 

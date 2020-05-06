@@ -1,9 +1,13 @@
 <template>
   <div id="app">
-    <Top />
-    <keep-alive>
-      <router-view />
-    </keep-alive>
+    <div class="top-box">
+      <Top />
+    </div>
+    <div class="router">
+      <keep-alive>
+        <router-view />
+      </keep-alive>
+    </div>
   </div>
 </template>
 
@@ -28,9 +32,6 @@ export default {
     this.check();
   },
   methods: {
-
-
-
     //检查是支持webp格式
     check() {
       let ua = navigator.userAgent.toLowerCase();
@@ -60,8 +61,16 @@ export default {
 </script>
 
 <style lang="stylus" scoped>
-#app {
-  font-family: 'Avenir', Helvetica, Arial, sans-serif;
-  color: #2c3e50;
-}
+#app 
+  font-family 'Avenir', Helvetica, Arial, sans-serif
+  color #2c3e50
+  height 100vh
+  width 100vw
+  display flex
+  flex-direction column
+  .top-box
+    flex 0 0 80px
+  .router
+    height 100%  
+
 </style>
