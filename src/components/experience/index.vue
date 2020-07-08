@@ -9,9 +9,9 @@
       <span class="line"></span>
        <li class="item start">
         <div class="detail">
-          <time>2019 ~ </time>
+          <time>2019/5 ~ </time>
           <h2>广州市为人软件科技有限公司</h2>
-          <p>上下链  微信公众号开发.</p>
+          <p>上下链  微信公众号开发.前端代码80%都是我写的。</p>
           <span>微信扫一扫，了解更多。</span>
           <div class="qr-box">
             <img src="@/assets/img/sxlQRcode.png" alt="">
@@ -19,12 +19,12 @@
         </div>
         <div class="show">
           <picture class="pic">
-            <source
+            <!-- <source
               srcset='../../assets/img/experience/bj.webp'
               type="image/webp"
-            >
+            > -->
             <img
-              src="../../assets/img/experience/biaoji_1.jpg"
+              src="../../assets/img/sxl.png"
               alt=""
             >
           </picture>
@@ -239,9 +239,9 @@ export default {
               width 100px
               height 100px
       .show
-        flex 0 0 150px
-        width 150px
-        height 150px
+        flex 0 0 100px
+        width 100px
+        height 100px
         border-radius 50%
         overflow hidden
         img
