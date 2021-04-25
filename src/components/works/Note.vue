@@ -1,7 +1,5 @@
 <template>
-  <a
-    :href="url"
-    target="_blank"
+  <div
     id="noteWrapper"
   >
     <div class="book">
@@ -14,16 +12,14 @@
       </div>
     </div>
     <div class="desc">
-      <p class="title">美团网</p>
-      <p class='detail'>服务端渲染的美团网  ssr/element-ui/vue/koa/</p>
+      <!-- <p class="title">美团网</p> -->
+      <!-- <p class='detail'>无</p> -->
     </div>
-  </a>
+  </div>
 </template>
 <script>
 export default {
-  props:{
-    url:''
-  }
+
 }
 </script>
 <style lang='stylus' scoped>

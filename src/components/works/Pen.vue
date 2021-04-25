@@ -1,23 +1,21 @@
 <template>
-  <a id="penWrapper" :href="url" target="_brank">
+  <div id="penWrapper" >
     <div class="pencil">
       <span class="taper"></span>
       <span class="barrel">made in china</span>
       <span class="eraser"></span>
     </div>
     <div class="desc">
-      <p class="title">ToDoList</p>
-      <p class="detail">数据库版的ToDoList</p>
+      <!-- <p class="title">ToDoList</p> -->
+      <!-- <p class="detail">无</p> -->
     </div>
-  </a>
+  </div>
 </template>
 
 
 <script>
 export default {
-  props:{
-    url:''
-  }
+
 }
 </script>
 

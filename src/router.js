@@ -16,32 +16,39 @@ export default new Router({
   routes: [
     {
       path: '/',
-      component: Fireworks,
-    },
-    // {
-    //   path: '/',
-    //   redirect: '/fireworks',
-    // },
-    {
-      path: '/about',
-      component: About
+      component: About,
+      meta: { keepAlive: true }
     },
     {
       path: '/job',
-      component: Job
+      component: Job,
+      meta: { keepAlive: true }
     },
     {
       path: '/skill',
-      component: Skill
+      component: Skill,
+      meta: { keepAlive: true }
     },
     {
       path: '/experience',
-      component: Experience
+      component: Experience,
+      meta: { keepAlive: true }
     },
     {
       path: '/fireworks',
-      component: Fireworks
+      component: Fireworks,
+      meta: { keepAlive: true }
     },
+
+    {
+      path: '/ThreeDPic',
+      name: 'threeDPic',
+      component: () => import('@/views/works/ThreeDPic.vue'),
+      meta: {
+        keepAlive: false // 不需要缓存
+      }
+    },
+
     {
       path: '/message',
       component: Message,

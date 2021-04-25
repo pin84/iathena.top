@@ -1,8 +1,7 @@
 <template>
-  <a
-    href="https://pin84.github.io/live/05_css3/05_3dPictrues/"
-    target="_brank"
+  <div
     class="three"
+    @click="toDetail"
   >
     <div class="three_3d">
       <div class='inner'>
@@ -13,15 +12,21 @@
       </div>
     </div>
     <div class="desc">
-      <p class="title">3D旋转</p>
-      <p class='detail'>只支持chrome浏览器</p>
+      <!-- <p class="title">3D旋转</p> -->
+      <!-- <p class='detail'>只支持chrome浏览器</p> -->
     </div>
-  </a>
+  </div>
 </template>
 
 
 <script>
 export default {
+
+    methods:{
+    toDetail(){
+      this.$router.push('/threeDPic')
+    }
+  }
 
 }
 </script>

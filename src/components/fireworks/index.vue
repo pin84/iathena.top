@@ -51,9 +51,7 @@
       然后想起我们此刻灿烂的时光 <br>
       一切都是真的 一切都不是真的…
     </div>
-    <div class="beian">
-     <a class="text" href="http://www.beian.miit.gov.cn">粤ICP备19021187号</a>
-    </div>
+
   </div>
 </template>
 <script>

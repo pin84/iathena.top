@@ -1,19 +1,17 @@
 <template>
-  <a :href="url" id="bookWrapper" target="_brank">
+  <div id="bookWrapper" >
     <div id="book">
       <span>HTML</span>
     </div>
     <div class="desc">
       <!-- <p class="title">新时代英语</p> -->
-      <p class="detail">VUE 移动端，新时代英语</p>
+      <!-- <p class="detail">无</p> -->
     </div>
-  </a>
+  </div>
 </template>
 <script>
 export default {
-  props: {
-    url: ""
-  }
+ 
 };
 </script>
 <style lang='stylus' scoped>

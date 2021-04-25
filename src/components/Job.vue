@@ -3,18 +3,18 @@
     <picture></picture>
     <h3>作品集</h3>
     <div class="works">
-      <Candle class="item" :url="dataList.vueElm.url"/>
-      <Note class="item" :url="dataList.mt.url"/>
+      <Candle class="item pointer" />
+      <ThreeDImage class="item pointer"/>
+      <Arrow class="item pointer" :url="dataList.github.url"/>
     </div>
     <hr>
     <div class="works">
-      <ThreeDImage class="item"/>
+      <Note class="item" />
       <SeaWave class="item"/>
-      <Eclipse class="item" :url="dataList.tb.url"/>
-      <Books class="item" :url="dataList.xsden.url"/>
-      <Pen class="item" :url="dataList.ToDo.url"/>
-      <MacBook class="item" :url="dataList.responsePage.url"/>
-      <Arrow class="item" :url="dataList.github.url"/>
+      <Eclipse class="item" />
+      <Books class="item" />
+      <Pen class="item" />
+      <MacBook class="item" />
       <ToBeContinue class="item"/>
     </div>
     <div></div>

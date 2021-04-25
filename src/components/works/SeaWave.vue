@@ -1,13 +1,13 @@
 <template>
-  <a href="http://df.iathena.top/" target='_brank' class="seawave">
+  <div class="seawave">
       <div class='desc'>
-        <p class="title">静态页面-企业官网</p>
-        <p class='detail'>业务范围下的数据都是用ajax从后台请求</p>
+        <!-- <p class="title">静态页面-企业官网</p> -->
+        <!-- <p class='detail'>无</p> -->
       </div> 
       <span class="wave"></span>
       <span class="wave"></span>
       <span class="wave"></span>
-  </a>
+  </div>
 </template>
 
 

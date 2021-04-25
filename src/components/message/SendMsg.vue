@@ -144,22 +144,22 @@ export default {
   },
   created() {
 
-    //如果登陆，则显示用户名
-    let name = document.cookie.replace(/(?:(?:^|.*;\s*)userInfo\s*\=\s*([^;]*).*$)|^.*$/, "$1")
+    // //如果登陆，则显示用户名
+    // let name = document.cookie.replace(/(?:(?:^|.*;\s*)userInfo\s*\=\s*([^;]*).*$)|^.*$/, "$1")
 
-    let abc = document.cookie
+    // let abc = document.cookie
 
-    console.log('============',abc)
-    if (name) {
-      this.isShowLoginWrapper = 3
-      this.message.username = name
-    }
+    // console.log('============',abc)
+    // if (name) {
+    //   this.isShowLoginWrapper = 3
+    //   this.message.username = name
+    // }
 
-    //默认选择第一个头像
-    this.$nextTick(() => {
-      this.$refs.avatar[0].checked = true;
-      this.message.avatar = this.avatarSum[0];
-    })
+    // //默认选择第一个头像
+    // this.$nextTick(() => {
+    //   this.$refs.avatar[0].checked = true;
+    //   this.message.avatar = this.avatarSum[0];
+    // })
   },
 
 

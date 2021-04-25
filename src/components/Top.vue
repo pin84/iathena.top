@@ -58,15 +58,24 @@ export default {
       routes:['关于我','技术栈','作品集','我的经历','留言本']
     }
   },
+  created(){
+    this.initData()
+  },
   methods:{
+    initData(){
+      let index = JSON.parse(localStorage.getItem('topIndex'))
+      this.i = index
+    },  
     routeTo(router,index){
       if(router === '留言本'){
         return alert('由于更换服务器。功能暂停使用.');
       }
+        if(this.i == index) return 
       this.i = index
+      localStorage.setItem('topIndex',JSON.stringify(index))
       switch(router){
         case '关于我':
-          this.$router.push('about')
+          this.$router.push('/')
           break;
         case '技术栈':
           this.$router.push('/skill')

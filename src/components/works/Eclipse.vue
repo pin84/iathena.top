@@ -1,7 +1,5 @@
 <template>
-  <a
-    :href="url"
-    target="_blank"
+  <div
     id="eclipse"
   >
     <div class="sky">
@@ -9,18 +7,16 @@
       <div class="moon"></div>
     </div>
     <div class="desc">
-      <p class="title">放大镜</p>
-      <p class="detail">淘宝网的放大镜效果</p>
+      <!-- <p class="title">放大镜</p> -->
+      <!-- <p class="detail">无</p> -->
     </div>
-  </a>
+  </div>
 </template>
 
 
 <script>
 export default {
-  props:{
-    url:''
-  }
+
 }
 </script>
 

@@ -1,7 +1,5 @@
 <template>
-  <a
-    :href="url"
-    target="_brank"
+  <div
     id="macBookWrapper"
   >
     <div class="macbook">
@@ -9,17 +7,15 @@
       <span class="base"></span>
     </div>
     <div class="desc">
-      <p class="title">响应式布局</p>
-      <p class="detail">理财网站响应式布局</p>
+      <!-- <p class="title">响应式布局</p> -->
+      <!-- <p class="detail">无</p> -->
     </div>
 
-  </a>
+  </div>
 </template>
 <script>
 export default {
-  props:{
-    url:''
-  }
+
 }
 </script>
 <style lang='stylus' scoped>
