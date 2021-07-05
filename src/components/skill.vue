@@ -2,7 +2,7 @@
   <div class="skillwrapper">
     <div class="main">
       <div class="signboard one">
-        <div class="sign">html5、css3、js</div>
+        <div class="sign">html5a、css3、js</div>
         <div class="strings"></div>
         <div class="pin top"></div>
         <div class="pin left"></div>
