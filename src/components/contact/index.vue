@@ -9,7 +9,9 @@
           <i>18610141858</i>
         </div>
         <div class="email">
-          <i>qp1984@live.com</i>
+          <a href="mailto:qp1984@live.com">
+            <i>qp1984@live.com</i>
+          </a>
         </div>
         <div class="github">
           <a href="https://github.com/pin84" target="_blank">
@@ -53,6 +55,9 @@ export default {
       flex-direction column
       font-size 2rem
       line-height 35px
+      div
+        display flex
+        align-items center
       .github>a:hover
         text-decoration underline
       .phone::before,.email:before, .github::before
@@ -62,7 +67,7 @@ export default {
         height 24px
         margin-right 10px
       .phone::before
-        background url('./phone1.png') no-repeat center
+        background url('./phone1.png') no-repeat center 
       .email::before
         background url('./email.png') no-repeat center
         // margin-bottom -5px

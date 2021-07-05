@@ -1,5 +1,5 @@
 <template>
-  <div class="arrowWrapper">
+  <div class="arrowWrapper" @click="toDetail">
     <div class="arrow">
       <span class="square"></span>
       <div class="triangle"></div>
@@ -12,7 +12,13 @@
   </div>
 </template>
 <script>
-export default {};
+export default {
+  methods: {
+    toDetail() {
+      window.open("https://github.com/pin84/", "_blank");
+    },
+  },
+};
 </script>
 
 <style lang='stylus' scoped>

@@ -1,5 +1,5 @@
 <template>
-  <div id="bookWrapper" >
+  <div id="bookWrapper" @click="toDetail" >
     <div id="book">
       <span>HTML</span>
     </div>
@@ -11,6 +11,12 @@
 </template>
 <script>
 export default {
+
+  methods:{
+    toDetail(){
+      this.$router.push('/audio')
+    }
+  }
  
 };
 </script>

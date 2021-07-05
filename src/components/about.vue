@@ -9,8 +9,11 @@
       <img src="../assets/img/avartor.jpg" alt="" />
     </picture>
     <div class="desc">
-      我叫覃平，1984年生于广西柳州。现坐标广州，是一名从事前端工作的普通一员。前端是一门有容乃大的行业，我并不是计算机专业出身。
+      我叫覃平，1984年生于广西柳州。是一名从事前端工作的普通一员。前端是一门有容乃大的行业，我并不是计算机专业出身。
       在自学前端之前，我一直从事的是印刷设备的售后服务工作。庆幸的是在慢长的自学中，让我体会到了乐趣，让我能一直走到今天。
+    </div>
+    <div class="desc">
+      现如今，定居于广西的一个小县城。这里没有合适我的工作，所以一直是以远程办公为主。
     </div>
 
     <div class="title contact">
@@ -81,6 +84,7 @@ export default {
     height: 200px;
     border-radius: 50%;
     overflow: hidden;
+    margin-bottom 30px;
 
     img {
       width: 100%;
@@ -90,7 +94,6 @@ export default {
 
   .desc {
     width: 60%;
-    margin: 3rem 0 0 0;
     font-size: 1.6rem;
     text-indent: 1.5em;
   }

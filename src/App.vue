@@ -81,7 +81,7 @@ export default {
   color: #2c3e50;
   height: 100vh;
   width: 100vw;
-  min-width: 1200px;
+  // min-width: 1200px;
   display: flex;
   flex-direction: column;
   overflow: hidden;
@@ -95,5 +95,7 @@ export default {
     height: 100%;
     overflow: scroll;
   }
+
+
 }
 </style>

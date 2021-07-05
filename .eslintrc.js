@@ -13,6 +13,8 @@ module.exports = {
   
       "no-use-before-define": ["error", { "functions": true, "classes": true }]
 
+      
+
   },
   parserOptions: {
     parser: 'babel-eslint'

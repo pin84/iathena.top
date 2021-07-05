@@ -48,6 +48,14 @@ export default new Router({
         keepAlive: false // 不需要缓存
       }
     },
+    {
+      path: '/audio',
+      name: 'Audio',
+      component: () => import('@/views/works/audio/index.vue'),
+      meta: {
+        keepAlive: false // 不需要缓存
+      }
+    },
 
     {
       path: '/message',

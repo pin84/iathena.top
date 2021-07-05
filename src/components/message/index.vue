@@ -3,68 +3,61 @@
     <div class="content">
       <picture class="banner">
         <source
-          srcset='../../assets/img/message/banner.webp'
+          srcset="../../assets/img/message/banner.webp"
           type="image/webp"
-        >
-        <img
-          src="../../assets/img/message/banner.jpg"
-          alt=""
-        >
+        />
+        <img src="../../assets/img/message/banner.jpg" alt="" />
       </picture>
       <div class="search">
         <BtnWriteMsg @toWriteMsg="toWriteMsg" />
-        <SearchBtn @searchMsg='searchMsg' />
+        <SearchBtn @searchMsg="searchMsg" />
       </div>
       <ul class="msglist">
-        <li
-          class="item"
-          v-for="(msg,i) in currentData"
-          :key="i"
-        >
+        <li class="item" v-for="(msg, i) in msgList" :key="i">
           <div v-if="msg.isShow">
             <div class="top">
-              <span>标题:</span> <span>{{msg.title}}</span> <span class="name">{{msg.username}}</span> <time><span>发表于:</span>{{msg.created}}</time>
-              <span
-                class="del"
-                @click="delMsg(msg.id,msg.username)"
-              >删除</span>
+              <span>标题:</span> <span>{{ msg.title }}</span>
+              <span class="name">{{ msg.username }}</span>
+              <time><span>发表于:</span>{{ msg.created }}</time>
+              <span class="del" @click="delMsg(msg.id, msg.username)"
+                >删除</span
+              >
             </div>
-            <div class="bottom">
+            <div  class="bottom">
               <div class="avatar">
                 <div class="imgbox">
                   <img
-                    v-if="!msg.isUploadAvatar"
-                    :src="require(`../../assets/img/message/avatar/${msg.avatar}.gif`)"
+                    v-if="msg.avatar"
+                    :src="msg.avatar"
                     alt=""
-                  >
+                  />
                   <img
                     v-else
-                    :src="`${url}/static/${msg.avatar}`"
-                    alt=""
-                  >
+                    :src="
+                      require(`../../assets/img/message/avatar/04.gif`)
+                    "
+                  />
                 </div>
 
-                <h5>{{msg.username}}</h5>
+                <h5>{{ msg.username }}</h5>
               </div>
-              <div
-                class="detail"
-                :class="{red:msg.isSecret === 1 }"
-              >{{msg.msg}}</div>
+              <div class="detail" :class="{ red: msg.isSecret === 1 }">
+                {{ msg.msg }}
+              </div>
             </div>
           </div>
         </li>
       </ul>
 
-      <div
-        v-if='isSearch'
-        id="isSearch"
-      >
-        <span>搜索结果一共 <strong>{{data.length}}</strong> 条留言</span>
+      <div v-if="isSearch" id="isSearch">
+        <span
+          >搜索结果一共 <strong>{{ data.length }}</strong> 条留言</span
+        >
         <button @click="initData">确定</button>
       </div>
 
       <PageChange
-        v-if='!isSearch'
+        v-if="!isSearch"
         @toLastPage="toLastPage"
         @toFirstPage="toFirstPage"
         @toPre="toPre"
@@ -73,301 +66,350 @@
         @changePageNum="changePageNum"
       />
       <SendMsg
-        v-if='isShowSendMsg'
+        v-if="isShowSendMsg"
         @refreshMsg="refreshMsg"
-        @closeSendMsgWrapper='closeSendMsgWrapper'
+        @closeSendMsgWrapper="closeSendMsgWrapper"
         ref="send"
       />
     </div>
-    <div class="note">留言本于2018.12.1开放 </div>
+    <div class="note">留言本于2018.12.1开放</div>
   </div>
 </template>
 
 <script>
-import config from '../../config/config'
-import PageChange from './PageChange'
-import SendMsg from './SendMsg'
-import BtnWriteMsg from './BtnWriteMsg'
-import SearchBtn from './SearchBtn'
+import PageChange from "./PageChange";
+import SendMsg from "./SendMsg";
+import BtnWriteMsg from "./BtnWriteMsg";
+import SearchBtn from "./SearchBtn";
 // import utils from '@/utils/dateFormat'
-
 
 export default {
   data() {
     return {
-      allData: [],//存后台所有的数据 用于上一页、下一页的操作，不从数据库取数据
-      data: [], //从后台拿回来的数据，只有前两条
+      allData: [], //存后台所有的数据 用于上一页、下一页的操作，不从数据库取数据
+      msgList: [
+        {
+          id: 1,
+          title: "aa",
+          username: "bb",
+          created: "cc",
+          isShow: true,
+        },
+      ], //从后台拿回来的数据，只有前两条
       isSearch: false,
-      searchKeyword: '', // 搜索关键字
+      searchKeyword: "", // 搜索关键字
       searchRes: [],
       maxSearchResLength: 32,
       start: this.currentPageIndex || Number(this.$store.state.pageIndex),
       end: this.currentPageNum || Number(this.$store.state.pageNum),
       isShowSendMsg: false,
       propsUserInfo: undefined,
-      url: config.avartorUrl
-    }
+      // url: config.avartorUrl
+    };
   },
   components: {
     PageChange,
     SendMsg,
     BtnWriteMsg,
-    SearchBtn
+    SearchBtn,
   },
 
   created() {
-    this.initData()
+    this.initData();
   },
 
   computed: {
-
-    currentData: function () {
-      return this.data
-    },
     currentPageNum: function () {
-      return Number(this.$store.state.pageNum)
+      return Number(this.$store.state.pageNum);
     },
     currentPageIndex() {
-      return Number(this.$store.state.pageIndex)
-    }
-
-
+      return Number(this.$store.state.pageIndex);
+    },
   },
 
   methods: {
-    initData() {
-      fetch(`${config.url}/initData?pageNum=${this.$store.state.pageNum}`, {
-        credentials: 'include',
-        method: 'GET',
-        cache: 'reload',
-      }).then(res => {
-        return res.json()
-      }).then(json => {
-        this.allData = json.returnData.reverse()
-        this.data = this.allData.slice(this.start, this.end)
-        this.$store.commit('setPages', json.pages)
-        // window.scrollTo(0, 180)
+    async initData() {
+      let res = await this.$get(this.$api.getmsg, { size: 5 });
 
-        if (this.isSearch) {
-          this.isSearch = false
-        }
-      })
+      console.log(res);
+
+      // fetch(`${config.url}/initData?pageNum=${this.$store.state.pageNum}`, {
+      //   credentials: 'include',
+      //   method: 'GET',
+      //   cache: 'reload',
+      // }).then(res => {
+      //   return res.json()
+      // }).then(json => {
+      //   this.allData = json.returnData.reverse()
+      //   this.data = this.allData.slice(this.start, this.end)
+      //   this.$store.commit('setPages', json.pages)
+      //   // window.scrollTo(0, 180)
+
+      //   if (this.isSearch) {
+      //     this.isSearch = false
+      //   }
+      // })
     },
 
     searchMsg(keyword) {
-      this.searchKeyword = keyword
+      this.searchKeyword = keyword;
       if (!this.searchKeyword) {
-        return alert('请输入关键字搜索，可以搜索标题、作者、留言内容')
+        return alert("请输入关键字搜索，可以搜索标题、作者、留言内容");
       }
-      fetch(`${config.url}/searchmsg?keyword=${this.searchKeyword}`).then(res => {
-        return res.json()
-      }).then(json => {
-        if (json.data.length > this.maxSearchResLength) { //防止搜索的结果过多，造成页面卡死
-          json.data.length = this.maxSearchResLength
-        }
-        this.data = json.data
-        this.searchKeyword = ''
-      })
-      this.isSearch = true
-      this.isShowSendMsg = false
+      fetch(`${config.url}/searchmsg?keyword=${this.searchKeyword}`)
+        .then((res) => {
+          return res.json();
+        })
+        .then((json) => {
+          if (json.data.length > this.maxSearchResLength) {
+            //防止搜索的结果过多，造成页面卡死
+            json.data.length = this.maxSearchResLength;
+          }
+          this.data = json.data;
+          this.searchKeyword = "";
+        });
+      this.isSearch = true;
+      this.isShowSendMsg = false;
     },
 
     refreshMsg() {
-      this.$store.commit('toFirstPage')
-      this.initData()
+      this.$store.commit("toFirstPage");
+      this.initData();
     },
 
-
     toPre() {
-      if (this.$store.state.pageIndex === 0) return
-      this.$store.commit('minus')
+      if (this.$store.state.pageIndex === 0) return;
+      this.$store.commit("minus");
 
-
-      this.start -= this.currentPageNum
-      this.end -= this.currentPageNum
+      this.start -= this.currentPageNum;
+      this.end -= this.currentPageNum;
       //防止 this.start - this.currentPageNum 小于0的情况 end 同理
-      this.start = this.start < 0 ? 0 : this.start
-      this.end = this.end < this.currentPageNum ? this.currentPageNum : this.end
+      this.start = this.start < 0 ? 0 : this.start;
+      this.end =
+        this.end < this.currentPageNum ? this.currentPageNum : this.end;
 
-      this.data = []
-      this.data = this.allData.slice(this.start, this.end)
-
-
-
+      this.data = [];
+      this.data = this.allData.slice(this.start, this.end);
     },
 
     toNext() {
-      if (this.$store.state.pageIndex === this.$store.state.pages - 1) return
-      this.$store.commit('increment')
+      if (this.$store.state.pageIndex === this.$store.state.pages - 1) return;
+      this.$store.commit("increment");
 
-      this.start += this.currentPageNum
-      this.end += this.currentPageNum
+      this.start += this.currentPageNum;
+      this.end += this.currentPageNum;
 
-      this.data = []
-      this.data = this.allData.slice(this.start, this.end)
+      this.data = [];
+      this.data = this.allData.slice(this.start, this.end);
 
       console.log(this.end);
     },
 
     toFirstPage() {
-      if (this.$store.state.pageIndex === 0) return
-      this.$store.commit('toFirstPage')
-      this.start = 0
-      this.end = Number(this.$store.state.pageNum)
-      this.data = this.allData.slice(this.start, this.end)
+      if (this.$store.state.pageIndex === 0) return;
+      this.$store.commit("toFirstPage");
+      this.start = 0;
+      this.end = Number(this.$store.state.pageNum);
+      this.data = this.allData.slice(this.start, this.end);
     },
 
     toLastPage() {
-      if (this.$store.state.pageIndex === this.$store.state.pages - 1) return
-      this.$store.commit('toLastPage')
-      this.start = this.allData.length - this.currentPageNum
-      this.end = this.allData.length
-      this.data = []
-      this.data = this.allData.slice(this.start, this.end)
+      if (this.$store.state.pageIndex === this.$store.state.pages - 1) return;
+      this.$store.commit("toLastPage");
+      this.start = this.allData.length - this.currentPageNum;
+      this.end = this.allData.length;
+      this.data = [];
+      this.data = this.allData.slice(this.start, this.end);
     },
     selectPage(s1) {
-      this.$store.state.pageIndex = s1
-      this.start = s1 * this.$store.state.pageNum
-      this.end = s1 * this.$store.state.pageNum + Number(this.$store.state.pageNum)
-      this.data = []
-      this.data = this.allData.slice(this.start, this.end)
+      this.$store.state.pageIndex = s1;
+      this.start = s1 * this.$store.state.pageNum;
+      this.end =
+        s1 * this.$store.state.pageNum + Number(this.$store.state.pageNum);
+      this.data = [];
+      this.data = this.allData.slice(this.start, this.end);
     },
     changePageNum(num) {
-      this.$store.commit('toFirstPage')
-      this.$store.commit('setPageNum', num)
-      this.$store.commit('setPages', Math.ceil(this.allData.length / num))
-      this.start = 0
-      this.end = Number(num)
-      this.data = []
-      this.data = this.allData.slice(this.start, this.end)
+      this.$store.commit("toFirstPage");
+      this.$store.commit("setPageNum", num);
+      this.$store.commit("setPages", Math.ceil(this.allData.length / num));
+      this.start = 0;
+      this.end = Number(num);
+      this.data = [];
+      this.data = this.allData.slice(this.start, this.end);
     },
-
 
     toWriteMsg() {
-      this.isShowSendMsg = true
+      this.isShowSendMsg = true;
       this.$nextTick(function () {
         window.scrollTo(0, 500);
-      })
+      });
     },
     closeSendMsgWrapper() {
-      this.isShowSendMsg = false
+      this.isShowSendMsg = false;
     },
     delMsg(id, name) {
-
       fetch(`${config.url}/delMsg?id=${id}&name=${name}`, {
-        credentials: 'include'
-      }).then(res => {
-        return res.json()
-      }).then(json => {
-
-        alert(json.data)
-        this.initData()
+        credentials: "include",
       })
-
-    }
-
-
-
-  }
-}
+        .then((res) => {
+          return res.json();
+        })
+        .then((json) => {
+          alert(json.data);
+          this.initData();
+        });
+    },
+  },
+};
 </script>
 
 
 <style lang='stylus' scoped>
-.message
-  width 100%
-  padding-top 20px
-  box-sizing border-box
-  font-size 1.4rem
-  margin-bottom 20px
-  .content
-    width 80%
-    margin 0 auto
-    .banner img
-      width 100%
-      height 100%
-    .search
-      display flex 
-      justify-content space-between
-      align-items flex-end
-    .msglist
-      margin-top 10px   
-      line-height 24px
-      .item
-        border 1px dashed black 
-        margin-bottom 20px
-        .top
-          background #FFA042
-          padding 5px 10px
-          position relative
-          user-select none
-          span
-            margin-right 10px
-            &.name
-              color #fff
-            &.del
-              position absolute
-              right 0  
-              &:hover
-                color red
-                cursor pointer
-        .bottom
-          display flex
-          text-align center
-          background url('../../assets/img/message/avatar/bg.webp')  
-          .avatar
-            display flex
-            flex 0  0 150px
-            background #fff
-            flex-direction column
-            // justify-content center
-            align-items center
-            padding 5px
-            .imgbox
-              width 100px
-              height 100px
-              margin-bottom 5px
-              img
-                width 100%
-                height 100%
-                border-radius 50%
-          .detail
-            padding 10px   
-            font-size 1.4rem 
-            text-indent 1em
-            text-align left
-            word-break break-all
-            &.red
-              color red
-    #isSearch
-      span
-        margin-right 10px
-        strong 
-          color red
-      button
-        border 0
-        outline none 
-        background #FF9900
-        padding 1px 5px
-        box-shadow 2px 2px 1px #666
-        &:hover
-          background #FF6600
-          cursor pointer
-  .note
-    margin 40px 0 0 0
-    width 100%
-    text-align center
-    color #006633    
-    font-size 1.6rem
+.message {
+  width: 100%;
+  padding-top: 20px;
+  box-sizing: border-box;
+  font-size: 1.4rem;
+  margin-bottom: 20px;
 
-@media screen and (max-width:480px)
-  .message
-    padding-top 0
-    box-sizing border-box
-    font-size 1.4rem
-    margin-bottom 80px
-    .content
-      width 100%
-      .msglist
-        margin-top 10px 
+  .content {
+    width: 80%;
+    margin: 0 auto;
+
+    .banner img {
+      width: 100%;
+      height: 100%;
+    }
+
+    .search {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-end;
+    }
+
+    .msglist {
+      margin-top: 10px;
+      line-height: 24px;
+
+      .item {
+        border: 1px dashed black;
+        margin-bottom: 20px;
+
+        .top {
+          background: #FFA042;
+          padding: 5px 10px;
+          position: relative;
+          user-select: none;
+
+          span {
+            margin-right: 10px;
+
+            &.name {
+              color: #fff;
+            }
+
+            &.del {
+              position: absolute;
+              right: 0;
+
+              &:hover {
+                color: red;
+                cursor: pointer;
+              }
+            }
+          }
+        }
+
+        .bottom {
+          display: flex;
+          text-align: center;
+          background: url('../../assets/img/message/avatar/bg.webp');
+
+          .avatar {
+            display: flex;
+            flex: 0 0 150px;
+            background: #fff;
+            flex-direction: column;
+            // justify-content center
+            align-items: center;
+            padding: 5px;
+
+            .imgbox {
+              width: 100px;
+              height: 100px;
+              margin-bottom: 5px;
+
+              img {
+                width: 100%;
+                height: 100%;
+                border-radius: 50%;
+              }
+            }
+          }
+
+          .detail {
+            padding: 10px;
+            font-size: 1.4rem;
+            text-indent: 1em;
+            text-align: left;
+            word-break: break-all;
+
+            &.red {
+              color: red;
+            }
+          }
+        }
+      }
+    }
+
+    #isSearch {
+      span {
+        margin-right: 10px;
+
+        strong {
+          color: red;
+        }
+      }
+
+      button {
+        border: 0;
+        outline: none;
+        background: #FF9900;
+        padding: 1px 5px;
+        box-shadow: 2px 2px 1px #666;
+
+        &:hover {
+          background: #FF6600;
+          cursor: pointer;
+        }
+      }
+    }
+  }
+
+  .note {
+    margin: 40px 0 0 0;
+    width: 100%;
+    text-align: center;
+    color: #006633;
+    font-size: 1.2rem;
+  }
+}
+
+@media screen and (max-width: 480px) {
+  .message {
+    padding-top: 0;
+    box-sizing: border-box;
+    font-size: 1.4rem;
+    margin-bottom: 80px;
+
+    .content {
+      width: 100%;
+
+      .msglist {
+        margin-top: 10px;
+      }
+    }
+  }
+}
 </style>

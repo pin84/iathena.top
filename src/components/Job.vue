@@ -4,15 +4,15 @@
     <h3>作品集</h3>
     <div class="works">
       <Candle class="item pointer" />
-      <ThreeDImage class="item pointer"/>
+      <ThreeDImage class="item "/>
       <Arrow class="item pointer" :url="dataList.github.url"/>
     </div>
     <hr>
     <div class="works">
+      <Books class="item " />
       <Note class="item" />
       <SeaWave class="item"/>
       <Eclipse class="item" />
-      <Books class="item" />
       <Pen class="item" />
       <MacBook class="item" />
       <ToBeContinue class="item"/>
@@ -21,6 +21,7 @@
   </div>
 </template>
 <script>
+
 import SeaWave from "./works/SeaWave";
 import ThreeDImage from "./works/ThreeDImage";
 import Eclipse from "./works/Eclipse";

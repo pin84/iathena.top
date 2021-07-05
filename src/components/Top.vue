@@ -67,10 +67,10 @@ export default {
       this.i = index
     },  
     routeTo(router,index){
-      if(router === '留言本'){
-        return alert('由于更换服务器。功能暂停使用.');
-      }
-        if(this.i == index) return 
+      // if(router === '留言本'){
+      //   return alert('由于更换服务器。功能暂停使用.');
+      // }
+        // if(this.i == index) return 
       this.i = index
       localStorage.setItem('topIndex',JSON.stringify(index))
       switch(router){
@@ -87,9 +87,9 @@ export default {
           this.$router.push('/experience')
           break;
         case '留言本':
-           alert('由于更换服务器。功能暂停使用.');
+          //  alert('由于更换服务器。功能暂停使用.');
            
-          // this.$router.push('/message')
+          this.$router.push('/message')
           break;
       }
     }

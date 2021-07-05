@@ -1,6 +1,6 @@
 <template>
   <div class="sendMsg">
-    <hr style="margin-bottom:20px;">
+    <!-- <hr style="margin-bottom:20px;"> -->
     <form action>
       <div class="userinfo">
         <div
@@ -258,6 +258,7 @@ export default {
   box-sizing border-box
   font-size 1.4rem
   box-shadow 2px 2px 3px 3px #ccc
+  padding 20px
   .userinfo 
     display inline-block 
     #username, #title 

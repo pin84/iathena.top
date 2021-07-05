@@ -3,7 +3,9 @@
 //   html8 = 'https://data.html8.info/web/iathena',
 //   html8Avartor = 'https://html8.info/'
 
-// export default {
-//   url: html8,
-//   avartorUrl: html8Avartor
-// }
+const baseURL = 'http://localhost:3000/apis'
+
+export  {
+    baseURL,
+    //   avartorUrl: html8Avartor
+}
