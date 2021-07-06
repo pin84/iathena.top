@@ -25,7 +25,7 @@
     <!-- <popup-info ref='pop'></popup-info>     -->
 
     <div class="beian">
-      <a class="text" href="http://www.beian.miit.gov.cn">粤ICP备19021187号</a>
+      <a class="text" href="http://www.beian.miit.gov.cn">桂ICP备2021005564号</a>
     </div>
   </div>
 </template>

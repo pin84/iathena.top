@@ -1,6 +1,6 @@
 <template>
   <section class="experience">
-    <button @click="web2pdf" ref="btn" class="print-btn">保存简历到PDF</button>
+    <!-- <button @click="web2pdf" ref="btn" class="print-btn">保存简历到PDF</button> -->
     <ul class="list">
       <span class="line"></span>
       <li class="item end">
@@ -39,7 +39,7 @@
               srcset='../../assets/img/experience/bj.webp'
               type="image/webp"
             > -->
-            <img src="../../assets/img/sxl.png" alt="" />
+            <img src="../../assets/img/experience/sxl.jpg" alt="" />
           </picture>
         </div>
       </li>
