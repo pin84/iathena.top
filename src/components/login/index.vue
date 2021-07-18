@@ -76,13 +76,16 @@
         </div> -->
       </div>
     </form>
+    <!-- <Button type="primary">主要按钮</Button> -->
+
     <div id="successTip" v-if="isShowSuccessTip" ref="successTip"></div>
     <span class="close" title="关闭" @click="closeRegister"> x </span>
   </div>
 </template>
 <script>
 import config from "../../config/config";
-import { setTimeout } from "timers";
+import { Dialog, Toast } from "vant";
+// import { Button } from 'vant';
 export default {
   data() {
     return {
@@ -113,25 +116,43 @@ export default {
     inputUserInfo() {
       this.isShowTip = false;
     },
-    login() {
-      fetch(`${config.url}/login`, {
-        credentials: "include",
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(this.loginUserInfo),
-      })
-        .then((res) => {
-          return res.json();
-        })
-        .then((data) => {
-          if (data.code === 1) {
-            this.isShowTip = true;
-            return;
-          }
-          this.$emit("loginSuccess", data.name); //sendMsg
-        });
+    async login() {
+      let { code, message, data } = await this.$post(
+        this.$api.userlogin,
+        this.loginUserInfo
+      );
+
+      if (code < 0) {
+        Dialog({ message });
+        return;
+      }
+      console.log(data);
+
+      let { token, user } = data;
+      localStorage.setItem("token", token);
+      this.$emit("loginSuccess", user.name); //sendMsg
+
+      // localStorage.getItem('userinfo')
+      // console.log(JSON.parse(localStorage.getItem('userinfo')));
+
+      // fetch(`${config.url}/login`, {
+      //   credentials: "include",
+      //   method: "POST",
+      //   headers: {
+      //     "Content-Type": "application/json",
+      //   },
+      //   body: JSON.stringify(this.loginUserInfo),
+      // })
+      //   .then((res) => {
+      //     return res.json();
+      //   })
+      //   .then((data) => {
+      //     if (data.code === 1) {
+      //       this.isShowTip = true;
+      //       return;
+      //     }
+      //     this.$emit("loginSuccess", data.name); //sendMsg
+      //   });
     },
 
     //以下为注册的方法
@@ -171,14 +192,18 @@ export default {
       flag ? (this.isRePWDok = true) : (this.isRePWDok = false);
     },
     async register() {
-      console.log(this.$api.register);
-
-debugger
-      let res =await this.$post(this.$api.register, this.userInfo);
-
-      
-
-      debugger;
+      let { code, data, message } = await this.$post(
+        this.$api.register,
+        this.userInfo
+      );
+      if (code < 0) {
+        Dialog({ message });
+        return;
+      }
+      let { token } = data;
+      localStorage.setItem("token", token);
+      Toast.success("注册成功");
+      this.$emit("loginSuccess", data.user.name); //sendMsg
 
       // fetch(`${config.url}/register`, {
       //   method: "post",
@@ -212,7 +237,11 @@ debugger
         this.$emit("closeLogin");
       }
     },
-    showRegister() {
+    async showRegister() {
+      // let token = localStorage.getItem("token");
+      // let res = await this.$get(this.$api.testToken, { token });
+      // console.log("-token--", res);
+      // return;
       this.isShowRegister = true;
     },
     resetStatus() {

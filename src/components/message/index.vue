@@ -1,5 +1,5 @@
 <template>
-  <div class="message">
+  <div class="message" ref="content">
     <div class="content">
       <picture class="banner">
         <source
@@ -14,35 +14,29 @@
       </div>
       <ul class="msglist">
         <li class="item" v-for="(msg, i) in msgList" :key="i">
-          <div v-if="msg.isShow">
+          <div>
             <div class="top">
               <span>标题:</span> <span>{{ msg.title }}</span>
               <span class="name">{{ msg.username }}</span>
-              <time><span>发表于:</span>{{ msg.created }}</time>
+              <time><span>发表于:</span>{{ msg.create_time }}</time>
               <span class="del" @click="delMsg(msg.id, msg.username)"
                 >删除</span
               >
             </div>
-            <div  class="bottom">
+            <div class="bottom">
               <div class="avatar">
                 <div class="imgbox">
-                  <img
-                    v-if="msg.avatar"
-                    :src="msg.avatar"
-                    alt=""
-                  />
+                  <img v-if="msg.avatar" :src="msg.avatar" alt="" />
                   <img
                     v-else
-                    :src="
-                      require(`../../assets/img/message/avatar/04.gif`)
-                    "
+                    :src="require(`../../assets/img/message/avatar/04.gif`)"
                   />
                 </div>
 
                 <h5>{{ msg.username }}</h5>
               </div>
               <div class="detail" :class="{ red: msg.isSecret === 1 }">
-                {{ msg.msg }}
+                {{ msg.content }}
               </div>
             </div>
           </div>
@@ -56,15 +50,7 @@
         <button @click="initData">确定</button>
       </div>
 
-      <PageChange
-        v-if="!isSearch"
-        @toLastPage="toLastPage"
-        @toFirstPage="toFirstPage"
-        @toPre="toPre"
-        @toNext="toNext"
-        @selectPage="selectPage"
-        @changePageNum="changePageNum"
-      />
+      <PageChange v-if="!isSearch" @changeData="changeData" />
       <SendMsg
         v-if="isShowSendMsg"
         @refreshMsg="refreshMsg"
@@ -86,16 +72,22 @@ import SearchBtn from "./SearchBtn";
 export default {
   data() {
     return {
-      allData: [], //存后台所有的数据 用于上一页、下一页的操作，不从数据库取数据
+      value: 10,
+      msgCount: 0,
+      curPage: 1,
+      curPageSize: 2,
+      allPageNum: 0,
       msgList: [
         {
           id: 1,
           title: "aa",
           username: "bb",
-          created: "cc",
+          create_time: "cc",
           isShow: true,
         },
       ], //从后台拿回来的数据，只有前两条
+
+      allData: [], //存后台所有的数据 用于上一页、下一页的操作，不从数据库取数据
       isSearch: false,
       searchKeyword: "", // 搜索关键字
       searchRes: [],
@@ -128,27 +120,26 @@ export default {
   },
 
   methods: {
+    onChange() {
+      console.log(this.value);
+    },
+    async changeData(obj) {
+      let { curPage, curPageSize } = obj;
+      this.curPage = curPage;
+      this.curPageSize = curPageSize;
+      await this.initData();
+    },
+
     async initData() {
-      let res = await this.$get(this.$api.getmsg, { size: 5 });
-
-      console.log(res);
-
-      // fetch(`${config.url}/initData?pageNum=${this.$store.state.pageNum}`, {
-      //   credentials: 'include',
-      //   method: 'GET',
-      //   cache: 'reload',
-      // }).then(res => {
-      //   return res.json()
-      // }).then(json => {
-      //   this.allData = json.returnData.reverse()
-      //   this.data = this.allData.slice(this.start, this.end)
-      //   this.$store.commit('setPages', json.pages)
-      //   // window.scrollTo(0, 180)
-
-      //   if (this.isSearch) {
-      //     this.isSearch = false
-      //   }
-      // })
+      let { code, data } = await this.$get(this.$api.getmsg, {
+        size: this.curPageSize,
+        pageIndex: this.curPage,
+      });
+      // data.forEach(element => {
+      //   element.isSecret = 1
+      // });
+      this.msgList = data;
+      return true;
     },
 
     searchMsg(keyword) {
@@ -177,78 +168,19 @@ export default {
       this.initData();
     },
 
-    toPre() {
-      if (this.$store.state.pageIndex === 0) return;
-      this.$store.commit("minus");
-
-      this.start -= this.currentPageNum;
-      this.end -= this.currentPageNum;
-      //防止 this.start - this.currentPageNum 小于0的情况 end 同理
-      this.start = this.start < 0 ? 0 : this.start;
-      this.end =
-        this.end < this.currentPageNum ? this.currentPageNum : this.end;
-
-      this.data = [];
-      this.data = this.allData.slice(this.start, this.end);
-    },
-
-    toNext() {
-      if (this.$store.state.pageIndex === this.$store.state.pages - 1) return;
-      this.$store.commit("increment");
-
-      this.start += this.currentPageNum;
-      this.end += this.currentPageNum;
-
-      this.data = [];
-      this.data = this.allData.slice(this.start, this.end);
-
-      console.log(this.end);
-    },
-
-    toFirstPage() {
-      if (this.$store.state.pageIndex === 0) return;
-      this.$store.commit("toFirstPage");
-      this.start = 0;
-      this.end = Number(this.$store.state.pageNum);
-      this.data = this.allData.slice(this.start, this.end);
-    },
-
-    toLastPage() {
-      if (this.$store.state.pageIndex === this.$store.state.pages - 1) return;
-      this.$store.commit("toLastPage");
-      this.start = this.allData.length - this.currentPageNum;
-      this.end = this.allData.length;
-      this.data = [];
-      this.data = this.allData.slice(this.start, this.end);
-    },
-    selectPage(s1) {
-      this.$store.state.pageIndex = s1;
-      this.start = s1 * this.$store.state.pageNum;
-      this.end =
-        s1 * this.$store.state.pageNum + Number(this.$store.state.pageNum);
-      this.data = [];
-      this.data = this.allData.slice(this.start, this.end);
-    },
-    changePageNum(num) {
-      this.$store.commit("toFirstPage");
-      this.$store.commit("setPageNum", num);
-      this.$store.commit("setPages", Math.ceil(this.allData.length / num));
-      this.start = 0;
-      this.end = Number(num);
-      this.data = [];
-      this.data = this.allData.slice(this.start, this.end);
-    },
-
     toWriteMsg() {
       this.isShowSendMsg = true;
-      this.$nextTick(function () {
-        window.scrollTo(0, 500);
+      this.$nextTick(() => {
+        let content = this.$refs.content;
+        content.scrollIntoView(0, 5000);
       });
     },
     closeSendMsgWrapper() {
       this.isShowSendMsg = false;
     },
     delMsg(id, name) {
+      alert("功能完善中。。。");
+      return;
       fetch(`${config.url}/delMsg?id=${id}&name=${name}`, {
         credentials: "include",
       })
