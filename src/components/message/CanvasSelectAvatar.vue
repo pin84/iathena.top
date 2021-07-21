@@ -84,6 +84,7 @@
  * 
  */
 import config from '../../config/config'
+import axios from 'axios'
 export default {
   data() {
     return {
@@ -255,21 +256,27 @@ export default {
       this.dataURL = this.resultCanvas.toDataURL('image/jpeg', 1.0)
 
       //把canvan中的图像保存成blob形式的文件，以保存到本地硬盘
-      this.resultCanvas.toBlob((blob) => {
+      this.resultCanvas.toBlob(async (blob) => {
         //上传到后台保存
         var formData = new FormData()
-        formData.append("filename", "abc");  // 文件名
+        formData.append("fileName", "abc");  // 文件名
         // JavaScript file-like 对象
         formData.append("file", blob);
 
-        fetch(`${config.url}/saveAvatarToLocal`, {
-          method: 'POST',
-          body: formData
-        }).then(res => {
-          return res.json()
-        }).then(data => {
-          this.$emit('setAvatarName', data.filename)
-        })
+
+        let res = await axios.post('http://localhost:3000/apis/file/upload',formData)
+
+        console.log(res);
+        
+
+        // fetch(`${config.url}/saveAvatarToLocal`, {
+        //   method: 'POST',
+        //   body: formData
+        // }).then(res => {
+        //   return res.json()
+        // }).then(data => {
+        //   this.$emit('setAvatarName', data.filename)
+        // })
 
 
       })
@@ -285,9 +292,9 @@ export default {
       //   reader.readAsDataURL(blob)
       //   */
       // })
-
-
     },
+
+
 
     closeNotic() {
       this.isShowNotice = false

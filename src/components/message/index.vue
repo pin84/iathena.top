@@ -10,26 +10,27 @@
       </picture>
       <div class="search">
         <BtnWriteMsg @toWriteMsg="toWriteMsg" />
-        <SearchBtn @searchMsg="searchMsg" />
+        <SearchBtn @searchMsg="searchMsg" :ts='ts' />
       </div>
-      <ul class="msglist">
+      <div class="msglist" v-if="msgList.length">
         <li class="item" v-for="(msg, i) in msgList" :key="i">
           <div>
             <div class="top">
               <span>标题:</span> <span>{{ msg.title }}</span>
-              <span class="name">{{ msg.username }}</span>
+              <!-- <span class="name">{{ msg.username }}</span> -->
               <time><span>发表于:</span>{{ msg.create_time }}</time>
-              <span class="del" @click="delMsg(msg.id, msg.username)"
+              <!-- <span class="del" @click="delMsg(msg.id, msg.username)"
                 >删除</span
-              >
+              > -->
             </div>
             <div class="bottom">
               <div class="avatar">
                 <div class="imgbox">
-                  <img v-if="msg.avatar" :src="msg.avatar" alt="" />
                   <img
-                    v-else
-                    :src="require(`../../assets/img/message/avatar/04.gif`)"
+                    :src="
+                      require(`../../assets/img/message/avatar/${msg.avatar}.gif`)
+                    "
+                    alt=""
                   />
                 </div>
 
@@ -41,19 +42,21 @@
             </div>
           </div>
         </li>
-      </ul>
+      </div>
+
+      <div class="nomsg" v-else>暂无留言</div>
 
       <div v-if="isSearch" id="isSearch">
         <span
-          >搜索结果一共 <strong>{{ data.length }}</strong> 条留言</span
+          >搜索结果一共 <strong>{{ msgList.length }}</strong> 条留言</span
         >
-        <button @click="initData">确定</button>
+        <button @click="hiddenSearchResult">确定</button>
       </div>
 
       <PageChange v-if="!isSearch" @changeData="changeData" />
       <SendMsg
         v-if="isShowSendMsg"
-        @refreshMsg="refreshMsg"
+        @refreshMsg="initData"
         @closeSendMsgWrapper="closeSendMsgWrapper"
         ref="send"
       />
@@ -67,25 +70,27 @@ import PageChange from "./PageChange";
 import SendMsg from "./SendMsg";
 import BtnWriteMsg from "./BtnWriteMsg";
 import SearchBtn from "./SearchBtn";
+import { Dialog } from "vant";
 // import utils from '@/utils/dateFormat'
 
 export default {
   data() {
     return {
+      ts:0,
       value: 10,
       msgCount: 0,
       curPage: 1,
       curPageSize: 2,
       allPageNum: 0,
-      msgList: [
-        {
-          id: 1,
-          title: "aa",
-          username: "bb",
-          create_time: "cc",
-          isShow: true,
-        },
-      ], //从后台拿回来的数据，只有前两条
+      msgList: [], //从后台拿回来的数据，只有前两条
+      // {
+      //   id: 1,
+      //   title: "aa",
+      //   username: "bb",
+      //   create_time: "cc",
+      //   isShow: true,
+      //   avatar:'04'
+      // },
 
       allData: [], //存后台所有的数据 用于上一页、下一页的操作，不从数据库取数据
       isSearch: false,
@@ -108,6 +113,9 @@ export default {
 
   created() {
     this.initData();
+
+    let token = localStorage.getItem('token')
+    console.log(token);
   },
 
   computed: {
@@ -120,9 +128,12 @@ export default {
   },
 
   methods: {
-    onChange() {
-      console.log(this.value);
+    hiddenSearchResult(){
+      let ts = new Date().getTime()
+      this.ts = ts
+      this.initData()
     },
+ 
     async changeData(obj) {
       let { curPage, curPageSize } = obj;
       this.curPage = curPage;
@@ -135,37 +146,24 @@ export default {
         size: this.curPageSize,
         pageIndex: this.curPage,
       });
-      // data.forEach(element => {
-      //   element.isSecret = 1
-      // });
       this.msgList = data;
+      this.isSearch = false;
       return true;
     },
 
-    searchMsg(keyword) {
+    async searchMsg(keyword) {
       this.searchKeyword = keyword;
-      if (!this.searchKeyword) {
-        return alert("请输入关键字搜索，可以搜索标题、作者、留言内容");
+
+      if (!keyword) {
+        Dialog({ message: "请输入关键字搜索" });
+        return;
       }
-      fetch(`${config.url}/searchmsg?keyword=${this.searchKeyword}`)
-        .then((res) => {
-          return res.json();
-        })
-        .then((json) => {
-          if (json.data.length > this.maxSearchResLength) {
-            //防止搜索的结果过多，造成页面卡死
-            json.data.length = this.maxSearchResLength;
-          }
-          this.data = json.data;
-          this.searchKeyword = "";
-        });
+      let { data } = await this.$get(this.$api.searchmsg, { keyword });
+      console.log(data);
+      this.msgList = data;
+      this.searchKeyword = "";
       this.isSearch = true;
       this.isShowSendMsg = false;
-    },
-
-    refreshMsg() {
-      this.$store.commit("toFirstPage");
-      this.initData();
     },
 
     toWriteMsg() {
@@ -202,8 +200,14 @@ export default {
   width: 100%;
   padding-top: 20px;
   box-sizing: border-box;
-  font-size: 1.4rem;
+  font-size: 1.3rem;
   margin-bottom: 20px;
+
+  .nomsg {
+    padding: 60px;
+    text-align: center;
+    color: red;
+  }
 
   .content {
     width: 80%;
@@ -217,7 +221,7 @@ export default {
     .search {
       display: flex;
       justify-content: space-between;
-      align-items: flex-end;
+      align-items: center;
     }
 
     .msglist {
@@ -236,6 +240,7 @@ export default {
 
           span {
             margin-right: 10px;
+            font-size: 12px;
 
             &.name {
               color: #fff;

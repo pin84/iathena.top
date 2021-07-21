@@ -43,6 +43,19 @@ export default {
     sendMsg:'/msg/send',
 
 
+    /**
+     * 搜索留言
+     * @param:keyword
+     */
+     searchmsg:'/msg/search',
+
+
+    //------------file----------
+    /**
+     * 上传文件，
+     */
+    upload:'/file/upload',
+
 
     //----------token-----------
 

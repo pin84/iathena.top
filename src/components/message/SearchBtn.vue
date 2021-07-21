@@ -15,9 +15,21 @@
 </template>
 <script>
 export default {
+  props:{
+    ts:{
+      type:Number,
+      default:()=>0
+    }
+  },
+  
   data() {
     return {
       keyword: ''
+    }
+  },
+  watch:{
+    ts:function(){
+      this.keyword = ''
     }
   },
   methods: {

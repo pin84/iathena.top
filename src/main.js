@@ -12,8 +12,9 @@ import store from './store'
 import './assets/stylus/common.styl'
 import './assets/stylus/printstyl.styl'
 
-import { Button ,Slider} from 'vant';
+import { Button ,Slider,Search} from 'vant';
 Vue.use(Button)
+Vue.use(Search)
 
 
 

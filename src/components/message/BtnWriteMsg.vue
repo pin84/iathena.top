@@ -27,6 +27,7 @@ export default {
     box-shadow  0 0 0 1px #0cf inset, 0 0 10px #0cf inset 
     transition .3s linear
     animation 10s move linear infinite
+    font-size 1.1rem
     &::before
       content ''
       display block

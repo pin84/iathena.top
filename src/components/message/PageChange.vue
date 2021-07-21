@@ -39,7 +39,8 @@ export default {
     async getMsgCount() {
       let { data } = await this.$get(this.$api.getmsgcount);
       this.pageCount = data;
-      let pages = this.pageCount / this.curPageSize;
+
+      let pages = Math.floor(this.pageCount / this.curPageSize)
       this.pages = pages;
     },
 

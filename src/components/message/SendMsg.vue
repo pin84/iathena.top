@@ -30,11 +30,11 @@
           ></Login>
         </div>
 
-        <span v-if="isShowLoginWrapper === 0">
+        <!-- <span v-if="isShowLoginWrapper === 0">
           <span>&ensp;或</span>
           <i class="btn-login" @click="showLogin">登录</i
           >&ensp;后,更多操作</span
-        >
+        > -->
         <br />
         <br />
         <label for="title">标题:</label>
@@ -49,12 +49,12 @@
 
       <br />
       <div class="avatar">
-        <span v-if="isShowAvatarList">请选择头像或 &ensp;</span>
-        <CanvasSelectAvatar
+        <span v-if="isShowAvatarList">请选择头像 &ensp;</span>
+        <!-- <CanvasSelectAvatar
           @hiddenAvatarList="hiddenAvatarList"
           @setAvatarName="setAvatarName"
           class="CanvasSelectAvatar"
-        />
+        /> -->
         <ul class="list" v-show="isShowAvatarList">
           <li class="item" v-for="(item, i) in avatarSum" :key="i">
             <input
@@ -62,8 +62,10 @@
               class="ra"
               type="radio"
               name="avatar"
-              @click="selectedAvatar(item)"
+              :value="item"
+              v-model="message.avatar"
             />
+            <!-- @click="selectedAvatar(item)" -->
             <img
               :src="require(`../../assets/img/message/avatar/${item}.gif`)"
             />
@@ -76,13 +78,14 @@
           <span class="red">必填</span>)
         </h4>
         <textarea
+          class="textarea"
           name="msg"
-          cols="42"
-          rows="10"
+          cols="80"
+          rows="8"
           v-model="message.msg"
         ></textarea>
         <p id="silent">
-          <span>是否为悄悄话(只有管理员才能看得见):</span>
+          <span>是否为悄悄话(只有管理员才能看得见)：</span>
           <input type="checkbox" v-model="message.isSecret" />
         </p>
         <button id="send" @click.prevent="send">发表</button>
@@ -98,17 +101,18 @@
 import config from "../../config/config";
 import CanvasSelectAvatar from "./CanvasSelectAvatar";
 import Login from "../login";
+import { Dialog } from "vant";
 export default {
   data() {
     return {
       close: false,
-      avatarSum: ["11", "15", "18", "04"], //头像的总编号数
+      avatarSum: ["11", "15",  "04",'12','06','17'], //头像的总编号数
       message: {
         username: "访客",
         title: "无标题",
-        avatar: "",
+        avatar: "11",
         msg: "",
-        isSecret: undefined, //是否为悄悄话
+        isSecret: false, //是否为悄悄话
         isUploadAvatar: "0",
       },
       showSeletAvatar: false,
@@ -135,37 +139,23 @@ export default {
   methods: {
     async send() {
       if (!this.message.msg) {
-        return alert("请输入留言信息");
+        Dialog({ message: "请输入留言信息" });
+        return;
       }
-
-
       console.log(this.message);
-      let res = await this.$post(this.$api.sendMsg, this.message);
-      console.log(res);
-
-      return;
-
-      // let res = await this.pos/t()
-
-      fetch(`${config.url}/addmsg`, {
-        method: "post",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(this.message),
-      })
-        .then((res) => {
-          return res.json();
-        })
-        .then((data) => {
-          if (!data.code) {
-            this.message.msg = "";
-            this.message.isSecret = undefined;
-            // alert(data.data);
-            this.$emit("refreshMsg");
-            window.scrollTo(0, 210); //滚动窗口到指定坐标
-          }
-        });
+      let { code, data, message } = await this.$post(
+        this.$api.sendMsg,
+        this.message
+      );
+      if (code < 0) {
+        Dialog({ message });
+        return;
+      } else {
+        Dialog({ message: "发表成功" });
+        this.$emit("refreshMsg");
+        this.message.msg = "";
+        this.message.isSecret = false;
+      }
     },
     async initData() {
       let token = localStorage.getItem("token");
@@ -253,7 +243,7 @@ export default {
   width: 100%;
   margin-top: 20px;
   box-sizing: border-box;
-  font-size: 1.4rem;
+  font-size: 1.3rem;
   box-shadow: 2px 2px 3px 3px #ccc;
   padding: 20px;
 
@@ -329,6 +319,7 @@ export default {
     textarea {
       padding: 5px;
       text-indent: 1em;
+      resize: none;
     }
 
     #silent {
