@@ -166,7 +166,7 @@ export default {
       this.isShowSendMsg = false;
     },
 
-    toWriteMsg() {
+    async toWriteMsg() {
       this.isShowSendMsg = true;
       this.$nextTick(() => {
         let content = this.$refs.content;
