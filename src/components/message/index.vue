@@ -146,6 +146,7 @@ export default {
         size: this.curPageSize,
         pageIndex: this.curPage,
       });
+
       this.msgList = data;
       this.isSearch = false;
       return true;
@@ -158,8 +159,10 @@ export default {
         Dialog({ message: "请输入关键字搜索" });
         return;
       }
+
       let { data } = await this.$get(this.$api.searchmsg, { keyword });
       console.log(data);
+
       this.msgList = data;
       this.searchKeyword = "";
       this.isSearch = true;

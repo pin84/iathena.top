@@ -3,8 +3,8 @@
 //   html8 = 'https://data.html8.info/web/iathena',
 //   html8Avartor = 'https://html8.info/'
 
-// const baseURL = 'http://localhost:3000/apis'
-const baseURL = 'http://data.lzhs.top/apis'
+const baseURL = 'http://localhost:3000'
+// const baseURL = 'http://data.lzhs.top'
 
 export  {
     baseURL,
