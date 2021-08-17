@@ -15,6 +15,8 @@
 <script>
 // @ is an alias to /src
 import Top from "@/components/Top";
+
+
 export default {
   name: "home",
   components: {

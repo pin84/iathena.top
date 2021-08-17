@@ -29,6 +29,8 @@ Vue.prototype.$get = get;
 Vue.prototype.$post = post;
 Vue.prototype.$api = api;
 
+
+
 new Vue({
   router,
   store,
