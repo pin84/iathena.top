@@ -14,7 +14,7 @@ export default {
 
   methods:{
     toDetail(){
-      this.$router.push('/audio')
+      // this.$router.push('/audio')
     }
   }
  

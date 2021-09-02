@@ -4,7 +4,7 @@
     <h3>作品集</h3>
     <div class="works">
       <Candle class="item pointer" />
-      <ThreeDImage class="item "/>
+      <ThreeDImage class="item pointer"/>
       <Arrow class="item pointer" :url="dataList.github.url"/>
     </div>
     <hr>
