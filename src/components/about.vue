@@ -4,10 +4,10 @@
     <div class="title">
       <span>关于我</span>
     </div>
-    <picture class="avartor">
+    <div class="avartor">
       <source srcset="../assets/img/avatar.webp" type="image/webp" />
       <img src="../assets/img/avartor.jpg" alt="" />
-    </picture>
+    </div>
     <div class="desc">
       我叫覃平，1984年生于广西柳州。是一名从事前端工作的普通一员。前端是一门有容乃大的行业，我并不是计算机专业出身。
       在自学前端之前，我一直从事的是印刷设备的售后服务工作。庆幸的是在慢长的自学中，让我体会到了乐趣，让我能一直走到今天。
@@ -56,12 +56,12 @@ export default {
 
 .about {
   width: 100%;
-  height: 100%;
+  // height: 100%;
   display: flex;
   flex-direction: column;
   align-items: center;
-  background: url('./contact/bg.webp') no-repeat center;
-  background-size: cover;
+  // background: url('./contact/bg.webp') no-repeat center;
+  // background-size: contain;
   position: relative;
 
   .title {
@@ -80,15 +80,17 @@ export default {
   }
 
   .avartor {
-    width: 200px;
-    height: 200px;
+    display inline-block
+    width 200px;
+    flex:0 0 200px;
+    // height: 200px;
     border-radius: 50%;
     overflow: hidden;
     margin-bottom 30px;
-
+    // border 1px solid red
     img {
       width: 100%;
-      height: 100%;
+      // height: 100%;
     }
   }
 
