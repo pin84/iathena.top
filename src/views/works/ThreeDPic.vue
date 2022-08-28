@@ -1,16 +1,16 @@
 <template>
   <div class="wrapper">
     <div id="wrap">
-      <div class="sence">
+      <div class="sence" id="sence">
         <ul>
-          <li><img src="@/assets/img/rotatePic/12.jpg" /></li>
-          <li><img src="@/assets/img/rotatePic/19.jpg" /></li>
-          <li><img src="@/assets/img/rotatePic/4.jpg" /></li>
-          <li><img src="@/assets/img/rotatePic/5.jpg" /></li>
-          <li><img src="@/assets/img/rotatePic/6.jpg" /></li>
-          <li><img src="@/assets/img/rotatePic/7.jpg" /></li>
-          <li><img src="@/assets/img/rotatePic/8.jpg" /></li>
-          <li><img src="@/assets/img/rotatePic/3.jpg" /></li>
+          <li class="img-box"><img src="@/assets/img/rotatePic/12.jpg" ></li>
+          <li class="img-box"><img src="@/assets/img/rotatePic/19.jpg" ></li>
+          <li class="img-box"><img src="@/assets/img/rotatePic/4.jpg" ></li>
+          <li class="img-box"><img src="@/assets/img/rotatePic/5.jpg" ></li>
+          <li class="img-box"><img src="@/assets/img/rotatePic/6.jpg" ></li>
+          <li class="img-box"><img src="@/assets/img/rotatePic/7.jpg" ></li>
+          <li class="img-box"><img src="@/assets/img/rotatePic/8.jpg" ></li>
+          <li class="img-box"><img src="@/assets/img/rotatePic/3.jpg" ></li>
           <!-- 
           <li><img src="@/assets/img/rotatePic/3.jpg" /></li>
           <li><img src="@/assets/img/rotatePic/3.jpg" /></li>
@@ -37,6 +37,8 @@ export default {
     initPage() {
       let sence = document.getElementsByClassName("sence")[0];
       let aLi = sence.getElementsByTagName("li");
+      // let sence = document.getElementById('sence')
+      // let aLi = document.querySelectorAll('.img-box')
 
       let aliLen = aLi.length;
       let deg = 360 / aliLen;
@@ -47,10 +49,14 @@ export default {
 
       setTimeout(() => {
         for (let i = 0; i < aliLen; i++) {
-          aLi[i].style.transform = `rotateY(${deg * i}deg) translateZ(300px)`;
-          aLi[i].style.transition = `transform 1s linear  ${
+          let  rotate = `rotateY(${deg * i}deg) translateZ(300px)`;
+          let transition = `transform 1s linear  ${
             (aliLen - i - 1) * 0.1
-          }s`;
+          }s`
+
+          console.log(rotate,transition);
+          aLi[i].style.transform = rotate
+          aLi[i].style.transition = transition;
           document.onmousedown = function (ev) {
             startX = ev.clientX;
             startY = ev.clientY;
@@ -95,6 +101,7 @@ export default {
 }
 #wrap {
   perspective: 800px;
+  -webkit-perspective: 800px; /* Safari 和 Chrome */
   background: #000;
   height: 100%;
 }
@@ -104,6 +111,7 @@ export default {
   height: 30rem;
   margin: 250px auto;
   transform-style: preserve-3d;
+  -webkit-transform-style: preserve-3d;	/* Safari 和 Chrome */
   transform: rotateX(-15deg) rotateY(0deg);
 }
 #wrap .sence ul li {
